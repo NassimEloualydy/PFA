@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+
+<odoo>
+<data>
+<record id="project_filtre_test" model="ir.ui.view">
+            <field name="name">Filtre</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_search_form_extended"/>
+            <field name="arch" type="xml">
+                    
+            <xpath expr="//filter[@name='user']" position="after">
+            
+              <group expand="0" string="Group By" colspan="16">
+                       
+               <separator orientation="vertical"/>
+                    <filter string=" Etiquette Admin" name="etiquette" domain="[('tag_ids', 'ilike', 'admin')]" />
+                    <filter string=" Etiquette Installation" name="installation" domain="[('tag_ids', 'ilike', 'installation')]"/>
+                    <filter string=" Etiquette Pv" name="pv" domain="[('tag_ids', 'ilike', 'pv')]"/>
+                    <filter string=" Etiquette Travaux" name="travaux" domain="[('tag_ids', 'ilike', 'travaux')]"/>
+                 </group>
+           
+            </xpath>
+          
+            
+            
+            </field>
+        
+     </record> 
+            <!--  -->
+<record id="project_filtre_test_form" model="ir.ui.view">
+            <field name="name">Filtre__form</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_search_form"/>
+            <field name="arch" type="xml">
+                    
+          
+            
+            
+            </field>
+        
+     </record> 
+</data>
+</odoo>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <data>
+        <record id="id_project_task_default_tree" model="ir.ui.view">        
+            <field name="name">name_project_task_default_tree</field>        
+            <field name="model">project.task.default</field>        
+            <field name="type">tree</field> <!-- Type de vue : arborescence (tree) -->
+            <field name="arch" type="xml">        
+                <!-- Contenu de la vue au format XML -->        
+                <tree editable="bottom"> <!-- La vue est éditable en bas (au niveau des lignes) -->
+                    <field name="name" string="Nom"/> <!-- Champ "name" affiché avec l'étiquette "Nom" -->        
+                    <field name="date_debut" string="Date De Début"/> <!-- Champ "date_debut" affiché avec l'étiquette "Date De Début" -->    
+                    <field name="date_fin" string="Date De Fin"/> <!-- Champ "date_fin" affiché avec l'étiquette "Date De Fin" -->
+                    <field name="type_task" string="Type"/> <!-- Champ "type_task" affiché avec l'étiquette "Type" -->
+                    <field name="is_task_initial"/> <!-- Champ "type_task" affiché avec l'étiquette "Type" -->
+                </tree>       
+            </field>
+        </record>
+
+        
+        <record model="ir.actions.server" id="insert_data">
+        
+            <!-- Définition de l'enregistrement d'une action de serveur -->
+        
+            <field name="name">Insérer les tâches sélectionnées vers ce projet</field>
+        
+            <!-- Nom de l'action -->
+        
+            <field name="model_id" ref="model_project_task_default"/>
+        
+            <!-- Référence au modèle associé à cette action -->
+        
+            <field name="binding_model_id" ref="model_project_task_default"/>
+        
+            <!-- Référence au modèle de liaison (éventuellement) -->
+        
+            <field name="state">code</field>
+        
+            <!-- L'action est de type "code" -->
+        
+            <field name="code">action = records.insert_data()</field>
+        
+            <!-- Le code à exécuter lors de l'action -->
+        
+
+        </record>
+
+</data>
+
+</odoo>

@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+
+<odoo>
+
+    <data>
+
+        <record id="id_project_project_view_form_simplified" model="ir.ui.view">
+
+            <field name="name">project_project_view_form_simplified</field>
+
+            <field name="model">project.project</field>
+
+            <field name="inherit_id" ref="project.project_project_view_form_simplified_footer"/>
+
+            <field name="arch" type="xml">
+
+                
+                <!-- Rend les éléments de configuration invisibles -->
+                
+                <xpath expr="//div[contains(@class, 'o_settings_container')]"  position="attributes">
+                
+                    <attribute name="invisible">1</attribute>
+                
+                </xpath>
+
+                
+                <xpath expr="//div[contains(@class, 'o_setting_box')]"  position="attributes">
+                
+                    <attribute name="invisible">1</attribute>
+                
+                </xpath>
+
+                
+                <xpath expr="//div[contains(@class, 'o_setting_left_pane')]"  position="attributes">
+                
+                    <attribute name="invisible">1</attribute>
+                
+                </xpath>
+
+                
+                <xpath expr="//div[contains(@class, 'o_setting_right_pane')]"  position="attributes">
+                
+                    <attribute name="invisible">1</attribute>
+                
+                </xpath>
+
+                <!-- Remplace le titre du projet et ajoute des champs -->
+                
+                <xpath expr="//div[@class='oe_title']" position="replace">
+                
+                    <div class="d-flex">
+                
+                        <b class="m-3"> Nom du projet </b>
+                
+                        <field name="name" class="o_project_name oe_inline m-3" placeholder="p.e. Fete au bureau" modifiers="{&quot;required&quot;: true}"/>
+                
+                    </div>    
+
+
+                    <div class="d-flex">
+
+                        <b class="m-3"> Permettre les feuilles de temps </b>
+
+                        <field name="allow_timesheets" class="o_project_name oe_inline m-3"/>
+
+                    </div>    
+
+
+                    <div class="d-flex">
+
+                        <b class="m-3"> Choisissez l'email du projet </b>
+
+                        <field name="email_project" class="o_project_name oe_inline m-3" placeholder="p.e. Fete au bureau" modifiers="{&quot;required&quot;: true}"/>
+
+                        <span class="m-3">@entrepriseriad.ma</span>
+
+                    </div>    
+
+                </xpath>
+
+            </field>
+
+        </record>
+
+    </data>
+
+</odoo>
+
+
+

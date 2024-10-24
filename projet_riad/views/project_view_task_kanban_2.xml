@@ -1,0 +1,362 @@
+<?xml version="1.0"?>
+
+<odoo>
+
+    <data>
+
+        <record id="id_project_view_task_kanban" model="ir.ui.view">
+
+            <field name="name">name_project.view_task_kanban</field>
+
+            <field name="model">project.task</field>
+
+            <field name="inherit_id" ref="project.view_task_kanban"/>
+
+            <field name="arch" type="xml">
+
+            <!-- Remplacez l'élément div suivant par votre contenu personnalisé -->
+<xpath expr="//kanban" position="attributes">
+                    <attribute name="js_class">custom_kanban_view_followers</attribute>
+                </xpath>                
+                <xpath expr="//div[@class='o_kanban_record_headings']"  position="replace">
+
+                    <strong class="container_task" >
+
+                                                <!-- Champ "name" affiché si l'enregistrement n'est pas f -->
+
+                                                <s t-if="!record.active.raw_value">
+                                                
+                                                        <field name="name" widget="name_with_subtask_count" modifiers="{&quot;required&quot;: true}"/>
+                                                
+                                                </s>
+
+                                                <t t-else="">
+
+                                                        <field name="name" widget="name_with_subtask_count" modifiers="{&quot;required&quot;: true}"/>
+                                                </t>
+                                                        <!-- Champ "name" avec un compteur de sous-tâches et marqué comme requis -->
+
+                                                        <br/>
+
+                                                        <field name="delta_date_debut" invisible="1"/>
+                                                        <!-- Champ "delta_date_debut" rendu invisible -->
+
+                                                        <field name="delta_date_fin" invisible="1"/>
+                                                        <!-- Champ "delta_date_fin" rendu invisible -->
+
+                                                        <field name="pv_id" invisible="1"/>
+                                                        <!-- Champ "pv_id" rendu invisible -->
+
+                                                        <field name="nom_pv" invisible="1"/>
+                                                        <!-- Champ "nom_pv" rendu invisible -->
+
+
+                                                <t t-if="record.delta_date_debut.raw_value lt 0">
+                                                <!-- Si "delta_date_debut" est inférieur à zéro (en retard) -->
+                                                
+                                                    <span t-attf-class="#{'oe_kanban_text_red'}">
+                                                    <!-- Appliquez la classe "oe_kanban_text_red" s'il est en retard -->
+                                                
+                                                        <span>D:</span>
+                                                        <!-- Affiche "D:" pour indiquer la date de début -->
+                                                
+                                                        <field name="date_debut"/>
+                                                        <!-- Affiche la date de début de la tâche -->
+                                                
+                                                        <field name="message_delta_date_debut"/>
+                                                        <!-- Affiche le message de délai pour la date de début -->
+                                                
+                                                        <br/>
+                                                
+                                                    </span>
+                                                
+                                                </t>
+
+                                                <t t-if="record.delta_date_debut.raw_value gt 0">
+                                                <!-- Si "delta_date_debut" est supérieur à zéro (en avance) -->
+
+                                                    <span t-attf-class="#{'oe_kanban_text_green'}">
+                                                    <!-- Appliquez la classe "oe_kanban_text_green" s'il est en avance -->
+
+                                                        <span>D:</span>
+                                                        <!-- Affiche "D:" pour indiquer la date de début -->
+
+                                                        <field name="date_debut"/>
+                                                        <!-- Affiche la date de début de la tâche -->
+
+                                                        <field name="message_delta_date_debut"/>
+                                                        <!-- Affiche le message de délai pour la date de début -->
+
+                                                        <br/>
+
+                                                    </span>
+
+                                                </t>
+
+                                                <t t-if="record.delta_date_debut.raw_value == 0">
+                                                <!-- Si "delta_date_debut" est égal à zéro (pas de retard ni d'avance) -->
+                                                
+                                                    <span t-attf-class="#{'oe_kanban_text_orange'}">
+                                                    <!-- Appliquez la classe "oe_kanban_text_orange" s'il n'y a ni retard ni avance -->
+                                                
+                                                        <span>D:</span>
+                                                        <!-- Affiche "D:" pour indiquer la date de début -->
+                                                
+                                                        <field name="date_debut"/>
+                                                        <!-- Affiche la date de début de la tâche -->
+                                                
+                                                        <field name="message_delta_date_debut"/>
+                                                        <!-- Affiche le message de délai pour la date de début -->
+                                                
+                                                        <br/>
+                                                
+                                                    </span>
+                                                
+                                                </t>
+
+
+                                                <t t-if="record.delta_date_fin.raw_value lt 0">
+                                                <!-- Si "delta_date_fin" est inférieur à zéro (il y a un retard) -->
+
+                                                    <span t-attf-class="#{'oe_kanban_text_red'}">
+                                                    <!-- Appliquez la classe "oe_kanban_text_red" pour indiquer un retard -->
+
+                                                        <span>F:</span>
+                                                        <!-- Affiche "F:" pour indiquer la date de fin avec un retard -->
+
+                                                        <field name="date_fin_project"/>
+                                                        <!-- Affiche la date de fin de la tâche avec le retard -->
+
+                                                        <field name="message_delta_date_fin"/>
+                                                        <!-- Affiche le message de délai pour la date de fin -->
+
+                                                        <br/>
+
+                                                    </span>
+
+                                                </t>
+                                                <t t-if="record.delta_date_fin.raw_value gt 0">
+                                                <!-- Si "delta_date_fin" est supérieur à zéro (il reste des jours avant la date de fin) -->
+
+                                                    <span t-attf-class="#{'oe_kanban_text_green'}">
+                                                    <!-- Appliquez la classe "oe_kanban_text_green" pour indiquer qu'il reste du temps avant la date de fin -->
+
+                                                        <span>F:</span>
+                                                        <!-- Affiche "F:" pour indiquer la date de fin avec le temps restant -->
+
+                                                        <field name="date_fin_project"/>
+                                                        <!-- Affiche la date de fin de la tâche avec le temps restant -->
+
+                                                        <field name="message_delta_date_fin"/>
+                                                        <!-- Affiche le message de délai pour la date de fin -->
+
+                                                        <br/>
+
+                                                    </span>
+
+                                                </t>
+
+                                                <t t-if="record.delta_date_fin.raw_value == 0">
+                                                <!-- Si "delta_date_fin" est égal à zéro (la date de fin est aujourd'hui) -->
+
+                                                    <span t-attf-class="#{'oe_kanban_text_orange'}">
+                                                    <!-- Appliquez la classe "oe_kanban_text_orange" pour indiquer que la date de fin est aujourd'hui -->
+
+                                                        <span>F:</span>
+                                                        <!-- Affiche "F:" pour indiquer la date de fin avec un message pour aujourd'hui -->
+
+                                                        <field name="date_fin_project"/>
+                                                        <!-- Affiche la date de fin de la tâche avec un message pour aujourd'hui -->
+
+                                                        <field name="message_delta_date_fin"/>
+                                                        <!-- Affiche le message de délai pour la date de fin (aujourd'hui) -->
+
+                                                        <br/>
+
+                                                    </span>
+
+                                                </t>
+
+                                                <t t-if="record.project_id.raw_value">
+                                                <!-- Si "pv_id" a une valeur (n'est pas vide) -->
+
+                                                    <span class="fw-bolder text-muted mr-2">
+                                                    <!-- Appliquez une classe pour mettre en gras "PV : " suivi d'un espace -->
+
+                                                         
+                                                        <!-- Affiche "PV : " -->
+                                            
+                                                        <field name="project_id_name"/>
+
+                                                        <!-- Affiche la valeur du champ "nom_pv" (probablement le nom d'un PV) -->
+
+                                                    </span>
+
+                                                </t>
+
+                                                <br/>
+<t t-if="record.pv_id.raw_value">
+                                                <!-- Si "pv_id" a une valeur (n'est pas vide) -->
+
+                                                    <span class="fw-bolder mr-2">
+                                                    <!-- Appliquez une classe pour mettre en gras "PV : " suivi d'un espace -->
+
+                                                        PV : 
+                                                        <!-- Affiche "PV : " -->
+
+                                                        <field name="nom_pv"/>
+                                                        <!-- Affiche la valeur du champ "nom_pv" (probablement le nom d'un PV) -->
+
+                                                    </span>
+
+                                                </t>
+
+                                                <br/>
+
+                                                <span class="text-muted">Duree</span>
+                                                <!-- Affiche "Duree" en texte grisé -->
+
+                                                <field class="text-muted" name="duree_de_tach"/>
+                                                <!-- Affiche la valeur du champ "duree_de_tach" en texte grisé -->
+
+
+                    </strong>
+                    <br/>
+
+                    <br/>
+
+                    <span>
+                                                
+                        <field name="project_id" widget="project_private_task" options="{'no_open': True}" on_change="1" modifiers="{&quot;invisible&quot;: true}"/>
+                        <!-- Champ "project_id" avec le widget "project_private_task" et options spécifiques, avec l'attribut "invisible" réglé sur vrai (caché) -->
+
+                            
+                    <style type="text/css">
+                    .two-line-text {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+                        /* Classe pour le conteneur de la tâche */
+                        .container_task {
+                            width: 100% !important;
+                        }
+                    
+                        /* Classe pour l'élément user_id_op */
+                        .user_id_op {
+                            margin-left: auto;
+                        }
+                    
+                        /* Classe pour le texte en vert */
+                        .oe_kanban_text_green {
+                            color: green;
+                            font-weight: bold;
+                        }
+                    
+                        /* Classe pour le texte en orange */
+                        .oe_kanban_text_orange {
+                            color: orange;
+                            font-weight: bold;
+                        }
+                    
+                        /* Classe pour le texte en noir */
+                        .oe_kanban_text_black {
+                            color: black;
+                            font-weight: bold;
+                        }
+                    
+                        /* Classe pour le texte en rouge */
+                        .oe_kanban_text_red {
+                            color: red;
+                            font-weight: bold;
+                        }
+                    </style>
+
+                    </span>
+
+                </xpath>
+
+                <!-- Cette section de code XML ajoute un lien dans une vue Kanban. -->
+                <xpath expr="//t[@name='planned_hours']" position="before">
+
+                    <!-- L'élément <a> représente un lien cliquable dans la vue Kanban. -->
+                    <a name="get_attachment_for_task_project" class="o_project_kanban_box" type="object">
+
+                        <!-- L'icône "fa-paperclip" est une icône de trombone pour indiquer des pièces jointes. -->
+                        <i class="fa fa-paperclip mt-1" aria-hidden="true"></i>
+
+                        <!-- Le champ "nbr_field_attached" affiche le nombre de pièces jointes liées à cet élément. -->
+                        <field name="message_attachment_count" />
+
+                    </a>
+
+                </xpath>
+
+
+                <!-- Cette section de code XML modifie les attributs d'un champ spécifique. -->
+                <xpath expr="//field[@name='planned_date_begin']" position="attributes">
+
+                    <!-- L'attribut "invisible" est utilisé pour masquer le champ. -->
+                    <attribute name="invisible">1</attribute>
+
+                </xpath>
+
+                <!-- Cette section de code XML modifie les attributs d'un champ spécifique. -->
+                <xpath expr="//field[@name='planned_date_end']" position="attributes">
+
+                    <!-- L'attribut "invisible" est utilisé pour masquer le champ. -->
+                    <attribute name="invisible">1</attribute>
+
+                </xpath>
+
+                <!-- Cette section de code XML modifie les attributs d'un élément <i> ayant une classe spécifique. -->
+                <xpath expr="//i[contains(@class,'fa-long-arrow-right')]" position="attributes">
+                
+                    <!-- L'attribut "invisible" est utilisé pour masquer l'élément. -->
+                    <attribute name="invisible">1</attribute>
+                
+                </xpath>
+
+                    <xpath expr="//div[@class='oe_kanban_bottom_left']/field[2]" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+
+                    <xpath expr="//div[@class='oe_kanban_bottom_left']/b[1]" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    
+                    <xpath expr="//div[@class='oe_kanban_bottom_left']/b[1]" position="after">
+                        <!-- <attribute name="invisible">1</attribute> -->
+                            <field name="nbr_message_partner_ids" invisible="1"/>
+                            <!-- <span style="visibility: hidden;" class="nbr_id_task">  
+                                    <field name="rec_id"/>
+                            </span> -->
+                            <span  class="oe_kanban_mail_new" >
+                                <span class="id">
+                                <span style="visibility: hidden;margin-right:-16px !important">
+                                        <field name="id"/>
+                                </span>
+                                        <i class="fa fa-user" role="img"/>
+                                </span>
+
+                                <!-- <i class="fa fa-user" role="img" aria-label="Followers"/> -->
+                                <t t-raw="record.nbr_message_partner_ids.raw_value"/>
+                                </span>
+
+                            <field name="message_needaction_counter" invisible="1"/>
+                            <span role="alert" class="oe_kanban_mail_new" title="Unread Messages"><i class="fa fa-comments" role="img" aria-label="Unread Messages"/><t t-raw="record.message_needaction_counter.raw_value"/></span>
+                    </xpath>
+
+
+            </field>
+
+        </record>
+            
+    </data>
+
+</odoo>

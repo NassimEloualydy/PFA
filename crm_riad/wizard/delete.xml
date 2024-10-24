@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="wizard_form_view_delete_piste" model="ir.ui.view">
+        <field name="name">wizard_piste_delete</field>
+         <field name="model">wizard.piste.delete</field>
+         <field name="arch" type="xml">  
+        
+             
+            <form >
+
+                <!-- Groupe de champs -->
+
+
+                    <p>Êtes-vous sûr de supprimer cet enregistrement ?</p>
+                   
+                  
+              
+
+                
+                <footer>
+
+                    <!-- Bouton d'action pour importer des données -->
+
+                    <button name="delete_piste" string="Supprimer" type="object" class="btn-primary"/>
+               
+                    <button string="Annuler" class="btn-secondary" special="cancel"/> 
+                
+
+
+                </footer>
+
+
+
+               
+        </form>
+        </field>
+
+    </record>   
+</odoo>

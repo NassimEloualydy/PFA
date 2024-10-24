@@ -1,0 +1,64 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <data>
+
+         <record id="id_project_task_default_form" model="ir.ui.view">
+
+            <field name="name">name_project_task_default_form</field>
+
+            <field name="model">project.task.default</field>
+
+            <field name="type">form</field>
+
+            <field name="arch" type="xml">
+
+                <form>
+
+                    <!-- Groupe principal -->
+
+                    <group>
+
+                        <!-- Premier groupe de champs -->
+
+                        <group>
+
+                            <!-- Champ pour le nom -->
+
+                            <field name="name" string="Nom"/>
+
+                            <!-- Champ pour la date de début -->
+
+                            <field name="date_debut" string="Date De Début"/>
+
+                        </group>
+
+
+
+                        <!-- Deuxième groupe de champs -->
+
+                        <group>
+
+                            <!-- Champ pour la date de fin -->
+
+                            <field name="date_fin" string="Date De Fin"/>
+
+                            <!-- Champ pour le type de tâche -->
+
+                            <field name="type_task" string="Type"/>
+
+                        </group>
+
+                    </group>
+
+                </form>
+
+             </field>
+
+        </record>       
+
+    </data>
+
+</odoo>

@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+
+<odoo>
+
+    <!-- Entête du fichier XML Odoo -->
+
+    <data>
+
+        <!-- Données de configuration Odoo -->
+
+        <record id="id_view_search_task_form" model="ir.ui.view">
+
+            <!-- Enregistrement d'une vue -->
+
+            <field name="name">name_view_search_task_form</field>
+
+            <!-- Nom de la vue -->
+
+            <field name="model">project.task</field>
+
+            <!-- Modèle associé à la vue -->
+
+            <field name="inherit_id" ref="project.view_task_search_form"/>
+
+            <!-- ID de la vue parent que vous souhaitez étendre -->
+
+            <field name="arch" type="xml">
+
+                <!-- Contenu XML de la vue -->
+
+                <xpath expr="//filter[@name='late']" position="replace">
+
+                    <!-- Remplacer l'élément "filter" avec l'attribut "name" égal à "late" -->
+
+                    <filter string="Tâches en retard" name="late" domain="[('date_fin_project', '&lt;', context_today().strftime('%Y-%m-%d')), ('is_closed', '=', False)]"/>
+
+                    <!-- Nouvel élément "filter" qui remplace l'original -->
+
+                </xpath>
+            <xpath expr="//filter[@name='blocked']" position="after">
+            
+              <group expand="0" string="Group By" colspan="16">
+                       
+                        <!-- <separator orientation="vertical"/> -->
+                    <filter string=" Etiquette Admin" name="etiquette" domain="[('tag_ids', 'ilike', 'admin')]" />
+                    <!-- <separator invisible="1"/> -->
+                    <filter string=" Etiquette Installation" name="installation" domain="[('tag_ids', 'ilike', 'installation')]"/>
+                    <!-- <separator invisible="1"/> -->
+                    <filter string=" Etiquette Pv" name="pv" domain="[('tag_ids', 'ilike', 'pv')]"/>
+                    <!-- <separator invisible="1"/> -->
+                    <filter string=" Etiquette Travaux" name="travaux" domain="[('tag_ids', 'ilike', 'travaux')]"/>
+                    <!-- <separator invisible="1"/> -->
+                    <filter string="Sans étiquettes" name="without_tags" domain="[('tag_ids', 'ilike', False)]"/>
+                        <separator invisible="1"/>
+                 </group>
+           
+            </xpath>
+                   <xpath expr="//filter[@name='inactive']" position="replace"/>
+                   
+                   <xpath expr="//filter[@name='without_tags']" position="after">
+                        <separator invisible="1"/>
+
+                                            <filter string="Archivé" name="Archivé" domain="[('active', '=', False)]"/>
+                                            
+
+                   </xpath>
+
+            </field>
+
+        </record>
+
+    </data>
+
+</odoo>

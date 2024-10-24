@@ -1,0 +1,211 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <record id="id_project_task_tree2" model="ir.ui.view">
+            <field name="name">name_project_task_tree2</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_tree2"/>
+            <field name="arch" type="xml">
+                    
+                    <xpath expr="//field[@name='name']" position="replace">
+                    
+                        <!-- Remplacer le champ "name" -->
+                    
+                        <field name="name" widget="name_with_subtask_count" string="Titre de tâche"/>
+                    
+                        <!-- Nouveau champ "name" avec widget et libellé personnalisés -->
+                    
+                    </xpath>
+                    
+                    <xpath expr="//field[@name='project_id']" position="replace">
+                    
+                        <!-- Remplacer le champ "project_id" -->
+                    
+                        <field name="project_id" string="Projet" widget="project_private_task" optional="show" readonly="1" options="{'no_open': 1}" invisible="1"/>
+                    
+                        <!-- Nouveau champ "project_id" avec libellé, widget, options et attributs personnalisés -->
+                    
+                    </xpath>
+                    
+                    <xpath expr="//field[@name='project_id']" position="after">
+                    
+                        <!-- Ajouter des champs après "project_id" -->
+                    
+                        <field name="date_debut" string="Date de debut" />
+                    
+                        <field name="date_fin_project" string="Date de fin" />
+                    
+                        <field name="echance_fin" string="Echéance / Fin" />    
+                    
+                    </xpath>
+                    
+                    <xpath expr="//field[@name='user_ids']" position="replace">                
+                    
+                        <!-- Remplacer le champ "user_ids" -->
+                    
+                        <field name="user_ids" string="Assigné à" optional="show" widget="many2many_avatar_user" domain="[('share', '=', False), ('active', '=', True)]" options="{'no_quick_create': true}"/>
+                    
+                        <!-- <field name="qte_planifier" string="Heures prevues initialement" />
+                    
+                        <field name="qte_planifier" string="Heures restantes" /> -->
+                    
+                        <!-- Ajouter de nouveaux champs après "user_ids" -->
+                    
+                    </xpath>              
+                    
+                    <xpath expr="//field[@name='activity_ids']" position="attributes">
+                    
+                        <!-- Attributs du champ "activity_ids" -->
+                    
+                        <attribute name="invisible">1</attribute>
+                    
+                        <!-- Rendre le champ invisible -->
+                    
+                    </xpath>
+                    
+                  
+                    <xpath expr="//field[@name='stage_id']" position="replace">                
+                    
+                        <!-- Remplacer le champ "stage_id" -->
+                    
+                        <field name="stage_id" string="Etape" invisible="context.get('set_visible', False)" optional="show" readonly="not context.get('default_project_id')"/>
+                    
+                        <!-- Nouveau champ "stage_id" avec libellé, attributs et options personnalisés -->
+                    
+                    </xpath>
+                    
+                    <!-- <xpath expr="//field[@name='stage_id']" position="after">                
+                    
+                        Ajouter des champs après "stage_id"
+                    
+                        <field name="duree_de_tach" string="Duree" />
+                    
+                        <field name="progress" widget="progressbar"/>
+                    
+                        <field name="temp_de_travail_enrgistrer" string="Temps de travail enregistrer" />
+                    
+                    </xpath> -->
+                    
+                    <xpath expr="//field[@name='kanban_state']" position="attributes">
+                    
+                        <!-- Attributs du champ "kanban_state" -->
+                    
+                        <attribute name="invisible">1</attribute>
+                    
+                        <!-- Rendre le champ invisible -->
+                    
+                    </xpath>
+                    
+                    <xpath expr="//field[@name='priority']" position="attributes">
+                    
+                        <!-- Attributs du champ "priority" -->
+                    
+                        <attribute name="invisible">1</attribute>
+                    
+                        <!-- Rendre le champ invisible -->
+                    
+                    </xpath>
+                    
+                    <xpath expr="//field[@name='planned_hours']" position="attributes">
+                    
+                        <!-- Attributs du champ "planned_hours" -->
+                    
+                        <attribute name="sum">0</attribute>
+                    
+                        <!-- Définir la somme initiale du champ "planned_hours" à 0 -->
+                    
+                    </xpath>
+
+
+                     <!-- Hide progress -->
+
+                    <xpath expr="//field[@name='progress']" position="attributes">
+                              
+                          
+                                  <attribute name="invisible">1</attribute>
+                              
+                                
+                      </xpath>  
+                      
+           
+
+                      <!-- <xpath expr="//field[@name='temp_de_travail_enrgistrer']" position="attributes">
+                            
+                        
+                        <attribute name="invisible">1</attribute>
+                            
+                              
+                        </xpath> -->
+
+         <xpath expr="//field[@name='milestone_id']" position="replace">
+                              
+                          
+    <field name="duree_de_tach"/>                              
+                                
+                      </xpath>  
+                      
+                    <xpath expr="//field[@name='tag_ids']" position="after">
+                              
+                          
+                            <field name="nbr_field_attached" string="PJ"/>                              
+                                
+                      </xpath>  
+
+                     
+
+            </field>
+
+        </record>
+
+
+        
+
+
+
+
+
+
+
+
+        <record id="id_custom_field" model="ir.actions.client">
+
+            <!-- Create a new record for a custom client action -->
+
+            <field name="name">name_custom_field</field>
+
+            <!-- Set the name of the custom action to "name_custom_field" -->
+
+            <field name="tag">custom_field</field>
+
+            <!-- Assign a tag "custom_field" to the custom action -->
+        </record>
+        <record model="ir.actions.server" id="id_merge_tasks">
+        
+            <!-- Définition de l'enregistrement d'une action de serveur -->
+        
+            <field name="name">Fusionner</field>
+        
+            <!-- Nom de l'action -->
+        
+            <field name="model_id" ref="model_project_task"/>
+        
+            <!-- Référence au modèle associé à cette action -->
+        
+            <field name="binding_model_id" ref="model_project_task"/>
+        
+            <!-- Référence au modèle de liaison (éventuellement) -->
+        
+            <field name="state">code</field>
+        
+            <!-- L'action est de type "code" -->
+        
+            <field name="code">action = records.merge_tasks()</field>
+        
+            <!-- Le code à exécuter lors de l'action -->
+        
+
+        </record>
+
+        </data>
+</odoo>

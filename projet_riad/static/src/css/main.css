@@ -1,0 +1,34 @@
+/* Masquer le bouton "Envoyer un message" dans la barre de discussion du haut. */
+/* button.o_ChatterTopbar_buttonSendMessage {
+    display: none !important;
+
+} */
+/* .o_MessageActionView_actionEdit {
+    display: none !important;
+} */
+/* i.o_MessageActionView_actionDelete {
+    display: none !important;
+} */
+/* .o_AttachmentImage_action {
+    display: none !important;
+} */
+/* .o_AttachmentCard_asideItem {
+    display: none !important;
+} */
+.o_ActivityBox.o_Chatter_activityBox {
+    display: none !important;
+}
+/* button.o_AttachmentCard_asideItem[title="Supprimer"]{
+    display: none !important;
+} */
+/* disolay the calenader event line in 2 lines*/
+div.o_event_title,div.o_event_title.me-2 {
+    /* display: -webkit-box !important;
+       -webkit-box-orient: vertical !important;
+         */
+       /* overflow: hidden !important; 
+        */
+        white-space: normal !important;
+        height: 38px !important;
+       -webkit-line-clamp: 3 !important;
+   }

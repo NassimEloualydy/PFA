@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+<t t-name="crm_view">
+    <div class="MyContainer">
+    <div class="profiles">
+        <div class='profile'>P1</div>
+    </div>
+    <div class="MyContainerPart1">
+      <div class="selection_cherche">
+          <div class='classHeader'>Secteurs</div>
+          <div class="classes">
+               <div class="selection">
+               </div>
+               <div class="selecteddd">
+               </div>
+          </div>
+          <div class='classHeader'>Villes</div>
+          <div class="classes">
+               <div class="selectionVilles">
+               </div>
+               <div class="selectedVilles">
+               </div>
+          </div>
+        <div class='classHeader'>Recherche avancée</div>
+        <div class='filter'>
+        <div class="formm">
+        <!-- the section for the domain,secteur,Class and qualification -->
+            <div  class="rowm">
+               <div class="fieldsm">
+                <!-- <input type="text" name="Domain" id="Domain" /> -->
+                 <span class="spanSearch"> Domaine </span> 
+                 <select id="select0" class="selectIDomain"   >
+                 <option value="">Tous les domaines</option>
+                 <option value="1">Equipement</option>
+                 <option value="2">Habitat</option>
+
+                </select>
+                <span class="spanSearch"> Secteur </span> 
+
+                <select  id="secteurselect0" class="selectI sectuers">
+                 <option value="">Tous les secteurs</option>
+                </select>
+                <!-- <span class="spanSearch"> Qualification </span> 
+                <select class="selectI">
+                 <option value="">Choisire un Qualification</option>
+                            <option value="">Tout les Qualification</option>
+                </select>
+                                <span class="spanSearch"> Class </span>               
+                <select class="selectI"  id="Classe">
+                   <option value="">Choisire un Class</option>
+                </select> -->
+                <input type="button" class="btn_plus" value="+"/>&nbsp;
+                <input  id='owm_"+indexOItmes+"' type='button' class='btn_moin_1' value='-'/>
+              </div>
+       
+            </div>
+             <span id="search_container">
+                <!-- <div class="rowm">
+                </div> -->
+                
+             </span>
+            <div class="rowm">
+              <span>Mots clés :</span>
+              <div class="fieldsm">
+                <input type="text" id="Cle1" />
+                <select name="EtOu1" id="EtOu1">
+                  <option value="AND">et</option>
+                </select>
+                <input type="text" id="Cle2" />
+                <select name="EtOu2" id="EtOu2">
+                  <option value="AND">et</option>
+                </select>
+                <input type="text" id="Cle3" />
+              </div>
+            </div>
+
+            <div class="rowm">
+              <span>Date limite :</span>
+              <div class="fieldsm">
+                <label for="Datentre">Entre  :</label>
+                <input type="date" name="Datentre" id="Datentre" />
+                <label for="Datet">Et  :</label>
+                <input type="date" name="Datet" id="Datet" />
+              </div>
+            </div>
+
+            <div class="rowm">
+              <span>Caution :</span>
+              <div class="fieldsm">
+                <label for="Cauentre">Entre  :</label>
+                <input type="number" name="Cauentre" id="Cauentre" min="0" />
+                <label for="Cauet">Et  :</label>
+                <input type="number" name="Cauet" id="Cauet" min="0" />
+              </div>
+            </div>
+
+            <div class="rowm">
+              <span>Budget :</span>
+              <div class="fieldsm">
+                <label for="Budentre">Entre  :</label>
+                <input type="number" name="Budentre" id="Budentre" min="0" />
+                <label for="Budet">Et  :</label>
+                <input type="number" name="Budet" id="Budet" min="0" />
+              </div>
+            </div>
+
+            <div class="rowm">
+              <span>N° d'ordre  :</span>
+              <div class="fieldsm">
+                <input type="text" name="ordre" id="ordre"  />
+              </div>
+            </div>
+
+            <div class="rowm">
+              <span>Référence  :</span>
+              <div class="fieldsm">
+                <input type="text" name="ref" id="ref" />
+              </div>
+            </div>
+        </div> 
+         <div class="cherche">
+            chercher
+         </div>
+          <div class="FiltersOptions">
+            <input type="text" id="referenceInput" placeholder="Entrer N° RÉFÉRENCE..."> 
+            <input type="text" id="organismeInput" placeholder="Entrer L'Organisme ..."> 
+            <input type="text" id="cautionInput" placeholder="Entrer La Caution..."> 
+            <input type="text" id="budgetInput" placeholder="Entrer Le Budget..."> 
+            <input type="text" id="villeInput" placeholder="Entrer La Ville ..."> 
+            <input type="text" id="classificationinput" placeholder="Entrer La Classification ..."> 
+          </div>
+          <div class="total">
+            
+         </div>
+      </div>  
+    </div>
+    <div class="MyContainerPart2" id="Table">
+    </div>
+  </div> 
+</t>
+</templates>

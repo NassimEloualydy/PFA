@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+     <record id="id_name_view_account_invoice_filter" model="ir.ui.view">
+        <field name="name">name_view_account_invoice_filter</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='open']" position="after">
+                                    <filter name="in_payment" string="En cours de Paiement " domain="[('payment_state', '=', 'in_payment')]"/>
+            </xpath>
+            <xpath expr="//filter[@name='closed']" position="replace">
+                                <filter name="closed" string="Chèque lettré" domain="[('state', '=', 'posted'), ('payment_state', '=', 'paid')]"/>
+            </xpath>            
+       </field>
+    </record>
+</odoo>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates xml:space="preserve">
+
+    <t t-name="GroupByMenuTemplate" t-inherit="web.GroupByMenu" owl="1">
+        <xpath expr="//t[@t-if='item.options']" position="replace">
+                    <Dropdown togglerClass="'o_menu_item' + (item.isActive ? ' selected' : '')">
+                        
+                        <t t-set-slot="toggler">
+                        <!-- <t t-if="item.description == 'Assignée / Suivies'"> -->
+ 
+                            <t t-esc="Nassim Worl"/>
+                        <!-- </t>
+                        <t t-else="">
+                            <t t-esc="item.description"/>
+
+                        </t> -->
+                        </t>
+                        <t t-set="subGroup" t-value="null"/>
+                        <t t-foreach="item.options" t-as="option" t-key="option.id">
+                            <t t-if="subGroup !== null and subGroup !== option.groupNumber">
+                                <div class="dropdown-divider" role="separator"/>
+                            </t>
+                            <!--  -->
+                            <t t-if="item.description == 'Assignée / Suivies'">
+                            
+                            <DropdownItem class="{ o_item_option: true, selected: option.isActive }"
+                                checked="option.isActive ? true : false"
+                                parentClosingMode="'none'"
+                                t-esc="Nassim Test  Fom "
+                                onSelected="() => this.onGroupBySelected({ itemId: item.id, optionId: option.id})"
+                            />
+                            </t>
+                            <t t-else="">
+
+                            <DropdownItem class="{ o_item_option: true, selected: option.isActive }"
+                                checked="option.isActive ? true : false"
+                                parentClosingMode="'none'"
+                                t-esc="option.description"
+                                onSelected="() => this.onGroupBySelected({ itemId: item.id, optionId: option.id})"
+                            />
+
+                            </t>
+                            <t t-set="subGroup" t-value="option.groupNumber"/>
+                        </t>
+                    </Dropdown>
+
+        </xpath>        
+    </t>
+    
+</templates>
+

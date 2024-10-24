@@ -1,0 +1,160 @@
+<?xml version="1.0"?>
+
+<odoo>
+
+    <data>
+
+        <record id="id_search_project_task" model="ir.ui.view">
+
+            <!-- Définition d'une vue de recherche personnalisée pour les tâches de projet. -->
+            
+            <field name="name">name_search_project_task</field>
+            <!-- Le nom de la vue. -->
+            
+            <field name="model">project.task</field>
+            <!-- Le modèle (entité) auquel cette vue est associée, ici "project.task". -->
+            
+            <field name="inherit_id" ref="project.view_task_search_form"/>
+            <!-- L'identifiant de la vue parent dont cette vue hérite ses éléments. -->
+            
+            <field name="arch" type="xml">
+            <!-- Le type d'architecture de la vue, ici "xml". -->
+
+                    <!-- Insérer un champ "Type De PV" après le champ "rating_last_text" dans la vue actuelle. -->
+                    <xpath expr="//field[@name='user_ids']" position="attributes">
+                            <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='user_ids']" position="after">
+                        <field name="user_id" string="Assignée à" />
+                        <!-- <field name="user_id" string="Assignée / Suivies" filter_domain="['|',('user_ids.name', 'ilike', self),('message_partner_ids.name', 'ilike', self)]"/> -->
+                        <field name="user_id"  string="Assignée / Suivies"  filter_domain="[('user_ids', '!=', False)]" groups="admin_without_delete.admin_without_delete" />
+                    
+                        <!-- <field name="message_is_follower" invisible="1"/> -->
+
+                    </xpath>
+                    
+                    <xpath expr="//field[@name='rating_last_text']" position="after">
+                        
+                        <field name="type_pv_id" string="Type De PV" filter_domain="[('type_pv_id', 'ilike', self)]"/>
+                    </xpath>
+        
+                    <!-- Ajouter un filtre pour les Étiquettes -->
+                    <xpath expr="//field[@name='tag_ids']" position="attributes">
+        
+                            <attribute name="filter_domain">[('tag_ids.name', 'ilike', self)]</attribute>
+        
+                    </xpath>            
+        
+                    <!-- Ajouter un filtre personnalisé appelé "Étiquettes" après le champ "rating_last_text" dans la vue actuelle. -->
+                    <!-- <xpath expr="//field[@name='rating_last_text']" position="after">
+                    
+                        <filter name="my_tag_ids" string="Étiquettes" context="{'group_by':'tag_ids'}" />
+                    
+                    </xpath> -->
+                    <xpath expr="//field[@name='milestone_id']" position="replace"/>
+                <xpath expr="//field[@name='tag_ids']" position="replace"/>
+                    
+            <!--  -->
+                    <xpath expr="//filter[@name='user']" position="replace">
+                        <filter string="Assignées" name="user" context="{'group_by': 'user_id'}"/>
+                        <filter string="Étiquettes" name="tag_id" context="{'group_by': 'tag_id'}"/>
+
+                    </xpath>
+                    <xpath expr="//filter[@name='milestone']" position="replace"/>
+                    <xpath expr="//field[@name='name']" position="after">
+                        <field name="project_id" invisible="1"/>
+                        <!-- <field name="message_is_follower" /> -->
+                        
+                    </xpath>
+                            <xpath expr="//filter[@name='unassigned']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                        <!-- <field name="message_is_follower" /> -->
+                        
+
+                   <xpath expr="//filter[@name='unassigned']" position="after">
+                                       <!-- <filter string="Unassigned" name="unassigned" domain="[('user_ids', '=', False)]" invisible="1"/> -->
+
+
+                        <filter string="Message non lu" name="unread_messages" domain="[('message_needaction', '=', True)]" />
+                            <separator invisible="1"/>
+
+                        <!-- <filter string="Tâches Des 30 Prochains Jours" name="next_30_days" domain="[('date_debut', '&lt;', datetime.datetime.now() + relativedelta(days=30))]"/> -->
+                        <filter string="Tâches Des 45 Prochains Jours" name="next_45_days" domain="[('date_fin_project', '&lt;', datetime.datetime.now() + relativedelta(days=45))]"/>
+                        <filter string="Tâches Des 90 Prochains Jours" name="next_90_days" domain="[('date_fin_project', '&lt;', datetime.datetime.now() + relativedelta(days=90))]"/>
+                    <!-- <filter string="Closed Last 30 Days" name="closed_last_30_days" domain="[('is_closed', '=', True), ('date_last_stage_update', '&gt;', datetime.datetime.now() - relativedelta(days=30))]"/> -->
+
+                   </xpath>
+                   <xpath expr="//filter[@name='my_team_tasks']" position="replace"/>
+                   <xpath expr="//filter[@name='my_department']" position="replace"/>
+                   <xpath expr="//filter[@name='low_priority']" position="replace"/>
+                   <xpath expr="//filter[@name='late_milestone']" position="replace"/>
+                   <xpath expr="//filter[@name='overtime']" position="replace">
+                            <field name="nbr_field_attached" invisible="1"/>
+                            <separator invisible="1"/>
+                            <filter string="Tâches avec PJ" name="task_with_pj" domain="[('nbr_field_attached', '&gt;', 0)]"/>
+                            <separator invisible="1"/>
+                            <filter string="Ces 15 Jours" name="task_in_15_days" domain="[('in_15_days', '=', 1)]"/>
+                            <separator invisible="1"/>
+                   </xpath>
+                   <xpath expr="//filter[@name='remaining_hours_percentage']" position="replace"/>
+                   <xpath expr="//filter[@name='tasks_due_today']" position="replace"/>
+                   <xpath expr="//filter[@name='stall_last_30_days']" position="replace"/>
+                   <xpath expr="//filter[@name='open_tasks']" position="after">
+                                               <separator invisible="1"/>
+                   </xpath>
+                    <xpath expr="//filter[@name='closed_tasks']" position="after">
+                                               <separator invisible="1"/>
+                   </xpath>
+                   <xpath expr="//filter[@name='closed_last_7_days']" position="after">
+                                               <separator invisible="1"/>
+                   </xpath>
+                   <xpath expr="//filter[@name='personal_stage']" position="after">
+                        <field name="is_mes_tach_suivi" invisible="1"/>
+                        <filter string="Assignée / Suivies " name="is_mes_tach_suivi" context="{'group_by': 'is_mes_tach_suivi:desc'}"/>
+                   </xpath>
+                   <xpath expr="//field[@name='name']" position="after">
+                   <!-- filter_domain="[('message_partner_ids.name', 'ilike', self)]" -->
+                        <!-- <field name="user_id" string="Assignée / Suivies Par"   context="{'group_by': 'is_mes_tach_suivi'}"/> -->
+                        <!-- <field name="user_id" string="Tâches Non Suivies Par" filter_domain="[('message_partner_ids.name', 'not in', self)]"/> -->
+                        <!-- <field name="user_id" string="Abonner" filter_domain="[('message_partner_ids.name', 'ilike', self)]"/> -->
+                   </xpath>
+                
+                    
+
+                                    <!-- <xpath expr="//filter[@name='followed_by_me']" position="replace"> 
+                                            <field name="message_is_follower" />
+
+                        <filter string="Followed" name="followed_by_mine" domain="[('message_is_follower', '=', True)]"/>
+                    </xpath> -->
+<xpath expr="//field[@name='sale_order_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+<xpath expr="//field[@name='ancestor_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>                             
+<xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>                             
+<xpath expr="//field[@name='stage_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>                             
+<xpath expr="//field[@name='rating_last_text']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>                             
+
+
+            </field>
+            
+
+        </record>
+ <!-- <record id="id_filter_other_user_is_mes_tach_suivi" model="ir.filters">
+        <field name="name">Assignée / Suivies Par</field>
+        <field name="model_id">project.task</field>
+        <field name="domain">[('message_partner_ids.name', 'ilike', self)]</field>
+        <field name="user_id" eval="False"/>
+        <field name="context">{'group_by': ['is_mes_tach_suivi']}</field>
+    </record> -->
+    </data>
+
+</odoo>

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+
+<odoo>
+
+    <data>
+
+
+
+        <record id="id_project_form_kanban" model="ir.ui.view">
+
+            <field name="name">name_project_form_kanban</field>
+
+            <field name="model">project.project</field>
+
+            <field name="inherit_id" ref="projet_riad.id_project_project_view_form_simplified"/>
+
+            <field name="arch" type="xml">
+
+                    <!-- Modifie l'attribut "required" du champ "email_project" pour le rendre non requis -->
+
+                    <xpath expr="//field[@name='email_project']" position="attributes">
+
+                        <attribute name="modifiers">{&quot;required&quot;: false}</attribute>
+
+                    </xpath>
+
+            </field>
+
+        </record>
+
+
+
+    </data>
+
+
+
+</odoo>

@@ -1,0 +1,207 @@
+<?xml version="1.0"?>
+
+<odoo>
+
+    <data>
+
+        <record id="id_project_project_tree" model="ir.ui.view">
+
+            <field name="name">project_project_tree</field>
+
+            <field name="model">project.project</field>
+
+            <field name="inherit_id" ref="project.view_project"/>
+
+            <field name="arch" type="xml">
+
+                    
+                    <!-- Remplace le champ 'display_name' par 'Nom du projet' avec une classe 'fw-bold' -->
+                    
+                    <xpath expr="//field[@name='display_name']" position="replace">                    
+                        <field name="display_name" string="Nom du projet" class="fw-bold"/>                    
+                    </xpath>
+
+
+                    
+                    <!-- Rend invisible le champ 'partner_id' -->
+                    
+                    <xpath expr="//field[@name='partner_id']" position="attributes">
+                    
+                        <attribute name="invisible">1</attribute>
+                    
+                    </xpath>
+
+
+                    
+                    <!-- Rend invisible le champ 'date_start' -->
+                    
+                    <xpath expr="//field[@name='date_start']" position="attributes">
+                    
+                        <attribute name="invisible">1</attribute>
+                    
+                    </xpath>
+
+
+                    
+                    <!-- Rend invisible le champ 'user_id' -->
+                    
+                    <xpath expr="//field[@name='user_id']" position="attributes">
+                    
+                        <attribute name="invisible">1</attribute>
+                    
+                    </xpath>
+
+
+                    
+                    <!-- Ajoute le champ 'user_id' après le champ 'partner_id' -->
+                    
+                    <xpath expr="//field[@name='partner_id']" position="after">
+                    
+                        <field name="user_id" string="Chef de projet" class="fw-bold"/>
+                       
+                    </xpath>
+
+
+                    
+                    <!-- Ajoute le champ 'partner_id' après le champ 'date_start' -->
+                    
+                    <xpath expr="//field[@name='date_start']" position="after">
+                    
+                                            <field name="rapoteur"/>
+                        <field name="partner_id" string="Client" class="fw-bold"/>
+
+                    </xpath>
+
+
+                    
+                    <!-- Rend invisible le champ 'date' -->
+                    
+                    <xpath expr="//field[@name='date']" position="attributes">
+                    
+                        <attribute name="invisible">1</attribute>
+                    
+                    </xpath>
+
+
+                    
+                    <!-- Ajoute le champ 'montant_marche' après le champ 'date' -->
+                    
+                    <xpath expr="//field[@name='date']" position="after">
+                    
+                        <!-- <field name="montant_marche" string="Montant marché" class="fw-bold"/> -->
+                        <field name="nbr_tasks_for_project" string="Sit. Taches" class="fw-bold"/>
+                    
+                    </xpath>
+                    
+                    <!-- Rend invisible le champ 'allocated_hours' -->
+                    
+                    <xpath expr="//field[@name='allocated_hours']" position="attributes">
+                    
+                        <attribute name="invisible">1</attribute>
+                    
+                    </xpath>
+
+
+                    
+                    <!-- Ajoute le champ 'travaux_executes' après le champ 'allocated_hours' -->
+                    
+                    <!-- <xpath expr="//field[@name='allocated_hours']" position="after">
+                    
+                        <field name="travaux_executes" string="Travaux Exécutés" class="fw-bold"/>
+                    
+                    </xpath> -->
+
+
+                    
+                    <!-- Rend invisible le champ 'last_update_status' -->
+                    
+                    <xpath expr="//field[@name='last_update_status']" position="attributes">
+                    
+                        <attribute name="invisible">1</attribute>
+                    
+                    </xpath>
+
+
+                    
+                    <!-- Ajoute le champ 'montant_restant' après le champ 'last_update_status' -->
+                    
+                    <!-- <xpath expr="//field[@name='last_update_status']" position="after">
+                    
+                        <field name="montant_restant" string="Montant restant" class="fw-bold"/>
+                    
+                    </xpath> -->
+
+
+                    
+                    <!-- Rend invisible le champ 'is_favorite' -->
+                    
+                    <xpath expr="//field[@name='is_favorite']" position="attributes">
+                    
+                        <attribute name="invisible">1</attribute>
+                    
+                    </xpath>
+
+                    <!-- <xpath expr="//field[@name='partner_id']" position="after">
+                        <field name="rapoteur"/>
+                    </xpath> -->
+
+            </field>
+
+        </record>
+            <record model="ir.actions.server" id="id_clean_folders">
+        
+            <!-- Définition de l'enregistrement d'une action de serveur -->
+        
+            <field name="name">Nettoyer les dossiers</field>
+        
+            <!-- Nom de l'action -->
+        
+            <field name="model_id" ref="model_project_project"/>
+        
+            <!-- Référence au modèle associé à cette action -->
+        
+            <field name="binding_model_id" ref="model_project_project"/>
+        
+            <!-- Référence au modèle de liaison (éventuellement) -->
+        
+            <field name="state">code</field>
+        
+            <!-- L'action est de type "code" -->
+        
+            <field name="code">action = records.clean_folder_data()</field>
+        
+            <!-- Le code à exécuter lors de l'action -->
+        
+
+        </record>
+
+            <record model="ir.actions.server" id="id_create_folders">
+        
+            <!-- Définition de l'enregistrement d'une action de serveur -->
+        
+            <field name="name">Cree les dossiers</field>
+        
+            <!-- Nom de l'action -->
+        
+            <field name="model_id" ref="model_project_project"/>
+        
+            <!-- Référence au modèle associé à cette action -->
+        
+            <field name="binding_model_id" ref="model_project_project"/>
+        
+            <!-- Référence au modèle de liaison (éventuellement) -->
+        
+            <field name="state">code</field>
+        
+            <!-- L'action est de type "code" -->
+        
+            <field name="code">action = records.creat_folder_and_subfolder()</field>
+        
+            <!-- Le code à exécuter lors de l'action -->
+        
+
+        </record>
+
+    </data>
+
+</odoo>

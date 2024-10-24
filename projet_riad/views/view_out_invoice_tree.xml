@@ -1,0 +1,175 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>       
+       <record id="id_name_view_tree_account_move" model="ir.ui.view">
+            <field name="name">name_view_tree_account_move</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_out_invoice_tree"/>
+            <field name="arch" type="xml">       
+                
+                <!-- Hide fields -->
+                
+                <xpath expr="//field[@name='name'][1]" position="attributes">
+                
+                    <attribute name="invisible">1</attribute>
+                
+                </xpath>
+                
+                <xpath expr="//field[@name='invoice_date'][2]" position="attributes">
+                
+                    <attribute name="invisible">1</attribute>
+                
+                </xpath>
+                
+                <xpath expr="//field[@name='amount_total_signed']" position="attributes">
+                
+                    <attribute name="invisible">1</attribute>
+                
+                </xpath>
+                
+                <xpath expr="//field[@name='payment_state']" position="attributes">
+                
+                    <attribute name="invisible">1</attribute>
+                
+                </xpath>
+                
+                <xpath expr="//field[@name='state']" position="attributes">
+                
+                    <attribute name="invisible">1</attribute>
+                
+                </xpath>
+
+                
+                
+                <!-- Add fields after specific fields -->
+                
+                <xpath expr="//field[@name='name']" position="after">
+                
+                    <field name="partner_id" string="Client"/>
+                
+                </xpath>
+                
+                <xpath expr="//field[@name='partner_id']" position="after">
+                
+                    <field name="project_numero_marche" string="Numéro du marché"/>
+                
+                </xpath>
+                
+                <xpath expr="//field[@name='project_numero_marche']" position="after">
+                
+                    <field name="project_id" string="Projet"/>
+                
+                </xpath>
+                
+                <xpath expr="//field[@name='project_id']" position="after">
+                
+                    <field name="invoice_date" string="Date de dépôt"/>
+                
+                </xpath>
+                
+                <xpath expr="//field[@name='invoice_date']" position="after">
+                
+                    <field name="decompte_n" string="DP N"/>
+                
+                </xpath>
+                
+                <xpath expr="//field[@name='decompte_n']" position="after">
+                
+                    <field name="user_id" string="Resp .Recouvrement"/>
+                
+                </xpath>
+
+                
+                
+                <!-- Add an additional field "Échéance" -->
+                
+                <xpath expr="//field[@name='user_id']" position="after">
+                
+                    <field name="echeance" string="Échéance"/>
+                
+                </xpath>
+
+                
+                
+                <xpath expr="//field[@name='echeance']" position="after">
+                
+                    <field name="partner_bank_id" string="Compt bancaire"/>
+                
+                </xpath>
+
+                
+                
+                <xpath expr="//field[@name='partner_bank_id']" position="after">
+                
+                    <field name="amount_total_signed" string="Total" sum="Total" decoration-bf="1"/>
+                
+                </xpath>
+
+                
+                
+                <xpath expr="//field[@name='amount_total_signed']" position="after">
+                
+                    <field name="nbr_field_attached" string="Pièces jointes"/>
+                
+                </xpath>
+
+                
+                
+                <xpath expr="//field[@name='state']" position="attributes">
+                
+                    <attribute name="string">Étape</attribute>
+                
+                </xpath>
+
+                
+                
+                <xpath expr="//field[@name='nbr_field_attached']" position="after">
+                
+                    <field name="state" string="Étape"/>
+                
+                </xpath>
+
+                
+                
+                <xpath expr="//field[@name='invoice_date_due']" position="attributes">
+                
+                    <attribute name="invisible">1</attribute>
+                
+                </xpath>
+
+                
+                
+                <xpath expr="//field[@name='activity_ids']" position="attributes">
+                
+                    <attribute name="invisible">1</attribute>
+                
+                </xpath>
+
+                
+                
+                <xpath expr="//field[@name='amount_untaxed_signed']" position="attributes">
+                
+                    <attribute name="invisible">1</attribute>
+                
+                </xpath>
+
+                
+                
+                <xpath expr="//field[@name='invoice_partner_display_name'][2]" position="attributes">
+                
+                    <attribute name="invisible">1</attribute>
+                
+                </xpath>
+
+                
+                
+                <xpath expr="//field[@name='amount_total_in_currency_signed']" position="attributes">
+                
+                    <attribute name="invisible">1</attribute>
+                
+                </xpath>
+
+            </field>
+        </record>
+        </data>
+</odoo>

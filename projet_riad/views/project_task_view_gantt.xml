@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+
+<odoo>
+
+    <data>
+
+        <record id="id_project_task_view_gantt" model="ir.ui.view">
+
+            <field name="name">name_project_task_view_gantt</field>
+
+            <field name="model">project.task</field>
+
+            <field name="inherit_id" ref="project_enterprise.project_task_view_gantt"/>
+
+            <field name="arch" type="xml">
+
+                <!-- Afficher la tâche de la vue Gantt par nom de la tâche -->
+                <xpath expr="//field[@name='project_id']" position="after">
+                    <field name="date_debut"/>
+                    <field name="date_fin_project"/>
+                    <field name="duree_de_tach"/>
+                    <field name="echance_fin"/>
+                </xpath>
+
+                
+                <xpath expr="//gantt" position="attributes">
+
+                    <attribute name="default_group_by">name</attribute>
+
+                    <attribute name="date_start">date_debut</attribute>
+
+                    <attribute name="date_stop">date_fin_project</attribute>
+                    <attribute name="scales">month,year</attribute>
+                </xpath>
+                <xpath expr="//div[@name='project_id']" position="replace"/>
+                <xpath expr="//div[@t-if='user_names']" position="after">
+
+                    <div t-if="date_debut"><strong>Date de début — </strong> <t t-esc="userTimezoneStartDate.format('l LT ')"/></div>
+                    <div t-if="date_fin_project"><strong>Date de fin — </strong> <t t-esc="userTimezoneStopDate.format(' l LT')"/></div>
+                    <div t-if="duree_de_tach"><strong>Durée de tâche — </strong> <t t-esc="duree_de_tach"/></div>
+                    <div t-if="echance_fin"><strong>Echéance / Fin — </strong> <t t-out="echance_fin"/></div>
+                            
+                            
+
+                </xpath>
+
+                <xpath expr="//div[@t-if='partner_id']" position="replace"/>
+                <xpath expr="//div[7]" position="replace"/>
+
+            </field>
+
+        </record>
+
+
+        <!-- project Task gantt -->
+        <record id="id_timesheet_grid_project_task_view_gantt_timesheet" model="ir.ui.view">
+
+            <field name="name">name_timesheet_grid_project_task_view_gantt_timesheet</field>
+
+            <field name="model">project.task</field>
+
+            <field name="inherit_id" ref="timesheet_grid.project_task_view_gantt_timesheet"/>
+
+            <field name="arch" type="xml">
+                <xpath expr="//div[@t-if='allow_timesheets']" position="replace"/>
+            </field>
+
+        </record>
+
+    </data>
+
+</odoo>

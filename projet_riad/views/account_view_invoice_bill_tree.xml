@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="id_account_view_in_invoice_bill_tree" model="ir.ui.view">
+            <field name="name">name_account_view_in_invoice_bill_tree</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_in_invoice_bill_tree"/>
+            <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                    <attribute name="default_order">write_date desc</attribute>
+              </xpath>
+
+                    <xpath expr="//field[@name='invoice_date_due']" position="replace">
+                        <field name="invoice_date_due" widget="remaining_days" optional="show" on_change="1" attrs="{'invisible': ['|',('payment_state', '=','paid'),('payment_state','=','reversed')]}"/>
+                    </xpath>
+                    <xpath expr="//field[@name='invoice_partner_display_name']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='name']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='ref']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='amount_untaxed_signed']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='activity_ids']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='invoice_date']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+
+                    <xpath expr="//field[@name='name']" position="before">
+                        
+                        <field name="invoice_date"/>
+                        <field name="invoice_origin" string="Document d'origine"/>
+
+                        <field name="invoice_partner_display_name" string="Fournisseur"/>
+                        <field name="project_id" string="Projet"/>
+                        
+                    </xpath>
+                    <!-- <xpath expr="//field[@name='project_id']" position="after">
+                        <field name="name" string="Numéro"/>
+                    </xpath> -->
+                    <!-- <xpath expr="//field[@name='invoice_date_due']" position="before">
+
+                        <field name="ref" string="Référence"/>
+                    </xpath> -->
+                    <!-- <xpath expr="//field[@name='invoice_date_due']" position="after"> -->
+                        <!-- <field name="amount_untaxed_signed" string="Tax exclues"/>
+                        <field name="amount_tax_signed" string="Taxe"/> -->
+                    <!-- </xpath> -->
+                    <!-- <xpath expr="//field[@name='state']" position="after">
+                        <field name="activity_ids" widget="list_activity" string="Activités"/>
+                    </xpath> -->
+                    <!-- <xpath expr="//field[@name='amount_total_signed']" position="after">
+                        <field name="amount_residual" string="A payer"/>
+                    </xpath> -->
+                    <xpath expr="//field[@name='amount_total_signed']" position="attributes">
+                    <!-- Ajoute un attribut "invisible" avec la valeur "1" à ces éléments, les rendant invisibles -->
+                    <attribute name="string">Montant TTC</attribute>
+                </xpath>
+                    
+                    <xpath expr="//field[@name='amount_total_signed']" position="after">
+                        <field name="amount_residual" string="A payer"/>
+                    </xpath>
+
+            </field>
+    </record>
+    </data>
+
+</odoo>
+

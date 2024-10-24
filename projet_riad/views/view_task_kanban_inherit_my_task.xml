@@ -1,0 +1,369 @@
+<?xml version="1.0"?>
+
+<odoo>
+
+    <data>
+
+
+        <record id="id_project_task__kanban_inherit_my_task" model="ir.ui.view">
+
+            <field name="name">name_kanban_inherit_my_task</field>
+
+            <field name="model">project.task</field>
+
+            <field name="inherit_id" ref="project.view_task_kanban_inherit_my_task"/>
+
+            <field name="arch" type="xml">
+
+                <xpath expr="//div[@class='o_kanban_record_headings']"  position="replace">
+
+                    <strong class="container_task" >
+
+
+                                                <s t-if="!record.active.raw_value">
+
+                                                    <!-- Vérifie si le champ "active" est faux (non actif) -->
+
+                                                    <field name="name" widget="name_with_subtask_count" modifiers="{&quot;required&quot: true}"/>
+
+                                                    <!-- Champ "name" avec widget "name_with_subtask_count" et marqué comme requis -->
+
+                                                </s>                                                
+
+                                                <t t-else="">
+
+                                                        <field name="name" widget="name_with_subtask_count" modifiers="{&quot;required&quot;: true}"/>
+
+                                                        <!-- Champ "name" avec widget "name_with_subtask_count" et marqué comme requis -->
+
+                                                        <br/>
+
+                                                        <field name="delta_date_debut" invisible="1"/>
+
+                                                        <!-- Champ "delta_date_debut" invisible -->
+
+                                                        <field name="delta_date_fin" invisible="1"/>
+
+                                                        <!-- Champ "delta_date_fin" invisible -->
+
+                                                        <field name="pv_id" invisible="1"/>
+
+                                                        <!-- Champ "pv_id" invisible -->
+
+                                                        <field name="nom_pv" invisible="1"/>
+
+                                                        <!-- Champ "nom_pv" invisible -->
+
+                                                <t t-if="record.delta_date_debut.raw_value lt 0">
+
+                                                    <!-- Si la valeur de delta_date_debut est inférieure à zéro -->
+
+                                                    <span t-attf-class="#{'oe_kanban_text_red'}">
+
+                                                        <!-- Appliquer la classe CSS "oe_kanban_text_red" -->
+
+                                                        <span>D:</span>
+
+                                                        <!-- Afficher "D:" -->
+
+                                                        <field name="date_debut"/>
+
+                                                        <!-- Afficher la valeur du champ "date_debut" -->
+
+                                                        <field name="message_delta_date_debut"/>
+
+                                                        <!-- Afficher la valeur du champ "message_delta_date_debut" -->
+
+                                                        <br/>
+
+                                                        <!-- Insérer une ligne vide -->
+
+                                                    </span>
+
+                                                </t>
+
+                                                <t t-if="record.delta_date_debut.raw_value gt 0">
+
+                                                    <!-- Si la valeur de delta_date_debut est supérieure à zéro -->
+
+                                                    <span t-attf-class="#{'oe_kanban_text_green'}">
+
+                                                        <!-- Appliquer la classe CSS "oe_kanban_text_green" -->
+
+                                                        <span>D:</span>
+
+                                                        <!-- Afficher "D:" -->
+
+                                                        <field name="date_debut"/>
+
+                                                        <!-- Afficher la valeur du champ "date_debut" -->
+
+                                                        <field name="message_delta_date_debut"/>
+
+                                                        <!-- Afficher la valeur du champ "message_delta_date_debut" -->
+
+                                                        <br/>
+
+                                                        <!-- Insérer une ligne vide -->
+
+                                                    </span>
+
+                                                </t>
+
+                                                <t t-if="record.delta_date_debut.raw_value == 0">
+
+                                                    <!-- Si la valeur de delta_date_debut est égale à zéro -->
+
+                                                    <span t-attf-class="#{'oe_kanban_text_orange'}">
+
+                                                        <!-- Appliquer la classe CSS "oe_kanban_text_orange" -->
+
+                                                        <span>D:</span>
+
+                                                        <!-- Afficher "D:" -->
+
+                                                        <field name="date_debut"/>
+
+                                                        <!-- Afficher la valeur du champ "date_debut" -->
+
+                                                        <field name="message_delta_date_debut"/>
+
+                                                        <!-- Afficher la valeur du champ "message_delta_date_debut" -->
+
+                                                        <br/>
+
+                                                        <!-- Insérer une ligne vide -->
+
+                                                    </span>
+
+                                                </t>
+
+                                                <t t-if="record.delta_date_fin.raw_value lt 0">
+
+                                                    <!-- Si la valeur de delta_date_fin est inférieure à zéro -->
+
+                                                    <span t-attf-class="#{'oe_kanban_text_red'}">
+
+                                                        <!-- Appliquer la classe CSS "oe_kanban_text_red" -->
+
+                                                        <span>F:</span>
+
+                                                        <!-- Afficher "F:" -->
+
+                                                        <field name="date_fin_project"/>
+
+                                                        <!-- Afficher la valeur du champ "date_fin_project" -->
+
+                                                        <field name="message_delta_date_fin"/>
+
+                                                        <!-- Afficher la valeur du champ "message_delta_date_fin" -->
+
+                                                        <br/>
+
+                                                        <!-- Insérer une ligne vide -->
+
+                                                    </span>
+
+                                                </t>
+
+                                                <t t-if="record.delta_date_fin.raw_value gt 0">
+
+                                                    <!-- Si la valeur de delta_date_fin est supérieure à zéro -->
+
+                                                    <span t-attf-class="#{'oe_kanban_text_green'}">
+
+                                                        <!-- Appliquer la classe CSS "oe_kanban_text_green" -->
+
+                                                        <span>F:</span>
+
+                                                        <!-- Afficher "F:" -->
+
+                                                        <field name="date_fin"/>
+
+                                                        <!-- Afficher la valeur du champ "date_fin" -->
+
+                                                        <field name="message_delta_date_fin"/>
+
+                                                        <!-- Afficher la valeur du champ "message_delta_date_fin" -->
+
+                                                        <br/>
+
+                                                        <!-- Insérer une ligne vide -->
+
+                                                    </span>
+
+                                                </t>
+
+                                                <t t-if="record.delta_date_fin.raw_value == 0">
+
+                                                    <!-- Si la valeur de delta_date_fin est égale à zéro -->
+
+                                                    <span t-attf-class="#{'oe_kanban_text_orange'}">
+
+                                                        <!-- Appliquer la classe CSS "oe_kanban_text_orange" -->
+
+                                                        <span>F:</span>
+
+                                                        <!-- Afficher "F:" -->
+
+                                                        <field name="date_fin_project"/>
+
+                                                        <!-- Afficher la valeur du champ "date_fin_project" -->
+
+                                                        <field name="message_delta_date_fin"/>
+
+                                                        <!-- Afficher la valeur du champ "message_delta_date_fin" -->
+
+                                                        <br/>
+
+                                                        <!-- Insérer une ligne vide -->
+
+                                                    </span>
+
+                                                </t>
+
+                                                <t t-if="record.pv_id.raw_value">
+
+                                                    <!-- Si la valeur de pv_id existe -->
+
+                                                    <span class="fw-bolder">PV &nbsp;&nbsp;</span>
+
+                                                    <!-- Afficher "PV" en gras -->
+
+                                                    <field name="nom_pv"/>
+
+                                                    <!-- Afficher la valeur du champ "nom_pv" -->
+
+                                                    <br/>
+
+                                                    <!-- Insérer une ligne vide -->
+
+                                                </t>
+
+                                                <span class="text-muted">
+                                                    <!-- Afficher le texte "Duree" en couleur grise -->
+                                                    Duree
+                                                </span>
+
+                                                <field class="text-muted" name="duree_de_tach"/>
+                                                <!-- Afficher la valeur du champ "duree_de_tach" en couleur grise -->
+                    </strong>
+
+                    <br/>
+
+                    <br/>
+
+                    <span>
+                                                
+                    <field name="project_id" widget="project_private_task" options="{'no_open': True}" on_change="1" modifiers="{&quot;invisible&quot;: true}"/>
+                    <!-- Champ "project_id" avec le widget "project_private_task" et certaines options -->
+
+                    <style type="text/css">
+                        <!-- Début de la définition des styles CSS -->
+
+                        .container_task {
+                            width: 100% !important;
+                            /* Appliquer une largeur de 100% */
+                        }
+
+                        .user_id_op {
+                            margin-left: auto;
+                            /* Définir une marge à gauche en auto (centrage) */
+                        }
+
+                        .oe_kanban_text_green {
+                            color: green;
+                            font-weight: bold;
+                            /* Couleur verte avec un texte en gras */
+                        }
+
+                        .oe_kanban_text_orange {
+                            color: orange;
+                            font-weight: bold;
+                            /* Couleur orange avec un texte en gras */
+                        }
+
+                        .oe_kanban_text_black {
+                            color: black;
+                            font-weight: bold;
+                            /* Couleur noire avec un texte en gras */
+                        }
+
+                        .oe_kanban_text_red {
+                            color: red;
+                            font-weight: bold;
+                            /* Couleur rouge avec un texte en gras */
+                        }
+
+                        <!-- Fin de la définition des styles CSS -->
+                    </style>
+
+                    </span>
+
+                </xpath>
+
+
+                <xpath expr="//t[@name='planned_hours']" position="before">
+
+                    <!-- Insérer avant l'élément "t[@name='planned_hours']" -->
+
+                    <a name="get_attachment_for_task_project" class="o_project_kanban_box" type="object">
+
+                        <!-- Créer un lien avec une classe et un type d'objet -->
+
+                        <i class="fa fa-paperclip mt-1" aria-hidden="true"></i>
+
+                        <!-- Icône de trombone -->
+
+                        <field name="nbr_field_attached" />
+
+                        <!-- Champ de nombre de fichiers attachés -->
+
+                    </a>
+
+                </xpath>
+
+
+
+                <xpath expr="//field[@name='planned_date_begin']" position="attributes">
+
+                    <!-- Attribut "invisible" pour le champ "planned_date_begin" -->
+
+                    <attribute name="invisible">1</attribute>
+
+                </xpath>
+
+
+
+                <xpath expr="//field[@name='planned_date_end']" position="attributes">
+
+                    <!-- Attribut "invisible" pour le champ "planned_date_end" -->
+
+                    <attribute name="invisible">1</attribute>
+
+                </xpath>
+
+
+
+                <xpath expr="//i[contains(@class,'fa-long-arrow-right')]" position="attributes">
+
+                    <!-- Attribut "invisible" pour l'élément "i" contenant la classe "fa-long-arrow-right" -->
+
+                    <attribute name="invisible">1</attribute>
+
+                </xpath>
+
+
+
+
+
+
+
+            </field>
+
+        </record>
+
+    </data>
+
+</odoo>
+

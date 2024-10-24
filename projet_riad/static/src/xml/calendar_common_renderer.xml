@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-name="calendarCommonRenderer.inherit" t-inherit="web.CalendarCommonRenderer.event" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[1]/div[1]" position="replace">
+            <div class="o_event_title text-truncate">
+                <div t-out="title"/>
+                <span  t-esc="end_date" />
+
+            </div>                            
+        </xpath>
+    </t> 
+</templates>

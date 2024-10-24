@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="id_view_attachment_search" model="ir.ui.view">
+            <field name="name">name_view_attachment_search</field>
+            <field name="model">ir.attachment</field>   
+            <field name="inherit_id" ref="base.view_attachment_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='type']" position="after">
+                                <field name="documents_folder_id"/>
+                                <field name="projet_id"/>
+                </xpath>
+
+                <xpath expr="//filter[@name='owner']" position="after">
+                    <filter name="Dossier" string="Dossier"  context="{'group_by':'documents_folder_id'}"/>
+
+                </xpath>
+            </field>
+        </record>   
+     </data>
+</odoo>
+

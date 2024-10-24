@@ -1,0 +1,466 @@
+<?xml version="1.0"?>
+
+<odoo>
+    <data>
+        <record id="id_project_project_edit" model="ir.ui.view">
+            <field name="name">project_project_edit_project</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="arch" type="xml">
+            <!-- masquer les chmaps suivant -->
+                <xpath expr="//field[@name='analytic_account_id']" position="attributes">
+                
+                    <attribute name="string">Contrat / analytique</attribute>
+
+                </xpath>
+                
+                <xpath expr="//field[@name='label_tasks']"  position="attributes">
+                
+                    <attribute name="invisible">1</attribute>
+                
+                </xpath>
+                
+                <xpath expr="//field[@name='partner_id']"  position="attributes">
+                
+                    <attribute name="invisible">1</attribute>
+                
+                </xpath>
+                
+                <xpath expr="//field[@name='tag_ids']"  position="attributes">
+                
+                    <attribute name="invisible">1</attribute>
+                
+                </xpath>
+                
+                <xpath expr="//field[@name='company_id']"  position="attributes">
+                
+                    <attribute name="invisible">1</attribute>
+                
+                </xpath>
+                
+                <xpath expr="//field[@name='user_id']"  position="attributes">
+                
+                    <attribute name="invisible">1</attribute>
+                
+                </xpath>
+                
+                <xpath expr="//label[@for='date_start']"  position="attributes">
+                
+                    <attribute name="invisible">1</attribute>
+                
+                </xpath>
+
+
+                
+                <xpath expr="//div[@class='o_row']"  position="attributes">
+                
+                    <attribute name="invisible">1</attribute>
+                
+                </xpath>
+                
+                <xpath expr="//group[1]/group[2]"  position="attributes">
+                
+                    <attribute name="invisible">1</attribute>
+                
+                </xpath>
+
+
+                
+                <xpath expr="//field[@name='is_favorite']"  position="attributes">
+                
+                    <attribute name="invisible">1</attribute>
+                
+                </xpath>
+            <!-- Ajouter les champs "numero_marche" et "type" après le champ "label_tasks" -->
+                
+                <xpath expr="//field[@name='label_tasks']" position="after">
+                
+                    <field name="numero_marche" />
+                
+                    <field name="type"/>
+                
+                    <field name="label_tasks" string="Nom de la tâche :"/>
+                
+                </xpath>
+
+                 
+                <!-- Remplacer le champ "name" par un champ "name" avec des attributs et widgets personnalisés -->
+ 
+                <xpath expr="//field[@name='name']" position="replace">
+ 
+                    <field name="name" class="o_text_overflow text-justify" placeholder="Nom Du Projet" modifiers="{&quot;required&quot;: true}" widget="text"/>
+                </xpath>
+
+
+ 
+                <!-- Mettre à jour l'attribut "string" de la page "settings" -->
+ 
+                <xpath expr="//page[@name='settings']" position="attributes">
+ 
+                    <attribute name="string">Configuration</attribute>
+ 
+                </xpath>
+
+
+ 
+                <!-- Rendre le champ "privacy_visibility" invisible -->
+ 
+                <xpath expr="//field[@name='privacy_visibility']" position="attributes">
+ 
+                    <attribute name="invisible">1</attribute>
+ 
+                </xpath>
+
+
+ 
+                <!-- Ajouter plusieurs champs après le champ "privacy_visibility" -->
+ 
+                <xpath expr="//field[@name='privacy_visibility']" position="after">
+ 
+                    <field name="privacy_visibility_new" string="Confidentialité" widget="radio"/>
+ 
+                    <field name="partner_id" string="Client"/>
+ 
+                    <field name="compt_banqaire" string="Compte bancaire" />
+ 
+                    <field name="sous_tache_project" string="Sous-tâche du projet" />
+ 
+                </xpath>
+
+
+ 
+                <!-- Rendre le champ "access_instruction_message" invisible -->
+ 
+                <xpath expr="//field[@name='access_instruction_message']" position="attributes">
+ 
+                    <attribute name="invisible">1</attribute>
+ 
+                </xpath>
+
+
+ 
+                <!-- Rendre invisible l'icône avec la classe "fa-lightbulb-o" -->
+ 
+                <xpath expr="//i[contains(@class, 'fa-lightbulb-o')]" position="attributes">
+ 
+                    <attribute name="invisible">1</attribute>
+ 
+                </xpath>
+
+
+ 
+                <!-- Mettre à jour l'attribut "string" du groupe "group_tasks_managment" -->
+ 
+                <xpath expr="//group[@name='group_tasks_managment']" position="attributes">
+ 
+                    <attribute name="string">Configuration</attribute>
+ 
+                </xpath>
+
+
+ 
+                <!-- Rendre invisibles les éléments de classe "o_setting_right_pane" et "o_setting_left_pane" -->
+ 
+                <xpath expr="//div[@class='o_setting_right_pane']" position="attributes">
+ 
+                    <attribute name="invisible">1</attribute>
+ 
+                </xpath>
+ 
+                <xpath expr="//div[@class='o_setting_left_pane']" position="attributes">
+ 
+                    <attribute name="invisible">1</attribute>
+ 
+                </xpath>
+
+
+ 
+                <!-- Rendre invisibles les groupes "group_time_managment" et "group_documents_analytics" -->
+ 
+                <xpath expr="//group[@name='group_time_managment']" position="attributes">
+ 
+                    <attribute name="invisible">1</attribute>
+ 
+                </xpath>
+ 
+                <xpath expr="//group[@name='group_documents_analytics']" position="attributes">
+ 
+                    <attribute name="invisible">1</attribute>
+ 
+                </xpath>
+
+
+ 
+                <!-- Ajouter des boutons personnalisés dans le header -->
+ 
+                <xpath expr="//button[@class='oe_stat_button'][1]" position="before">
+ 
+                    <!-- Bouton 1 -->
+ 
+                    <button class="oe_stat_button" name="get_attachment_for_user" type="object" icon="fa-files-o">
+ 
+                        Document <field name="nbr_field_attached"/>
+ 
+                    </button>
+ 
+                    <!-- Bouton 2 -->
+ 
+                    <button class="oe_stat_button" type="object" name="get_pv_for_project" icon="fa-tasks">
+ 
+                        PV(S) <field name="pv_project_task" />
+ 
+                    </button>
+ 
+                    <!-- Bouton 3 -->
+ 
+                    <button class="oe_stat_button" type="object" name="get_nbr_task_for_project" icon="fa-tasks">
+ 
+                        <field name="nbr_tasks_for_project" />
+ 
+                    </button>
+ 
+                    <!-- Bouton 4 -->
+ 
+                    <button name="archive_action_function" type="object" class="oe_stat_button oe_percent" icon="fa-smile-o">
+ 
+                        <field name='is_active'/> 
+ 
+                    </button>
+ 
+                    <!-- Bouton 5 -->
+ 
+                    <button groups="sales_team.group_sale_salesman" class="oe_stat_button" type="object" icon="fa-dollar" name="get_account_move_project_payer" modifiers="{}" options="{}">
+ 
+                        <field string="Décomptes" name="get_invoice_payer" widget="statinfo" modifiers="{'readonly':true}"/>
+ 
+                    </button>
+ 
+                    <!-- Bouton 6 -->
+ 
+                    <button class="oe_stat_button" type="object" icon="fa-clock-o" name="get_view_leave_count" modifiers="{}" options="{}">
+ 
+                        <field string="Ordres de service" name="leave_count" widget="statinfo" />
+ 
+                    </button>
+ 
+                    <!-- Bouton 7 -->
+ 
+                    <button class="oe_stat_button" type="object" icon="fa-shopping-cart" name="get_achat_for_project" modifiers="{}" options="{}">
+ 
+                        <field string="Achats" name="achat_prject" widget="statinfo" modifiers="{'readonly':true}"/>
+ 
+                    </button>
+ 
+                    <!-- Bouton 8 -->
+ 
+                    <button class="oe_stat_button" type="object" icon="fa-dollar" name="show_account_analytic_line" modifiers="{}" options="{}">
+ 
+                        <field string="Analytique" name="get_account_analytic_line" widget="statinfo" modifiers="{'readonly':true}"/>
+ 
+                    </button>
+ 
+                </xpath>
+
+
+ 
+                <!-- Rendre invisible le bouton "project_update_all_action" -->
+ 
+                <xpath expr="//button[@name='project_update_all_action']" position="attributes">
+ 
+                    <attribute name="invisible">1</attribute>
+ 
+                </xpath>
+
+
+ 
+                <!-- Ajouter une nouvelle page nommée "partenaire" -->
+ 
+                <xpath expr="//page[@name='settings']" position="after">
+ 
+                    <page name="delai" string="Gestion des délais">
+ 
+                        <group string="Gestion des délais">
+ 
+                            <group>
+ 
+                                <label for="delai_exuction_mois" string="Délai d'exécution" />
+ 
+                                <div>
+ 
+                                    <field name="delai_exuction_mois" class="oe_inline" style="vertical-align:baseline"/>
+ 
+                                    mois -
+ 
+                                    <field name="delai_exuction_jour" class="oe_inline" style="vertical-align:baseline"/>
+ 
+                                    jours
+ 
+                                </div>
+ 
+                                <label for="delai_avenant_mois" string="Délai d'avenant" />
+ 
+                                <div>
+ 
+                                    <field name="delai_avenant_mois" class="oe_inline" style="vertical-align:baseline"/>
+ 
+                                    mois -
+ 
+                                    <field name="delai_avenant_jours" class="oe_inline" style="vertical-align:baseline"/>
+ 
+                                    jours
+ 
+                                </div>
+ 
+                                <field name="ordre_de_service"/>
+                                
+                                <field name="order_service_file" string=""/>
+                                
+                                <field name="date_reception_provisoire" string="Date de réception provisoire" readonly="1" widget="date"/>
+ 
+                                <field name="delai_consome" string="Délai consommé" readonly="1" />
+ 
+                                <field name="delai_restant" string="Délai restant"/>
+ 
+                                <field name="calendrier_des_arret" string="Calendrier des arrêts"/>
+ 
+                                <field name="totale_des_arrets" string="Total des arrêts" readonly="1"/>
+                                
+
+
+                                <field name="sequence" string="Séquence"/>
+ 
+                            </group>
+ 
+                        </group>
+ 
+                    </page>
+ 
+                </xpath>
+
+
+ 
+                <!-- Ajouter une nouvelle page nommée "partenaires" -->
+ 
+                <xpath expr="//page[@name='delai']" position="after">
+ 
+                    <page name="partenaires" string="Responsable Interne">
+ 
+                        <group>
+ 
+                            <group string="Personnel interne">
+                                <field name="check_user" invisible="1"/>
+                                <field name="user_id" string="Chef de Projet" attrs="{'readonly': [('check_user', '=', False)]}" />
+ 
+                                <field name="resp_etude" attrs="{'readonly': [('check_user', '=', False)]}" />
+                                <field name="rapoteur" attrs="{'readonly': [('check_user', '=', False )]}"/>
+                                <field name="chef_chantier" string="Conducteur Travaux" attrs="{'readonly': [('check_user', '=', False)]}"/>
+                                <field name="resp_Recouvrement" string="Resp. Recouvrement" attrs="{'readonly': [('check_user', '=', False)]}"/>
+                                
+ 
+                                <field name="metreur" string="Métreur" attrs="{'readonly': [('check_user', '=', False)]}"/>
+ 
+                                <field name="comptable" string="Caissier" attrs="{'readonly': [('check_user', '=', False)]}"/>
+ 
+                                <field name="receptionniste" string="Réceptionniste" attrs="{'readonly': [('check_user', '=', False)]}"/>
+ 
+                                <field name="pointeur" string="Pointeur" attrs="{'readonly': [('check_user', '=', False)]}"/>
+ 
+                                <field name="type_of_construction" string="Type de chantier" attrs="{'readonly': [('check_user', '=', False)]}"/>
+
+                                <!-- <field name="warehouse_id" string="Emplacement de gestion" attrs="{'readonly': [('check_user', '=', False)]}"/> -->
+ 
+                            </group>
+ 
+                            <group string="Partenaires">
+ 
+                                <!-- Ajouter des champs ici -->
+ 
+                            </group>
+ 
+                        </group>
+ 
+                    </page>
+
+
+ 
+                    <!-- Ajouter une nouvelle page nommée "Étapes de projet" -->
+ 
+                    <page string="Étapes de projet">
+ 
+                        <field name="type_ids" can_create="true" can_write="true" modifiers="{}">
+ 
+                            <tree>
+ 
+                                <field name="name"/>
+ 
+                                <field name="fold" widget="boolean_checkbox"/>
+ 
+                                <field name="description"/>
+ 
+                            </tree>
+ 
+                        </field>
+ 
+                    </page>
+ 
+                </xpath>
+
+
+ 
+                <!-- Rendre invisible le premier bouton dans le header -->
+ 
+                <xpath expr="//header/button[1]" position="attributes">
+ 
+                    <attribute name="invisible">1</attribute>
+ 
+                </xpath>
+
+
+ 
+                <!-- Ajouter de nouveaux boutons après le sixième bouton dans le header -->
+ 
+                <xpath expr="//header/button[1]" position="after">
+ 
+                    <!-- Bouton 1 -->
+ 
+                    <button name="create_purchase_order" string="Créer un bon de commande" class="oe_highlight" type="object"/>
+ 
+                    <!-- Bouton 2 -->
+ 
+                    <button name="import_task_admin" string="Importer des tâches d'admin" groups="admin_without_delete.admin_without_delete" class="oe_highlight" type="object"/>
+ 
+                    <!-- Bouton 3 -->
+ 
+                    <button name="import_task_instalation" string="Importer des tâches d'installation" groups="admin_without_delete.admin_without_delete" class="oe_highlight" type="object"/>
+ 
+                    <!-- Bouton 4 -->
+ 
+                    <button name="import_ms_project" string="IMPORTER UN FICHIER DE MS PROJET" groups="admin_without_delete.admin_without_delete" class="oe_highlight" type="object"/>
+ 
+                </xpath>
+
+                <!-- Rendre le champ "Button 6" invisible -->
+
+                <xpath expr="//header/button[6]" position="attributes">
+                
+                                 <attribute name="invisible">1</attribute>
+                
+                </xpath>
+
+ 
+                <!-- Rendre le champ "calendrier_des_arret" en lecture seule -->
+ 
+                <xpath expr="//field[@name='calendrier_des_arret']" position="attributes">
+ 
+                    <attribute name="readonly">1</attribute>
+ 
+                </xpath>
+
+            </field>
+    
+        </record>
+    
+    </data>
+
+</odoo>
+

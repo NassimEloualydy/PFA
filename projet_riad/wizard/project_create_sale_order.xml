@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+
+<odoo>
+
+    <data>
+
+        <record id="id_project_create_sale_order_view_form" model="ir.ui.view">
+
+            <field name="name">Créer un bon de commande</field>
+
+            <field name="model">project.create.sale.order</field>        
+
+            <field name="inherit_id" ref="sale_timesheet.project_create_sale_order_view_form"/>
+
+            <field name="arch" type="xml">
+                
+                <!-- Vous modifiez les attributs du champ "partner_id" pour le rendre visible -->
+                
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                
+                    <attribute name="invisible">0</attribute>
+                
+                </xpath>
+                
+
+                
+                <!-- Vous remplacez le champ "line_ids" par un nouveau champ "line_ids" avec un arbre (tree) personnalisé -->
+                
+                <xpath expr="//field[@name='line_ids']" position="replace">
+                
+                    <field name="line_ids" nolabel="1">
+                
+                        <tree editable="bottom">
+                
+                            <!-- Champ "product_id" -->
+                
+                            <field name="product_id" options="{'no_create_edit': True, 'no_create': True}" on_change="1" can_create="true" can_write="true"/>
+                
+                            <!-- Champ "employee_id" -->
+                
+                            <field name="employee_id" options="{'no_create_edit': True, 'no_create': True}" can_create="true" can_write="true"/>
+                
+                            <!-- Champ "price_unit" avec widget "monetary" pour la gestion des montants monétaires -->
+                
+                            <field name="price_unit" widget="monetary" options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                
+                            <!-- Champ "currency_id" avec des modifications pour le rendre invisible -->
+                
+                            <field name="currency_id" modifiers="{&quot;column_invisible&quot;: true}" can_create="true" can_write="true"/>
+                
+                        </tree>
+                
+                    </field>
+                
+                </xpath>
+
+
+            </field>
+
+        </record>
+
+    </data>
+
+</odoo>

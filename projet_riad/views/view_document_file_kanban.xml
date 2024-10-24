@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="id_view_document_file_kanban" model="ir.ui.view">
+            <field name="name">name_id_view_document_file_kanban</field>
+            <field name="model">ir.attachment</field>   
+            <field name="inherit_id" ref="mail.view_document_file_kanban"/>
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="attributes">
+                                        <attribute name="default_group_by">documents_folder_id</attribute>
+                </xpath>
+
+            </field>
+        </record>   
+     </data>
+</odoo>
+

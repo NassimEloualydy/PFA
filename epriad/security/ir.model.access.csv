@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_entreprise_offre,access_entreprise_offre_name,model_entreprise_offre,base.group_user,1,1,1,1
+access_riad_compte,access_riad_compte_name,model_riad_compte,base.group_user,1,1,1,1
+access_riad_profiles,access_riad_profiles_name,model_riad_profiles,base.group_user,1,1,1,1
+
+
+
+
+
+

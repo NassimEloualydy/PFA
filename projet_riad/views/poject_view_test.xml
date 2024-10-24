@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <!-- Déclaration d'une nouvelle vue -->
+        <record id="id_project_project_tree" model="ir.ui.view">
+
+            <field name="name">project_project_tree</field>
+
+            <field name="model">project.project</field>
+
+            <field name="inherit_id" ref="project.view_project" />
+            
+            <!-- Modification de la vue via XPath -->
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="domain">
+                                ['&','|','&',
+                                            ('privacy_visibility_new', '=', 'followers'),
+                                            ('message_partner_ids', 'in', [user_id_connected]),
+                                            ('privacy_visibility_new', '!=', 'followers'),
+                                            ('message_partner_ids', '!=', False)                                
+                                            ]
+                                            </attribute>
+                </xpath> 
+                <!-- Masquer le champ 'user_id' -->
+                <!-- <xpath expr="//field[@name='user_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath> -->
+
+                <!-- Renommer le champ 'display_name' en 'Nom du projet' -->
+                <!-- <xpath expr="//field[@name='display_name']" position="attributes">
+                    <attribute name="string">Nom du projet</attribute>
+                </xpath> -->
+
+                <!-- Ajouter un nouveau champ 'user_id' après 'display_name' -->
+                <!-- <xpath expr="//field[@name='display_name']" position="after">
+                    <field name="user_id" string="Responsable" />
+                </xpath> -->
+
+                <!-- Renommer le champ 'partner_id' en 'Contact' -->
+                <!-- <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="string">Contact</attribute>
+                </xpath> -->
+
+                <!-- Masquer les champs suivants -->
+                <!-- <xpath expr="//field[@name='date_start']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='date']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='allocated_hours']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='last_update_status']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath> -->
+
+                <!-- Ajouter deux nouveaux champs après 'partner_id' -->
+                <!-- <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="montant_marche" />
+                    <field name="travaux_executes" string="Travaux Exécutés" class="fw-bold" />
+                </xpath> -->
+            </field>
+        </record>
+    </data>
+</odoo>

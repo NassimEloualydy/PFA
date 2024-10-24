@@ -1,0 +1,1041 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <!-- code to be deleted -->
+
+        <!-- code to be deleted -->
+        <record id="id_crm_lead_form" model="ir.ui.view">
+            <field name="name">crm.crm_lead_view_form_uodate.inherit</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="arch" type="xml">
+                <!-- Rend invisible le champ "company_id" -->
+                <xpath expr="//group/group[4]/field[@name='user_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <!-- Rend invisible le champ "user_id" -->
+                <xpath expr="//group/group[5]/field[@name='user_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <!-- Rend invisible le champ "probability" -->
+                <xpath expr="//field[@name='probability']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <!-- Rend invisible le champ "expected_revenue" -->
+                <xpath expr="//field[@name='expected_revenue']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <!-- Rend invisible le champ "date_deadline" -->
+                <xpath expr="//field[@name='date_deadline']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <!-- Rend invisible le label "date_deadline" -->
+                <xpath expr="//label[@for='date_deadline']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <!-- Rend invisible le champ "priority" -->
+                <xpath expr="//field[@name='priority']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <!-- Rend invisible le champ "tag_ids" -->
+                <xpath expr="//field[@name='tag_ids']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+ 
+                <!-- ajouter le champs Maitre d'ouvrage apres la div qui contient la class 'oe_title' -->
+                <xpath expr="//div[@class='oe_title']" position="before">
+                    <group attrs="{'invisible': [('type', '=', 'lead')]}">
+                        <label for="partner_id" class="fw-bolder" string="Maitre d'ouvrage"/>
+                        <field name="partner_id" class="h1_header_field"/>
+                    </group>
+                    <style type="text/css">
+                                    .h1_header_field{
+                                    font-size: 32px;
+                                    width:80%;
+
+                                        }                                                    
+                    </style>
+                </xpath>
+
+                <!-- ajouter une label apres le champs  partner_id -->
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <group>
+                        <span class="fw-bolder"> Objet </span>
+                    </group>
+                </xpath>
+
+                <!-- Localise et remplace un élément h2 avec la classe 'd-flex' -->
+                <xpath expr="//h2[contains(@class, 'd-flex')]" position="replace">
+        <!-- <xpath expr="//ul[@class='list-inline mb4']" position="replace">
+        <xpath expr="//ul[contains(@class,'list-inline')]" position="replace"> -->
+
+                    <!-- Crée un conteneur div avec une marge inférieure -->
+                    <div class="mb-3">
+
+                        <!-- Crée un groupe avec l'étiquette 'Informations Générales' et une classe de largeur complète -->
+                        <group string="Informations Générales" class="o_group_full_width">
+
+                            <!-- Crée un groupe imbriqué -->
+                            <group>
+
+                                <!-- Ajoute un champ 'numero_a_o' -->
+                                <field name="numero_a_o"/>
+
+                                <!-- Ajoute un champ 'date_deadline' avec une étiquette personnalisée -->
+                                <field name="date_deadline" string="Date de soumission"/>
+
+                                <!-- Ajoute un champ 'date_visite' avec une visibilité conditionnelle -->
+                                <field name="date_visite" string="Date de visite" attrs="{'invisible': [('type', '=', 'opportunity')]}"/>
+
+                            </group>
+
+                            <!-- Crée un autre groupe imbriqué -->
+                            <group>
+
+                                <!-- Ajoute un champ 'expected_revenue' avec une étiquette personnalisée -->
+                                <field name="expected_revenue" string="Estimation/Budget"/>
+
+                                <!-- Ajoute un champ 'caution_provisoire' -->
+                                <field name="caution_provisoire"/>
+
+                                <!-- Ajoute un champ 'probability' -->
+                                <field name="probability"/>
+
+                            </group>
+
+                        </group>
+
+                        <!-- Crée un autre groupe avec la même étiquette et une classe de largeur complète -->
+                        <group string="Informations Générales" class="o_group_full_width">
+
+                            <!-- Crée un groupe imbriqué -->
+                            <group>
+
+                                <!-- Ajoute un champ 'partner_id' avec une étiquette personnalisée et une visibilité conditionnelle -->
+                                <field name="partner_id" string="Maître d'ouvrage" attrs="{'invisible': [('type', '=', 'opportunity')]}"/>
+
+                                <!-- Champ 'partner_name' commenté -->
+
+                                <!-- Ajoute une étiquette 'address_name' avec une visibilité conditionnelle -->
+                                <span class="o_form_label o_td_label" name="address_name" attrs="{'invisible': [('type', '=', 'opportunity')]}">
+                                    <b>Adresse</b>
+                                </span>
+
+                                <!-- Crée une division pour le formatage de l'adresse avec une visibilité conditionnelle -->
+                                <div class="o_address_format" attrs="{'invisible': [('type', '=', 'opportunity')]}">
+                                    <field name="street" placeholder="Adresse" class="o_address_street" attrs="{'invisible': [('type', '=', 'opportunity')]}"/>
+                                </div>
+
+                                <!-- Champ "courriel" avec l'attribut "invisible" basé sur la valeur du champ "type" égale à 'lead' -->
+                                <field name="courriel" attrs="{'invisible': [('type', '=', 'lead')]}"/>
+
+                                <!-- Champ "phone_crm" avec l'attribut "invisible" basé sur la valeur du champ "type" égale à 'lead' -->
+                                <field name="phone_crm" attrs="{'invisible': [('type', '=', 'lead')]}"/>
+
+                                <!-- Champ "groupement" avec l'attribut "invisible" basé sur la valeur du champ "type" égale à 'lead' -->
+                                <field name="groupement" />
+
+                                <!-- Champ "partner_id_groupement" avec l'attribut "invisible" basé sur la valeur du champ "groupement" égale à False -->
+                                <field name="partner_id_groupement" attrs="{'invisible': [('groupement', '=', False)]}" />
+
+                                <!-- Champ "architecte" avec l'attribut "invisible" basé sur la valeur du champ "type" égale à 'lead' -->
+                                <field name="architecte" />
+
+                                <!-- Champ "bet" avec l'attribut "invisible" basé sur la valeur du champ "type" égale à 'lead' -->
+                                <field name="bet" />
+
+                                <!-- Champ "bct" avec l'attribut "invisible" basé sur la valeur du champ "type" égale à 'lead' -->
+                                <field name="bct" />
+
+                                <!-- Champ "user_id" renommé en "Assigné à" et utilisant le widget "many2one_avatar_user" -->
+                                <field name="user_id" string="Assigné à" widget="many2one_avatar_user"/>
+
+                                <!-- Champ "nature_de_marche" -->
+                                <field name="nature_de_marche" />
+                            </group>
+
+                            <!-- Crée un groupe imbriqué -->
+                            <group>
+
+                                <!-- Ajoute un champ 's_electronique' -->
+                                <field name="s_electronique"/>
+
+                                <!-- Ajoute une étiquette pour 'nom_du_contact' avec une visibilité conditionnelle -->
+                                <label for="titre_nom_du_contact" string="Nom du contact" attrs="{'invisible': [('type', '=', 'opportunity')]}"/>
+
+                                <!-- Crée une division avec une visibilité conditionnelle -->
+                                <div class="d-flex" attrs="{'invisible': [('type', '=', 'opportunity')]}">
+                                    <field name="nom_du_contact" attrs="{'invisible': [('type', '=', 'opportunity')]}"/>
+                                    <field name="titre_nom_du_contact" attrs="{'invisible': [('type', '=', 'opportunity')]}"/>
+                                </div>
+
+                                <!-- Ajoute un champ 'courriel' avec une visibilité conditionnelle -->
+                                <field name="courriel" attrs="{'invisible': [('type', '=', 'opportunity')]}"/>
+
+                                <!-- Ajoute un champ 'site_web' avec une étiquette personnalisée et une visibilité conditionnelle -->
+                                <field name="site_web" string="Site Web" attrs="{'invisible': [('type', '=', 'opportunity')]}"/>
+
+                                <!-- Ajoute un champ 'phone_crm' avec une visibilité conditionnelle -->
+                                <field name="phone_crm" attrs="{'invisible': [('type', '=', 'opportunity')]}"/>
+
+                                <!-- Ajoute un champ 'mobile' avec une visibilité conditionnelle -->
+                                <field name="mobile" attrs="{'invisible': [('type', '=', 'opportunity')]}"/>
+
+                                <!-- Ajoute un champ 'is_visite_des_lieux' avec une visibilité conditionnelle -->
+                                <field name="is_visite_des_lieux" attrs="{'invisible': [('type', '=', 'lead')]}"/>
+
+                                <!-- Ajoute un champ 'date_visite_des_lieux' avec une visibilité conditionnelle -->
+                                <field name="date_visite_des_lieux" attrs="{'invisible': [('is_visite_des_lieux', '=', False)]}"/>
+
+                                <!-- Ajoute un champ 'is_date_ech' avec une visibilité conditionnelle -->
+                                <field name="is_date_ech" attrs="{'invisible': [('type', '=', 'lead')]}"/>
+
+                                <!-- Ajoute un champ 'date_ech' avec une visibilité conditionnelle -->
+                                <field name="date_ech" attrs="{'invisible': [('is_date_ech', '=', False)]}"/>
+
+                                <!-- Ajoute une étiquette pour 'duration_months' avec une visibilité conditionnelle -->
+                                <label for="duration_months" string="Délai d'exécution" />
+
+                                <!-- Div avec l'attribut "invisible" basé sur la valeur du champ "type" égale à 'lead' -->
+                                <div >
+                                    <!-- Champ "duration_months" affiché en ligne avec la classe "oe_inline" et un style de vertical-align -->
+                                    <field name="duration_months" class="oe_inline" style="vertical-align:baseline"/> mois -
+                                    <!-- Champ "duration_days" affiché en ligne avec la classe "oe_inline" et un style de vertical-align -->
+                                    <field name="duration_days" class="oe_inline" style="vertical-align:baseline"/> jours
+                                </div>
+
+                                <!-- Ajoute un champ 'priority' avec une étiquette personnalisée et un widget 'priority' -->
+                                <field name="priority" string="Priorité" widget="priority"/>
+
+                                <!-- Ajoute un champ 'qualifications' avec une étiquette personnalisée -->
+                                <field name="qualifications" string="Qualifications"/>
+
+                            </group>
+
+                        </group>
+
+                    </div>
+                </xpath>
+
+                <!-- Rend le champ "email_from" invisible -->
+                <xpath expr="//field[@name='email_from']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <!-- Rend le champ "phone" invisible -->
+                <xpath expr="//field[@name='phone']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <!-- Rend le champ "probability" invisible -->
+                <xpath expr="//field[@name='probability']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <!-- Rend le groupe "lead_partner" invisible -->
+                <xpath expr="//group[@name='lead_partner']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <!-- Rend le groupe "opportunity_partner" invisible -->
+                <xpath expr="//group[@name='opportunity_partner']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <!-- Rend le groupe "lead_info" invisible -->
+                <xpath expr="//group[@name='lead_info']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <!-- Rend le groupe "lead_priority" invisible -->
+                <xpath expr="//group[@name='lead_priority']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <!-- Rend le champ "team_id" invisible -->
+                <xpath expr="//field[@name='team_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <!-- Rend le champ "lead_properties" invisible -->
+                <xpath expr="//field[@name='lead_properties']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <!-- afficher le champs name en 2 line -->
+                <xpath expr="//field[@name='name']" position="attributes">
+                    <attribute name="widget">text</attribute>
+                </xpath>
+
+                <!-- button qui va rederigez nous vers le module document -->
+                <xpath expr="//button[@name='action_show_potential_duplicates']" position="after">
+                    <button class="oe_stat_button" name="get_attachment_for_user" type="object" icon="fa-files-o">
+                           Document <field name="nbr_field_attached"/>
+                    </button>
+
+                </xpath>
+
+
+        
+                <!-- delete button  -->
+                 <xpath expr="//field[@name='stage_id']" position="after">
+                    <button class="oe_stat_button" attrs="{'invisible': [('type', '=', 'lead')]}" name="delete_piste" type="object">
+                    Supprimer
+                    </button>
+                </xpath>
+
+                <!-- button qui permet de convertire un piste vers un projet  -->
+                <xpath expr="//field[@name='stage_id']" position="after">
+                    <button class="oe_highlight" attrs="{'invisible': [('type', '=', 'lead')]}" name="convert_to_project" type="object">
+                    Convertir en projet
+                    </button>
+                </xpath>
+
+                <!-- masquer le checkbox -->
+                <xpath expr="//field[@name='message_ids']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//header/button[@type='action'][2]" position="replace">
+                    <button name="convert_to_opportunity" string="convertir en opportunité" type="object" help="Convert to Opportunity" class="oe_highlight" attrs="{'invisible': ['|', ('type', '=', 'opportunity'), ('active', '=', False)]}" data-hotkey="v"/>        
+                </xpath>
+                <!-- <xpath expr="//header/button[3]" position="replace"> -->
+                <xpath expr="//header/button[@type='action'][1]" position="replace">
+                    <button name="mark_as_lost" string="PERDU" data-hotkey="l" title="PERDU" type="object" context="{'default_lead_id': active_id}" attrs="{'invisible': ['|', ('type', '=', 'lead'), '&amp;',('active', '=', False),('probability', '&lt;', 100)]}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="id_crm_lead_kanban" model="ir.ui.view">
+            <field name="name">crm.crm_lead_view_tree_uodate.inherit</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_kanban_view_leads"/>
+            <field name="arch" type="xml">
+                <!-- Recherche l'élément 'progressbar' et modifie ses attributs -->
+                <xpath expr="//progressbar" position="attributes">
+
+                    <!-- Ajoute ou modifie l'attribut 'sum_field' de l'élément 'progressbar' -->
+                    <attribute name="sum_field">self</attribute>
+
+                </xpath>
+
+                <!-- Recherche l'élément 'div' avec l'attribut 'class' égal à 'oe_kanban_bottom_right' et remplace-le -->
+                <xpath expr="//div[@class='oe_kanban_bottom_right']" position="replace">
+
+                    <!-- Remplace l'élément 'div' par un nouvel élément 'div' avec des classes personnalisées -->
+                    <div class="oe_kanban_bottom_right user_id_op">
+
+                        <!-- Ajoute un champ 'user_id' avec le widget 'many2one_avatar_user' à l'intérieur du nouvel élément 'div' -->
+                        <field name="user_id" widget="many2one_avatar_user"/>
+
+                    </div>
+                </xpath>
+
+                <!-- Recherche l'élément 'div' avec l'attribut 'class' égal à 'oe_kanban_bottom_left' et le remplace -->
+                <xpath expr="//div[@class='oe_kanban_bottom_left']" position="replace">
+
+                    <!-- Ajoute un champ 'priority' avec le widget 'priority' et l'attribut 'groups' -->
+                    <field name="priority" widget="priority" groups="base.group_user"/>
+
+                    <!-- Ajoute un champ 'activity_ids' avec le widget 'kanban_activity' -->
+                    <field name="activity_ids" widget="kanban_activity"/>
+
+                    <!-- Ajoute un lien 'a' avec un nom d'action et une classe CSS -->
+                    <a name="get_attachment_for_user" class="o_project_kanban_box" type="object">
+
+                        <!-- Ajoute une icône 'i' avec des classes CSS -->
+                        <i class="fa fa-paperclip mt-1" aria-hidden="true"></i>
+
+                        <!-- Ajoute un champ 'nbr_field_attached' -->
+                        <field name="nbr_field_attached" />
+
+                    </a>
+                </xpath>
+                <!-- Recherche l'élément 'div' avec l'attribut 'class' égal à 'oe_kanban_footer' et insère du contenu avant cet élément -->
+                <xpath expr="//div[@class='oe_kanban_footer']" position="before">
+                    <!-- Ajoute un champ 'expected_revenue' avec l'attribut 'invisible' égal à "1" (caché) -->
+                    <field name="expected_revenue" invisible="1"/>
+
+                    <!-- Ajoute un champ 'delta_deadline' avec l'attribut 'invisible' égal à "1" (caché) -->
+                    <field name="delta_deadline" invisible="1"/>
+
+                    <!-- Ajoute un champ 'delta_date_ech' avec l'attribut 'invisible' égal à "1" (caché) -->
+                    <field name="delta_date_ech" invisible="1"/>
+
+                    <!-- Ajoute un champ 'delta_date_visite_des_lieux' avec l'attribut 'invisible' égal à "1" (caché) -->
+                    <field name="delta_date_visite_des_lieux" invisible="1"/>
+
+                    <div>
+                        <!-- Vérifie si la valeur brute de "expected_revenue" dans l'enregistrement existe -->
+                        <t t-if="record.expected_revenue.raw_value">
+                            <!-- Si la valeur existe, crée un élément "span" avec une classe "d-flex" pour le mettre en forme -->
+                            <span class="d-flex">
+                                <!-- Affiche le champ "expected_revenue_with_span" dans cet élément "span" -->
+                                <field name="expected_revenue_with_span"/>
+                            </span>
+                        </t>
+                        <!-- Vérifie si la valeur brute de "delta_date_visite_des_lieux" dans l'enregistrement est inférieure à 0 -->
+                        <t t-if="record.delta_date_visite_des_lieux.raw_value lt 0">
+                            <!-- Si la condition est vraie, crée un élément "div" avec une classe "oe_kanban_text_red" -->
+                            <div t-attf-class="#{'oe_kanban_text_red'}">
+                                <!-- Crée un élément "span" avec la classe "d-flex" et le rend invisible si "date_visite_des_lieux" est égal à False -->
+                                <span class="d-flex" attrs="{'invisible': [('date_visite_des_lieux', '=', False)]}">
+                                    <!-- Affiche en gras "D.Visite :" suivi du champ "date_visite_des_lieux" -->
+                                    <b> D.Visite : </b>
+                                    <field name="date_visite_des_lieux" attrs="{'invisible': [('date_visite_des_lieux', '=', False)]}"/>
+                                </span>
+                                <!-- Affiche le champ "message_date_visite_des_lieux" et le rend invisible si "date_visite_des_lieux" est égal à False -->
+                                <field name="message_date_visite_des_lieux" attrs="{'invisible': [('date_visite_des_lieux', '=', False)]}" />
+                            </div>
+                        </t>
+                        <!-- Vérifie si la valeur brute de "delta_date_visite_des_lieux" dans l'enregistrement est inférieure à 2 jours (en secondes) et supérieure à 0 -->
+                        <t t-if="record.delta_date_visite_des_lieux.raw_value / 86400 lt 2 and record.delta_date_visite_des_lieux.raw_value gt 0">
+                            <!-- Si la condition est vraie, crée un élément "div" avec une classe "oe_kanban_text_orange" -->
+                            <div t-attf-class="#{'oe_kanban_text_orange'}">
+                                <!-- Crée un élément "span" avec la classe "d-flex" et le rend invisible si "date_visite_des_lieux" est égal à False -->
+                                <span class="d-flex" attrs="{'invisible': [('date_visite_des_lieux', '=', False)]}">
+                                    <!-- Affiche en gras "D.Visite :" suivi du champ "date_visite_des_lieux" -->
+                                    <b> D.Visite : </b>
+                                    <field name="date_visite_des_lieux" attrs="{'invisible': [('date_visite_des_lieux', '=', False)]}"/>
+                                </span>
+                                <!-- Affiche le champ "message_date_visite_des_lieux" et le rend invisible si "date_visite_des_lieux" est égal à False -->
+                                <field name="message_date_visite_des_lieux" attrs="{'invisible': [('date_visite_des_lieux', '=', False)]}" />
+                            </div>
+                        </t>
+                        <!-- Vérifie si la valeur brute de "delta_date_visite_des_lieux" dans l'enregistrement est supérieure à 2 jours (en secondes) -->
+                        <t t-if="record.delta_date_visite_des_lieux.raw_value / 86400 gt 2">
+                            <!-- Si la condition est vraie, crée un élément "div" avec une classe "oe_kanban_text_green" -->
+                            <div t-attf-class="#{'oe_kanban_text_green'}">
+                                <!-- Crée un élément "span" avec la classe "d-flex" et le rend invisible si "date_visite_des_lieux" est égal à False -->
+                                <span class="d-flex" attrs="{'invisible': [('date_visite_des_lieux', '=', False)]}">
+                                    <!-- Affiche en gras "D.Visite :" suivi du champ "date_visite_des_lieux" -->
+                                    <b> D.Visite : </b>
+                                    <field name="date_visite_des_lieux" attrs="{'invisible': [('date_visite_des_lieux', '=', False)]}"/>
+                                </span>
+                                <!-- Affiche le champ "message_date_visite_des_lieux" et le rend invisible si "date_visite_des_lieux" est égal à False -->
+                                <field name="message_date_visite_des_lieux" attrs="{'invisible': [('date_visite_des_lieux', '=', False)]}" />
+                            </div>
+                        </t>
+                        <!-- Vérifie si la valeur brute de "delta_date_ech" dans l'enregistrement est inférieure à 0 -->
+                        <t t-if="record.delta_date_ech.raw_value lt 0">
+                            <!-- Si la condition est vraie, crée un élément "div" avec une classe "oe_kanban_text_red" -->
+                            <div t-attf-class="#{'oe_kanban_text_red'}">
+                                <!-- Rend le champ "is_date_ech" invisible -->
+                                <field name="is_date_ech" invisible="1"/>
+                                <!-- Crée un "span" avec la classe CSS "d-flex" et le rend invisible si "is_date_ech" est égal à False -->
+                                <span class="d-flex" attrs="{'invisible': [('is_date_ech', '=', False)]}">
+                                    <!-- Affiche en gras "D.Dépôt :" suivi du champ "date_ech" -->
+                                    <b> D.Dépôt : </b>
+                                    <field name="date_ech" attrs="{'invisible': [('is_date_ech', '=', False)]}"/>
+                                </span>
+                                <!-- Affiche le champ "message_date_ech" et le rend invisible si "is_date_ech" est égal à False -->
+                                <field name="message_date_ech" attrs="{'invisible': [('is_date_ech', '=', False)]}" />
+                            </div>
+                        </t>
+
+                        <!-- Vérifie si la valeur brute de "delta_date_ech" dans l'enregistrement est supérieure à 2 jours (en secondes) -->
+                        <t t-if="record.delta_date_ech.raw_value / 86400 gt 2">
+                            <!-- Si la condition est vraie, crée un élément "div" avec une classe "oe_kanban_text_green" -->
+                            <div t-attf-class="#{'oe_kanban_text_green'}">
+                                <!-- Rend le champ "is_date_ech" invisible -->
+                                <field name="is_date_ech" invisible="1"/>
+                                <!-- Crée un "span" avec la classe CSS "d-flex" et le rend invisible si "is_date_ech" est égal à False -->
+                                <span class="d-flex" attrs="{'invisible': [('is_date_ech', '=', False)]}">
+                                    <!-- Affiche en gras "D.Dépôt :" suivi du champ "date_ech" -->
+                                    <b> D.Dépôt : </b>
+                                    <field name="date_ech" attrs="{'invisible': [('is_date_ech', '=', False)]}"/>
+                                </span>
+                                <!-- Affiche le champ "message_date_ech" et le rend invisible si "is_date_ech" est égal à False -->
+                                <field name="message_date_ech" attrs="{'invisible': [('is_date_ech', '=', False)]}" />
+                            </div>
+                        </t>
+
+                        <!-- Vérifie si la valeur brute de "delta_date_ech" dans l'enregistrement est inférieure à 2 jours (en secondes) et supérieure à 0 -->
+                        <t t-if="record.delta_date_ech.raw_value / 86400 lt 2 and record.delta_date_ech.raw_value gt 0">
+                            <!-- Si la condition est vraie, crée un élément "div" avec une classe "oe_kanban_text_orange" -->
+                            <div t-attf-class="#{'oe_kanban_text_orange'}">
+                                <!-- Rend le champ "is_date_ech" invisible -->
+                                <field name="is_date_ech" invisible="1"/>
+                                <!-- Crée un "span" avec la classe CSS "d-flex" et le rend invisible si "is_date_ech" est égal à False -->
+                                <span class="d-flex" attrs="{'invisible': [('is_date_ech', '=', False)]}">
+                                    <!-- Affiche en gras "D.Dépôt :" suivi du champ "date_ech" -->
+                                    <b> D.Dépôt : </b>
+                                    <field name="date_ech" attrs="{'invisible': [('is_date_ech', '=', False)]}"/>
+                                </span>
+                                <!-- Affiche le champ "message_date_ech" et le rend invisible si "is_date_ech" est égal à False -->
+                                <field name="message_date_ech" attrs="{'invisible': [('is_date_ech', '=', False)]}" />
+                            </div>
+                        </t>
+                        <!-- Vérifie si la valeur brute de "delta_deadline" dans l'enregistrement est inférieure à 0 -->
+                        <t t-if="record.delta_deadline.raw_value lt 0">
+                            <!-- Si la condition est vraie, crée un élément "div" avec une classe "oe_kanban_text_red" -->
+                            <div t-attf-class="#{'oe_kanban_text_red'}">
+                                <!-- Crée un "span" avec la classe CSS "d-flex" -->
+                                <span class="d-flex">
+                                    <!-- Affiche en gras "D. Soumission :" suivi du champ "date_deadline" -->
+                                    <b>  D. Soumission : </b>
+                                    <!-- Affiche le champ "date_deadline" et le rend invisible si "date_deadline" est égal à False -->
+                                    <field name="date_deadline" attrs="{'invisible': [('date_deadline', '=', False)]}"/>
+                                </span>
+                                <!-- Affiche le champ "message_date_deadline" et le rend invisible si "date_deadline" est égal à False -->
+                                <field name="message_date_deadline" attrs="{'invisible': [('date_deadline', '=', False)]}" />
+                            </div>
+                        </t>
+                        <!-- Vérifie si la valeur brute de "delta_deadline" dans l'enregistrement est supérieure à 2 jours (en secondes) -->
+                        <t t-if="record.delta_deadline.raw_value / 86400 gt 2">
+                            <!-- Si la condition est vraie, crée un élément "div" avec une classe "oe_kanban_text_green" -->
+                            <div t-attf-class="#{'oe_kanban_text_green'}">
+                                <!-- Crée un "span" avec la classe CSS "d-flex" -->
+                                <span class="d-flex">
+                                    <!-- Affiche en gras "D. Soumission :" suivi du champ "date_deadline" -->
+                                    <b>  D. Soumission : </b>
+                                    <!-- Affiche le champ "date_deadline" et le rend invisible si "date_deadline" est égal à False -->
+                                    <field name="date_deadline" attrs="{'invisible': [('date_deadline', '=', False)]}"/>
+                                </span>
+                                <!-- Affiche le champ "message_date_deadline" et le rend invisible si "date_deadline" est égal à False -->
+                                <field name="message_date_deadline" attrs="{'invisible': [('date_deadline', '=', False)]}" />
+                            </div>
+                        </t>
+                        <!-- Vérifie si la valeur brute de "delta_deadline" dans l'enregistrement est inférieure à 2 jours (en secondes) et supérieure à 0 -->
+                        <t t-if="record.delta_deadline.raw_value / 86400 lt 2 and record.delta_deadline.raw_value gt 0">
+                            <!-- Si la condition est vraie, crée un élément "div" avec une classe "oe_kanban_text_orange" -->
+                            <div t-attf-class="#{'oe_kanban_text_orange'}">
+                                <!-- Crée un "span" avec la classe CSS "d-flex" -->
+                                <span class="d-flex">
+                                    <!-- Affiche en gras "D. Soumission :" suivi du champ "date_deadline" -->
+                                    <b>  D. Soumission : </b>
+                                    <!-- Affiche le champ "date_deadline" et le rend invisible si "date_deadline" est égal à False -->
+                                    <field name="date_deadline" attrs="{'invisible': [('date_deadline', '=', False)]}"/>
+                                </span>
+                                <!-- Affiche le champ "message_date_deadline" et le rend invisible si "date_deadline" est égal à False -->
+                                <field name="message_date_deadline" attrs="{'invisible': [('date_deadline', '=', False)]}" />
+                            </div>
+                        </t>
+
+                        <style type="text/css">
+                            /* Classe CSS pour l'élément avec la classe "user_id_op" */
+                            .user_id_op {
+                                margin-left: auto; /* Marge à gauche automatique pour centrer l'élément */
+                            }
+
+                            /* Classe CSS pour le texte en vert */
+                            .oe_kanban_text_green {
+                                color: green; /* Couleur du texte verte */
+                                font-weight: bold; /* Texte en gras */
+                            }
+
+                            /* Classe CSS pour le texte en orange */
+                            .oe_kanban_text_orange {
+                                color: orange; /* Couleur du texte orange */
+                                font-weight: bold; /* Texte en gras */
+                            }
+
+                            /* Classe CSS pour le texte en noir */
+                            .oe_kanban_text_black {
+                                color: black; /* Couleur du texte noir */
+                                font-weight: bold; /* Texte en gras */
+                            }
+
+                            /* Classe CSS pour le texte en rouge */
+                            .oe_kanban_text_red {
+                                color: red; /* Couleur du texte rouge */
+                                font-weight: bold; /* Texte en gras */
+                            }
+                        </style>
+
+                    </div>
+                </xpath>
+
+                <!-- Sélectionne tous les éléments "div" avec l'attribut de classe "o_kanban_record_subtitle" -->
+                <xpath expr="//div[@class='o_kanban_record_subtitle']" position="attributes">
+                    <!-- Ajoute un attribut "invisible" avec la valeur "1" à ces éléments, les rendant invisibles -->
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="id_crm_lead_tree_leed" model="ir.ui.view">
+            <field name="name">crm.crm_lead_view_form_uodate.inherit.lead</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_tree_view_leads"/>
+            <field name="arch" type="xml">
+                <!-- ajoute un filtre par date de creation  -->
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="default_order">create_date desc</attribute>
+                </xpath>
+
+                <!-- Remplace le champ "name" par "date_deadline" avec l'intitulé "Date soumission" -->
+                <xpath expr="//field[@name='name']" position="replace">
+                    <field name="date_deadline" string="Date soumission"/>
+                </xpath>
+
+                <!-- Remplace le champ "email_from" par "name" avec l'intitulé "Piste" -->
+                <xpath expr="//field[@name='email_from']" position="replace">
+                    <field name="name" string="Piste"/>
+                </xpath>
+
+                <!-- Remplace le champ "phone" par "partner_id" avec l'intitulé "Maitre d'ouvrage" -->
+                <xpath expr="//field[@name='phone']" position="replace">
+                    <field name="partner_id" string="Maitre d'ouvrage"/>
+                </xpath>
+
+                <!-- Rend invisible le deuxième champ "company_id" -->
+                <xpath expr="//field[@name='company_id'][2]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <!-- Ajoute le champ "expected_revenue" après le deuxième champ "company_id" -->
+                <xpath expr="//field[@name='company_id'][2]" position="after">
+                    <field name="expected_revenue" string="Montant du marche" />
+                </xpath>
+
+                <!-- Remplace le champ "city" par "caution_provisoire" avec l'intitulé "Caution Provisoire" -->
+                <xpath expr="//field[@name='city']" position="replace">
+                    <field name="caution_provisoire" string="Caution Provisoire"/>
+                </xpath>
+
+                <!-- Rend invisible le champ "country_id" -->
+                <xpath expr="//field[@name='country_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <!-- Ajoute le champ "date_visite" après le champ "country_id" -->
+                <xpath expr="//field[@name='country_id']" position="after">
+                    <field name="date_visite" string="Date visite des lieux"/>
+                </xpath>
+                <!-- Rend le champ "team_id" invisible -->
+                <xpath expr="//field[@name='team_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <!-- Modifie l'attribut "string" du champ "user_id" pour le renommer en "Assigné à" -->
+                <xpath expr="//field[@name='user_id']" position="replace">
+                    <!-- <attribute name="string">Assigné à</attribute> -->
+                                   <field name="qualifications"/>
+                                                       <field name="nbr_field_attached" string="PJ"/>
+
+                </xpath>
+
+            </field>
+
+        </record>
+        
+        <!-- Définit une vue personnalisée pour le modèle "crm.lead" basée sur la vue existante "crm.crm_case_calendar_view_leads" -->
+        <record id="id_crm_lead_view_calendar_inherit" model="ir.ui.view">
+            <field name="name">crm.crm_lead_calendar_tree_riad.inherit</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_calendar_view_leads"/>
+            <field name="arch" type="xml">
+                <!-- Remplace la section "calendar" de la vue existante -->
+                <xpath expr="//calendar" position="replace">
+                    <!-- Définit un calendrier personnalisé pour la génération de leads -->
+                    <calendar string="Génération de leads" create="0" mode="month" date_start="date_deadline" hide_time="true" hide_date="true" event_limit="5" color="user_id">
+                        <field name="date_deadline" />
+                        <field name="date_visite_des_lieux" attrs="{'invisible': [('date_visite_des_lieux', '=', False)]}" />
+                         <field name="date_visite" attrs="{'invisible': [('date_visite', '=', False)]}" />
+
+                        <field name="expected_revenue" string="Estimation/Budget"/>
+
+                        <!-- Affiche le champ "partner_id" avec un avatar, ne le rend pas invisible, et renomme son intitulé en "Assigner à" -->
+                        <field name="partner_id" invisible="0" avatar_field="avatar_128" string="Assigner à"/>
+
+                        <!-- Affiche le champ "user_id" avec des filtres, ne le rend pas invisible, et renomme son intitulé en "Assigner à" -->
+                        <field name="user_id" filters="1" invisible="0" string="Client"/>
+
+                    </calendar>
+                </xpath>
+            </field>
+        </record>
+        <!-- Définit une vue personnalisée pour le modèle "crm.lead" basée sur la vue existante "crm.crm_case_tree_view_oppor" -->
+        <record id="id_crm_lead_tree" model="ir.ui.view">
+            <field name="name">crm.crm_lead_view_tree_riad.inherit</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_tree_view_oppor"/>
+            <field name="arch" type="xml">
+                <!-- Rend le champ "my_activity_date_deadline" invisible -->
+                <xpath expr="//field[@name='my_activity_date_deadline']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <!-- Remplace le champ "name" par "date_deadline" avec l'intitulé "Date soumission" -->
+                <xpath expr="//field[@name='name']" position="replace">
+                    <field name="date_deadline" string="Date soumission"/>
+                </xpath>
+
+                <!-- Remplace le champ "contact_name" par "partner_id" avec l'intitulé "Client" -->
+                <xpath expr="//field[@name='contact_name']" position="replace">
+                    <field name="partner_id" string="Client"/>
+                </xpath>
+
+                <!-- Remplace le champ "email_from" par "name" avec l'intitulé "Opportunité" -->
+                <xpath expr="//field[@name='email_from']" position="replace">
+                    <field name="name" string="Opportunité"/>
+                </xpath>
+
+                <!-- Remplace le champ "phone" par "caution_provisoire" avec l'intitulé "Caution Provisoire" -->
+                <xpath expr="//field[@name='phone']" position="replace">
+                    <field name="caution_provisoire" string="Caution Provisoire"/>
+                </xpath>
+
+                <!-- Remplace le champ "user_id" par "date_visite_des_lieux" avec l'intitulé "Date visite" -->
+                <xpath expr="//field[@name='user_id']" position="replace">
+                    <field name="date_visite_des_lieux" string="Date visite"/>
+                </xpath>
+
+                <!-- Rend le champ "activity_ids" invisible -->
+                <xpath expr="//field[@name='activity_ids']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <!-- Modifie l'attribut "string" du champ "stage_id" pour le renommer en "Étape" -->
+                <xpath expr="//field[@name='stage_id']" position="attributes">
+                    <attribute name="string">Étape</attribute>
+                </xpath>
+
+                <!-- Rend le champ "expected_revenue" invisible -->
+                <xpath expr="//field[@name='expected_revenue']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <!-- Ajoute les champs "nature_de_marche" et "is_date_ech" après le champ "stage_id" -->
+                <xpath expr="//field[@name='stage_id']" position="after">
+                    <field name="nature_de_marche" string="Nature du marché"/>
+                    <field name="is_date_ech" invisible="1"/>
+                </xpath>
+
+                <!-- Rend invisible le deuxième champ "company_id" -->
+                <xpath expr="//field[@name='company_id'][2]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <!-- Ajoute le champ "user_id" après le champ "nature_de_marche" -->
+                <xpath expr="//field[@name='nature_de_marche']" position="after">
+                    <field name="user_id" string="Assigné à"/>
+                    <field name="nbr_field_attached" string="PJ"/>
+                </xpath>
+
+                <!-- Ajoute le champ "expected_revenue" avant le champ "nature_de_marche" -->
+                <xpath expr="//field[@name='nature_de_marche']" position="before">
+                    <field name="expected_revenue" string="Estimation/Budget"/>
+                </xpath>
+
+                <!-- Rend invisible le bouton "action_reschedule_meeting" -->
+                <xpath expr="//button[@name='action_reschedule_meeting']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <!-- Rend invisible le bouton avec l'icône "fa-envelope" -->
+                <xpath expr="//button[@icon='fa-envelope']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='nature_de_marche']" position="replace">
+                  <field name="qualifications"/>
+                </xpath>
+
+            </field>
+                    </record>
+    <!-- <record id="modify_calender_mode_month" model="ir.ui.view">
+        <field name="name">modify_calendar_mode_month</field>
+        <field name="model">calendar.event</field>
+        <field name="inherit_id" ref="calendar.view_calendar_event_calendar"/>
+        <field name="arch" type="xml">
+             <xpath expr="//calendar" position="replace">
+            
+
+                <calendar js_class="attendee_calendar" string="Meetings" date_start="start"  date_delay="duration" all_day="allday" event_open_popup="true" event_limit="5" color="partner_ids" mode="month" >
+                <field name="attendee_status" invisible="1"/>
+                <field name="partner_ids" options="{'block': True, 'icon': 'fa fa-users'}" filters="1" widget="many2manyattendee" write_model="calendar.filters" write_field="partner_id" filter_field="partner_checked" avatar_field="avatar_128"/>
+                <field name="videocall_location" widget="url" text="Join Video Call" options="{'icon': 'fa fa-lg fa-video-camera'}" attrs="{'invisible': [('videocall_location', '=', False)]}"/>
+                <field name="is_highlighted" invisible="1"/>
+                <field name="is_organizer_alone" invisible="1"/>
+                <field name="display_description" invisible="1"/>
+                <field name="location" attrs="{'invisible': [('location', '=', False)]}"/>
+                <field name="description" attrs="{'invisible': [('display_description', '=', False)]}"/>
+                <field name="privacy"/>
+                <field name="alarm_ids" attrs="{'invisible': [('alarm_ids', '=', [])]}"/>
+                <field name="categ_ids" attrs="{'invisible': [('categ_ids', '=', [])]}"/>
+                <field name="recurrency" invisible="1"/>
+                <field name="recurrence_update" invisible="1"/>
+                <field name="partner_id" string="Organizer"/>
+            </calendar>
+             
+         </xpath>
+          
+        </field>
+    </record> -->
+
+
+    <!-- Calendar CRM  -->
+
+
+
+      <record id="modify_calendar_mode_month_crm" model="ir.ui.view">
+        <field name="name">modify_calendar_mode_month_crm</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_calendar_view_leads"/>
+        <field name="arch" type="xml">
+                        <!-- Remplace la section "calendar" de la vue existante -->
+                <xpath expr="//calendar" position="replace">
+                    <!-- Définit un calendrier personnalisé pour la génération de leads -->
+             <calendar string="Leads Generation" create="0" mode="month" date_start="date_deadline" color="user_id" hide_time="true" hide_date="true" event_limit="5">
+                        <field name="date_deadline" />
+
+                        <field name="date_visite_des_lieux" attrs="{'invisible': [('date_visite_des_lieux', '=', False)]}" />
+                         <field name="date_visite" attrs="{'invisible': [('date_visite', '=', False)]}" />
+
+                        <field name="expected_revenue" string="Estimation/Budget"/>
+
+                        <!-- Affiche le champ "partner_id" avec un avatar, ne le rend pas invisible, et renomme son intitulé en "Assigner à" -->
+                        <field name="partner_id" invisible="0" avatar_field="avatar_128" string="Assigner à"/>
+
+                        <!-- Affiche le champ "user_id" avec des filtres, ne le rend pas invisible, et renomme son intitulé en "Assigner à" -->
+                        <field name="user_id" filters="1" invisible="0" string="Client"/>
+
+                    </calendar>
+                </xpath>
+
+          
+        </field>
+    </record>
+  
+      <record id="id_crm_view_crm_lead_kanban" model="ir.ui.view">
+        <field name="name">name_crm_view_crm_lead_kanban</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.view_crm_lead_kanban"/>
+        <field name="arch" type="xml">
+<xpath expr="//div[@class='oe_kanban_bottom_left']" position="replace">
+
+                    <!-- Ajoute un champ 'priority' avec le widget 'priority' et l'attribut 'groups' -->
+                    <field name="priority" widget="priority" groups="base.group_user"/>
+
+                    <!-- Ajoute un champ 'activity_ids' avec le widget 'kanban_activity' -->
+                    <field name="activity_ids" widget="kanban_activity"/>
+
+                    <!-- Ajoute un lien 'a' avec un nom d'action et une classe CSS -->
+                    <a name="get_attachment_for_user" class="o_project_kanban_box" type="object">
+
+                        <!-- Ajoute une icône 'i' avec des classes CSS -->
+                        <i class="fa fa-paperclip mt-1" aria-hidden="true"/>
+
+                        <!-- Ajoute un champ 'nbr_field_attached' -->
+                        <field name="nbr_field_attached"/>
+
+                    </a>
+                </xpath>
+                <xpath expr="//div[@class='oe_kanban_bottom_right']" position="replace">
+
+                    <!-- Remplace l'élément 'div' par un nouvel élément 'div' avec des classes personnalisées -->
+                    <div class="oe_kanban_bottom_right user_id_op">
+
+                        <!-- Ajoute un champ 'user_id' avec le widget 'many2one_avatar_user' à l'intérieur du nouvel élément 'div' -->
+                        <field name="user_id" widget="many2one_avatar_user"/>
+
+                    </div>
+                </xpath>
+                                <xpath expr="//div[@class='o_kanban_record_bottom']" position="before">
+                    <!-- Ajoute un champ 'expected_revenue' avec l'attribut 'invisible' égal à "1" (caché) -->
+                    <field name="expected_revenue" invisible="1"/>
+
+                    <!-- Ajoute un champ 'delta_deadline' avec l'attribut 'invisible' égal à "1" (caché) -->
+                    <field name="delta_deadline" invisible="1"/>
+
+                    <!-- Ajoute un champ 'delta_date_ech' avec l'attribut 'invisible' égal à "1" (caché) -->
+                    <field name="delta_date_ech" invisible="1"/>
+
+                    <!-- Ajoute un champ 'delta_date_visite_des_lieux' avec l'attribut 'invisible' égal à "1" (caché) -->
+                    <field name="delta_date_visite" invisible="1"/>
+                    
+                    <div>
+                        <!-- Vérifie si la valeur brute de "expected_revenue" dans l'enregistrement existe -->
+                        <t t-if="record.expected_revenue.raw_value">
+                            <!-- Si la valeur existe, crée un élément "span" avec une classe "d-flex" pour le mettre en forme -->
+                            <span class="d-flex">
+                                <!-- Affiche le champ "expected_revenue_with_span" dans cet élément "span" -->
+                                <field name="expected_revenue_with_span"/>
+                            </span>
+                        </t>
+                        <!-- Vérifie si la valeur brute de "delta_date_visite" dans l'enregistrement est inférieure à 0 -->
+                        <t t-if="record.delta_date_visite.raw_value lt 0">
+                            <!-- Si la condition est vraie, crée un élément "div" avec une classe "oe_kanban_text_red" -->
+                            <div t-attf-class="#{'oe_kanban_text_red'}">
+                                <!-- Crée un élément "span" avec la classe "d-flex" et le rend invisible si "date_visite_des_lieux" est égal à False -->
+                                <span class="d-flex" attrs="{'invisible': [('date_visite', '=', False)]}">
+                                    <!-- Affiche en gras "D.Visite :" suivi du champ "date_visite" -->
+                                    <b> D.Visite : </b>
+                                    <field name="date_visite" attrs="{'invisible': [('date_visite', '=', False)]}"/>
+                                </span>
+                                <!-- Affiche le champ "message_date_visite" et le rend invisible si "date_visite" est égal à False -->
+                                <field name="message_date_visite" attrs="{'invisible': [('date_visite', '=', False)]}"/>
+                            </div>
+                        </t>
+                        <!-- Vérifie si la valeur brute de "delta_date_visite" dans l'enregistrement est inférieure à 2 jours (en secondes) et supérieure à 0 -->
+                        <t t-if="record.delta_date_visite.raw_value / 86400 lt 2 and record.delta_date_visite.raw_value gt 0">
+                            <!-- Si la condition est vraie, crée un élément "div" avec une classe "oe_kanban_text_orange" -->
+                            <div t-attf-class="#{'oe_kanban_text_orange'}">
+                                <!-- Crée un élément "span" avec la classe "d-flex" et le rend invisible si "date_visite" est égal à False -->
+                                <span class="d-flex" attrs="{'invisible': [('date_visite', '=', False)]}">
+                                    <!-- Affiche en gras "D.Visite :" suivi du champ "date_visite" -->
+                                    <b> D.Visite : </b>
+                                    <field name="date_visite" attrs="{'invisible': [('date_visite', '=', False)]}"/>
+                                </span>
+                                <!-- Affiche le champ "message_date_visite" et le rend invisible si "date_visite" est égal à False -->
+                                <field name="message_date_visite" attrs="{'invisible': [('date_visite', '=', False)]}"/>
+                            </div>
+                        </t>
+                        <!-- Vérifie si la valeur brute de "delta_date_visite" dans l'enregistrement est supérieure à 2 jours (en secondes) -->
+                        <t t-if="record.delta_date_visite.raw_value / 86400 gt 2">
+                            <!-- Si la condition est vraie, crée un élément "div" avec une classe "oe_kanban_text_green" -->
+                            <div t-attf-class="#{'oe_kanban_text_green'}">
+                                <!-- Crée un élément "span" avec la classe "d-flex" et le rend invisible si "date_visite" est égal à False -->
+                                <span class="d-flex" attrs="{'invisible': [('date_visite', '=', False)]}">
+                                    <!-- Affiche en gras "D.Visite :" suivi du champ "date_visite" -->
+                                    <b> D.Visite : </b>
+                                    <field name="date_visite" attrs="{'invisible': [('date_visite', '=', False)]}"/>
+                                </span>
+                                <!-- Affiche le champ "message_date_visite" et le rend invisible si "date_visite" est égal à False -->
+                                <field name="message_date_visite" attrs="{'invisible': [('date_visite', '=', False)]}"/>
+                            </div>
+                        </t>
+                        <!-- Vérifie si la valeur brute de "delta_date_ech" dans l'enregistrement est inférieure à 0 -->
+                        <t t-if="record.delta_date_ech.raw_value lt 0">
+                            <!-- Si la condition est vraie, crée un élément "div" avec une classe "oe_kanban_text_red" -->
+                            <div t-attf-class="#{'oe_kanban_text_red'}">
+                                <!-- Rend le champ "is_date_ech" invisible -->
+                                <field name="is_date_ech" invisible="1"/>
+                                <!-- Crée un "span" avec la classe CSS "d-flex" et le rend invisible si "is_date_ech" est égal à False -->
+                                <span class="d-flex" attrs="{'invisible': [('is_date_ech', '=', False)]}">
+                                    <!-- Affiche en gras "D.Dépôt :" suivi du champ "date_ech" -->
+                                    <b> D.Dépôt : </b>
+                                    <field name="date_ech" attrs="{'invisible': [('is_date_ech', '=', False)]}"/>
+                                </span>
+                                <!-- Affiche le champ "message_date_ech" et le rend invisible si "is_date_ech" est égal à False -->
+                                <field name="message_date_ech" attrs="{'invisible': [('is_date_ech', '=', False)]}"/>
+                            </div>
+                        </t>
+
+                        <!-- Vérifie si la valeur brute de "delta_date_ech" dans l'enregistrement est supérieure à 2 jours (en secondes) -->
+                        <t t-if="record.delta_date_ech.raw_value / 86400 gt 2">
+                            <!-- Si la condition est vraie, crée un élément "div" avec une classe "oe_kanban_text_green" -->
+                            <div t-attf-class="#{'oe_kanban_text_green'}">
+                                <!-- Rend le champ "is_date_ech" invisible -->
+                                <field name="is_date_ech" invisible="1"/>
+                                <!-- Crée un "span" avec la classe CSS "d-flex" et le rend invisible si "is_date_ech" est égal à False -->
+                                <span class="d-flex" attrs="{'invisible': [('is_date_ech', '=', False)]}">
+                                    <!-- Affiche en gras "D.Dépôt :" suivi du champ "date_ech" -->
+                                    <b> D.Dépôt : </b>
+                                    <field name="date_ech" attrs="{'invisible': [('is_date_ech', '=', False)]}"/>
+                                </span>
+                                <!-- Affiche le champ "message_date_ech" et le rend invisible si "is_date_ech" est égal à False -->
+                                <field name="message_date_ech" attrs="{'invisible': [('is_date_ech', '=', False)]}"/>
+                            </div>
+                        </t>
+
+                        <!-- Vérifie si la valeur brute de "delta_date_ech" dans l'enregistrement est inférieure à 2 jours (en secondes) et supérieure à 0 -->
+                        <t t-if="record.delta_date_ech.raw_value / 86400 lt 2 and record.delta_date_ech.raw_value gt 0">
+                            <!-- Si la condition est vraie, crée un élément "div" avec une classe "oe_kanban_text_orange" -->
+                            <div t-attf-class="#{'oe_kanban_text_orange'}">
+                                <!-- Rend le champ "is_date_ech" invisible -->
+                                <field name="is_date_ech" invisible="1"/>
+                                <!-- Crée un "span" avec la classe CSS "d-flex" et le rend invisible si "is_date_ech" est égal à False -->
+                                <span class="d-flex" attrs="{'invisible': [('is_date_ech', '=', False)]}">
+                                    <!-- Affiche en gras "D.Dépôt :" suivi du champ "date_ech" -->
+                                    <b> D.Dépôt : </b>
+                                    <field name="date_ech" attrs="{'invisible': [('is_date_ech', '=', False)]}"/>
+                                </span>
+                                <!-- Affiche le champ "message_date_ech" et le rend invisible si "is_date_ech" est égal à False -->
+                                <field name="message_date_ech" attrs="{'invisible': [('is_date_ech', '=', False)]}"/>
+                            </div>
+                        </t>
+                        <!-- Vérifie si la valeur brute de "delta_deadline" dans l'enregistrement est inférieure à 0 -->
+                        <t t-if="record.delta_deadline.raw_value lt 0">
+                            <!-- Si la condition est vraie, crée un élément "div" avec une classe "oe_kanban_text_red" -->
+                            <div t-attf-class="#{'oe_kanban_text_red'}">
+                                <!-- Crée un "span" avec la classe CSS "d-flex" -->
+                                <span class="d-flex">
+                                    <!-- Affiche en gras "D. Soumission :" suivi du champ "date_deadline" -->
+                                    <b>  D. Soumission : </b>
+                                    <!-- Affiche le champ "date_deadline" et le rend invisible si "date_deadline" est égal à False -->
+                                    <field name="date_deadline" attrs="{'invisible': [('date_deadline', '=', False)]}"/>
+                                </span>
+                                <!-- Affiche le champ "message_date_deadline" et le rend invisible si "date_deadline" est égal à False -->
+                                <field name="message_date_deadline" attrs="{'invisible': [('date_deadline', '=', False)]}"/>
+                            </div>
+                        </t>
+                        <!-- Vérifie si la valeur brute de "delta_deadline" dans l'enregistrement est supérieure à 2 jours (en secondes) -->
+                        <t t-if="record.delta_deadline.raw_value / 86400 gt 2">
+                            <!-- Si la condition est vraie, crée un élément "div" avec une classe "oe_kanban_text_green" -->
+                            <div t-attf-class="#{'oe_kanban_text_green'}">
+                                <!-- Crée un "span" avec la classe CSS "d-flex" -->
+                                <span class="d-flex">
+                                    <!-- Affiche en gras "D. Soumission :" suivi du champ "date_deadline" -->
+                                    <b>  D. Soumission : </b>
+                                    <!-- Affiche le champ "date_deadline" et le rend invisible si "date_deadline" est égal à False -->
+                                    <field name="date_deadline" attrs="{'invisible': [('date_deadline', '=', False)]}"/>
+                                </span>
+                                <!-- Affiche le champ "message_date_deadline" et le rend invisible si "date_deadline" est égal à False -->
+                                <field name="message_date_deadline" attrs="{'invisible': [('date_deadline', '=', False)]}"/>
+                            </div>
+                        </t>
+                        <!-- Vérifie si la valeur brute de "delta_deadline" dans l'enregistrement est inférieure à 2 jours (en secondes) et supérieure à 0 -->
+                        <t t-if="record.delta_deadline.raw_value / 86400 lt 2 and record.delta_deadline.raw_value gt 0">
+                            <!-- Si la condition est vraie, crée un élément "div" avec une classe "oe_kanban_text_orange" -->
+                            <div t-attf-class="#{'oe_kanban_text_orange'}">
+                                <!-- Crée un "span" avec la classe CSS "d-flex" -->
+                                <span class="d-flex">
+                                    <!-- Affiche en gras "D. Soumission :" suivi du champ "date_deadline" -->
+                                    <b>  D. Soumission : </b>
+                                    <!-- Affiche le champ "date_deadline" et le rend invisible si "date_deadline" est égal à False -->
+                                    <field name="date_deadline" attrs="{'invisible': [('date_deadline', '=', False)]}"/>
+                                </span>
+                                <!-- Affiche le champ "message_date_deadline" et le rend invisible si "date_deadline" est égal à False -->
+                                <field name="message_date_deadline" attrs="{'invisible': [('date_deadline', '=', False)]}"/>
+                            </div>
+                        </t>
+
+                        <style type="text/css">
+                            /* Classe CSS pour l'élément avec la classe "user_id_op" */
+                            .user_id_op {
+                                margin-left: auto; /* Marge à gauche automatique pour centrer l'élément */
+                            }
+
+                            /* Classe CSS pour le texte en vert */
+                            .oe_kanban_text_green {
+                                color: green; /* Couleur du texte verte */
+                                font-weight: bold; /* Texte en gras */
+                            }
+
+                            /* Classe CSS pour le texte en orange */
+                            .oe_kanban_text_orange {
+                                color: orange; /* Couleur du texte orange */
+                                font-weight: bold; /* Texte en gras */
+                            }
+
+                            /* Classe CSS pour le texte en noir */
+                            .oe_kanban_text_black {
+                                color: black; /* Couleur du texte noir */
+                                font-weight: bold; /* Texte en gras */
+                            }
+
+                            /* Classe CSS pour le texte en rouge */
+                            .oe_kanban_text_red {
+                                color: red; /* Couleur du texte rouge */
+                                font-weight: bold; /* Texte en gras */
+                            }
+                        </style>
+
+                    </div>
+                </xpath>
+
+        </field>
+    </record>
+
+
+    </data>
+
+</odoo>
+

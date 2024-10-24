@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<data>
+    <record id="add_project_id_search" model="ir.ui.view">
+        <field name="name">add_project_id_serach</field>
+        <field name="model">calendar.event</field>
+        <field name="inherit_id" ref="calendar.view_calendar_event_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="before">
+                <field name="project_id" string="Projet"/>
+            
+            </xpath>         
+        </field>
+    </record>
+    
+</data>
+
+    
+
+
+</odoo>

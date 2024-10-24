@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+         <record id="id_account_journal_kanban" model="ir.ui.view">
+            <field name="name">account_journal_kanban</field>
+            <field name="model">account.journal</field>   
+            <field name="inherit_id" ref="account.account_journal_dashboard_kanban_view"/> 
+            <field name="arch" type="xml">
+
+                 
+               <xpath expr="//div[@t-if='dashboard.number_draft']/div/a/span[2]" position="replace">
+                    <span t-if="journal_type == 'purchase'" title="Bills to Validate">
+                    <t t-esc="dashboard.number_draft"/> F.Brouillon</span>
+               </xpath>
+               <xpath expr="//div[@t-if='dashboard.number_waiting']/div/a[2]" position="replace">
+                                    <a type="object" t-if="journal_type == 'purchase'" name="open_action" context="{'search_default_open':1, 'search_default_posted':1, 'search_default_partial': 1}" id="account_dashboard_purchase_pay_link">
+                                        <t t-esc="dashboard.number_waiting"/> F.en cours de paiement
+                                    </a>
+               </xpath>
+               <xpath expr="//div[@t-if='dashboard.number_draft']" position="replace">
+               </xpath>
+               
+               <xpath expr="//div[@t-if='dashboard.number_late']" position="before">
+                    <div class="row" t-if="dashboard.number_draft">
+                                <div class="col overflow-hidden text-start">
+                                    <a type="object" name="open_action" context="{'search_default_draft': '1'}">
+                                        <span t-if="journal_type == 'sale'" title="Invoices to Validate"><t t-esc="dashboard.number_draft"/> Invoices to Validate</span>
+                                        <span t-if="journal_type == 'purchase'" title="Bills to Validate"><t t-esc="dashboard.number_draft"/> F.Brouillon</span>
+                                    </a>
+                                </div>
+                                <div class="col-auto text-end">
+                                    <span><t t-esc="dashboard.sum_draft"/></span>
+                                </div>
+                            </div>
+
+               </xpath>
+                <xpath expr="//div[@t-if='dashboard.number_late']" position="replace"/>
+               <xpath expr="//div[@t-if='dashboard.number_waiting']" position="after">
+                            <div class="row" t-if="dashboard.number_late">
+                                <div class="col overflow-hidden text-start">
+                                    <a type="object" name="open_action" context="{'search_default_late': '1'}">
+                                        <span t-if="journal_type == 'sale'" title="Late Invoices"><t t-esc="dashboard.number_late"/> Late Invoices</span>
+                                        <span t-if="journal_type == 'purchase'" title="Late Bills"><t t-esc="dashboard.number_late"/> F.en Retard de paiement</span>
+                                    </a>
+                                </div>
+                                <div class="col-auto text-end">
+                                    <span><t t-esc="dashboard.sum_late"/></span>
+                                </div>
+                            </div>
+               </xpath>
+               <xpath expr="//div[@t-if='dashboard.number_draft']/div/a[1]" position="after">    
+               <br/>        
+                    <a type="object" t-if="journal_type == 'purchase'" name="open_action_active" id="account_dashboard_active_purchase_pay_link">
+                         <field name="nb_facture_archive"></field> F.Archives                                        
+                    </a>
+               </xpath> 
+              <xpath expr="//t[@t-esc='dashboard.sum_draft']" position="after">
+
+                     <div class="col-auto text-end" t-if="journal_type == 'purchase'">
+                          <span><field name="total_archive"/></span> DH
+                     </div>
+               </xpath>
+
+            </field>
+          </record>
+ </data>
+</odoo>

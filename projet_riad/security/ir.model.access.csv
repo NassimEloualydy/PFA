@@ -1,0 +1,14 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_project_task_form,access_project_task_form,model_project_task,base.group_user,1,1,1,1
+access_project_pv_type_form,access_project_pv_type_form,model_project_pv_type,base.group_user,1,1,1,1
+access_project_pv_form,access_project_pv_form,model_project_pv,base.group_user,1,1,1,1
+access_resource_calendar_form,access_resource_calendar_form,model_resource_calendar,base.group_user,1,1,1,1
+access_crossovered_budget_form,access_crossovered_budget_form,model_crossovered_budget,base.group_user,1,1,1,1
+access_account_payment_register_form,access_account_payment_register_form,model_account_payment_register,base.group_user,1,1,1,1
+access_project_ms,access_project_ms,model_project_ms,base.group_user,1,1,1,1
+access_project_task_default,access_project_task_default,model_project_task_default,base.group_user,1,1,1,1
+access_purchase_order_wizard,access_purchase_order_wizard,model_purchase_order_wizard,base.group_user,1,1,1,1
+access_purchase_order_wizard_line,access_purchase_order_wizard_line,model_purchase_order_wizard_line,base.group_user,1,1,1,1
+access_merge_task,access_merge_task,model_merge_task,base.group_user,1,1,1,1
+access_user_filter,access_user_filter,model_user_filter,base.group_user,1,1,1,1
+

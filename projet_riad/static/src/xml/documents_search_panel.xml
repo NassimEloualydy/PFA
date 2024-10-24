@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates xml:space="preserve">
+
+    <t t-name="document.search.panel"  t-inherit="documents.DocumentsSearchPanelItemSettingsPopover" t-inherit-mode="extension" owl="1">
+    <xpath expr="//div[1]" position="replace">
+        <div class="o_search_panel_value_edit">
+            <a t-if="props.createChildEnabled" t-on-click.stop.prevent="props.onCreateChild" class="o_search_panel_value_edit_create py-1 list-group-item list-group-item-action row d-flex justify-content-between align-items-center g-0 cursor-pointer">
+                New
+            </a>
+            <a t-on-click.stop.prevent="props.onEdit" class="o_search_panel_value_edit_edit py-1 list-group-item list-group-item-action row d-flex justify-content-between align-items-center g-0 cursor-pointer">
+                Edit
+            </a>
+            <a t-on-click.stop.prevent="props.onDelete" class="o_search_panel_value_edit_delete py-1 list-group-item list-group-item-action row d-flex justify-content-between align-items-center g-0 cursor-pointer">
+                Delete
+            </a>
+            <a t-if="props.isArchive=='Chantier'" t-on-click.stop.prevent="props.onArchive" class="o_search_panel_value_edit_delete py-1 list-group-item list-group-item-action row d-flex justify-content-between align-items-center g-0 cursor-pointer">
+                Archiver
+            </a>
+            <a t-if="props.isArchive=='Archive'" t-on-click.stop.prevent="props.onArchive" class="o_search_panel_value_edit_delete py-1 list-group-item list-group-item-action row d-flex justify-content-between align-items-center g-0 cursor-pointer">
+                Desarchiver
+            </a>
+
+        </div>
+    </xpath>
+    </t>
+    

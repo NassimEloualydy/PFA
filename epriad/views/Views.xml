@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="Mon_compte_form_view">
+            <field name="name">riad.compte.form.view</field>
+            <field name="model">riad.compte</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="login"/>
+                            <field name="password"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_riad_compte_tree" model="ir.ui.view">
+            <field name="name">riad.compte.tree</field>
+            <field name="model">riad.compte</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="login"/>
+                    <field name="password"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

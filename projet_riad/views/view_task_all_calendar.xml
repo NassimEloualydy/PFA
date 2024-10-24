@@ -1,0 +1,145 @@
+<?xml version="1.0"?>
+
+<odoo>
+
+    <data>
+
+            <record id="id_view_task_calendar_task_modify" model="ir.ui.view">
+
+            <field name="name">view_task_calendar_task_modify</field>
+
+            <field name="model">project.task</field>
+
+            <field name="inherit_id" ref="project.view_task_calendar"/>
+
+
+            <field name="arch" type="xml">
+
+
+                <xpath expr="//calendar" position="replace">
+
+                    <!-- Remplace la balise <calendar> existante -->
+
+                    <calendar date_start="date_debut" string="Tâches" mode="month" color="partner_id" event_limit="5" hide_time="true" hide_date="true" event_open_popup="false" quick_add="false" show_unusual_days="True" js_class="project_calendar" scales="month,year">
+
+                        <!-- Champ "allow_milestones" -->
+                      
+                        
+                        <field name="allow_milestones" modifiers="{&quot;invisible&quot;: true}"/>
+
+                        <!-- Champ "project_id" -->
+
+                        <field name="project_id" widget="project_private_task" color="color" optional="show"/>
+
+                        <!-- replace "milestone_id" par duree de tache  -->
+
+                        <field name="date_start_calendar" invisible="1"/>
+                         <field name="date_debut" string="Date début"/>
+
+                        <!-- Champ "date_fin_project" -->
+
+                        <field name="date_fin_project" string="Date de fin"/>
+
+                        <field name="duree_de_tach" string="Durée de la tâche"/>
+
+                        <!-- Champ "user_ids" -->
+
+                        <field name="user_ids" widget="many2many_avatar_user" />
+
+                        <!-- Champ "tag_ids" -->
+
+                        <field name="tag_ids" widget="many2many_tags" modifiers="{&quot;invisible&quot;: [[&quot;tag_ids&quot;, &quot;=&quot;, []]]}"/>
+
+                        <!-- Champ "stage_id" -->
+                        <field name="stage_id"/>
+                        <!-- <field name="kanban_state"/> -->
+
+
+
+
+                        <!-- Champ "kanban_state" -->
+
+                     
+                        <!-- Champ "date_start_calendar" (invisible) -->
+
+                    
+
+                    </calendar>
+
+                </xpath>
+
+            </field>
+
+        </record>
+
+
+        <record id="id_view_task_all_calendar_modify_task" model="ir.ui.view">
+
+            <field name="name">view_task_all_calendar_modify_task</field>
+
+            <field name="model">project.task</field>
+
+            <field name="inherit_id" ref="project.view_task_all_calendar"/>
+
+            <field name="arch" type="xml">
+                
+                <xpath expr="//calendar" position="replace">
+                
+                    <!-- Remplace la balise <calendar> existante -->
+                
+                    <calendar date_start="date_debut" string="Tâches" mode="month" color="partner_id" event_limit="5" hide_time="true"  hide_date="true"  event_open_popup="false" quick_add="false" show_unusual_days="True" js_class="project_calendar" scales="month,year">
+                
+                        <!-- Champ "allow_milestones" -->
+
+                
+                        <field name="allow_milestones" modifiers="{&quot;invisible&quot;: true}"/>
+                
+                        <!-- Champ "project_id" avec widget "project_private_task" -->
+                
+                        <field name="project_id" widget="project_private_task" color="color" optional="show"/>
+                
+                        <!-- replace jamlon par duree de tache  -->
+
+
+                        
+                           <field name="date_debut" string="Date début"/>
+                           <field name="date_fin_project" string="Date de fin"/>
+                
+                
+                          <field name="duree_de_tach" string="Durée de la tâche"/>
+                
+                        <!-- Champ "user_ids" avec widget "many2many_avatar_user" -->
+                
+                        <field name="user_ids" widget="many2many_avatar_user" />
+                
+                        <!-- Champ "tag_ids" (invisible si vide) avec widget "many2many_tags" -->
+                
+                        <field name="tag_ids" widget="many2many_tags" modifiers="{&quot;invisible&quot;: [[&quot;tag_ids&quot;, &quot;=&quot;, []]]}"/>
+                
+                        <!-- Champ "stage_id" -->
+                
+                        <field name="stage_id"/>
+                
+                        <!-- Champ "kanban_state" -->
+<!--                 
+                        <field name="kanban_state"/> -->
+                
+                        <!-- Champ "date_start_calendar" (invisible) -->
+                
+                        <field name="date_start_calendar" invisible="1"/>
+                
+                        <!-- Champ "date_fin_project" avec étiquette "Date de fin" -->
+                
+                     
+                    </calendar>
+                
+
+                </xpath>
+
+            </field>
+
+        </record>
+
+    </data>
+
+</odoo>

@@ -1,0 +1,172 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+       
+       <record id="id_resource_calendar_leavs_form" model="ir.ui.view">
+
+            <field name="name">name_resource_calendar_leavs_form</field>
+
+            <field name="model">resource.calendar.leaves</field>
+
+            <field name="inherit_id" ref="resource.resource_calendar_leave_tree"/>
+
+            <field name="arch" type="xml">       
+                
+                <!-- Rend invisible le champ 'calendar_id' -->
+                
+                <xpath expr="//field[@name='calendar_id']" position="attributes">
+                
+                    <attribute name="invisible">1</attribute>
+                
+                </xpath>
+
+
+                
+                <!-- Rend invisible le champ 'resource_id' -->
+                
+                <xpath expr="//field[@name='resource_id']" position="attributes">
+                
+                    <attribute name="invisible">1</attribute>
+                
+                </xpath>
+
+
+                
+                <!-- Modifie le libellé du champ 'name' en "Motif" -->
+                
+                <xpath expr="//field[@name='name']" position="attributes">
+                
+                    <attribute name="string">Motif</attribute>
+                
+                </xpath>
+
+
+                
+                <!-- Modifie le libellé du champ 'date_from' en "Ordre d'arrêt" -->
+                
+                <xpath expr="//field[@name='date_from']" position="attributes">
+                
+                    <attribute name="string">Ordre d'arrêt</attribute>
+                
+                </xpath>
+
+
+                
+                <!-- Modifie le libellé du champ 'date_to' en "Ordre de reprise" -->
+                
+                <xpath expr="//field[@name='date_to']" position="attributes">
+                
+                    <attribute name="string">Ordre de reprise</attribute>
+                
+                </xpath>
+
+
+                
+                <!-- Ajoute le champ 'totale_des_arret' après le champ 'date_to' -->
+                
+                <xpath expr="//field[@name='date_to']" position="after">
+                
+                    <field name="totale_des_arret" string="Totale des arrêt" readonly="1" sum="Somme de Totale des arrêt"/>
+                
+                </xpath>
+
+
+            </field>
+
+        </record>
+        
+        <record id="id_resource_calendar_form" model="ir.ui.view">
+
+            <field name="name">name_resource_calendar_form</field>
+
+            <field name="model">resource.calendar</field>
+
+            <field name="inherit_id" ref="resource.resource_calendar_form"/>
+
+            <field name="arch" type="xml">
+                    
+                    <!-- Rend invisible le champ 'name' sous le h1 -->
+                    
+                    <xpath expr="//h1/field[@name='name']" position="attributes">
+                    
+                        <attribute name="invisible">1</attribute>
+                    
+                    </xpath>
+
+
+                    
+                    <!-- Rend invisible le groupe 'resource_details' -->
+                    
+                    <xpath expr="//group[@name='resource_details']" position="attributes">
+                    
+                        <attribute name="invisible">1</attribute>
+                    
+                    </xpath>
+
+
+                    
+                    <!-- Modifie le libellé de la page 'working_hours' en "Orders de service" -->
+                    
+                    <xpath expr="//page[@name='working_hours']" position="attributes">
+                    
+                        <attribute name="string">Orders de service</attribute>
+                    
+                    </xpath>
+
+
+                    
+                    <!-- Rend invisible le champ 'two_weeks_explanation' -->
+                    
+                    <xpath expr="//field[@name='two_weeks_explanation']" position="attributes">
+                    
+                        <attribute name="invisible">1</attribute>
+                    
+                    </xpath>
+
+
+                    
+                    <!-- Rend invisible le champ 'attendance_ids' -->
+                    
+                    <xpath expr="//field[@name='attendance_ids']" position="attributes">
+                    
+                        <attribute name="invisible">1</attribute>
+                    
+                    </xpath>
+
+
+                    
+                    <!-- Ajoute le champ 'resource_calendar_leaves_ids' après le champ 'attendance_ids' -->
+                    
+                    <xpath expr="//field[@name='attendance_ids']" position="after">
+
+                        <field name="resource_calendar_leaves_ids" widget="one2many_list">
+
+                            <tree editable="bottom">
+
+                                    <field name="name"/>
+                            
+                                    <field  name="date_from" string="Ordre d'arrêt" widget="date"/>
+                                     
+                                    <field name="order_arret_file" string="Fichier d'ordre d'arrêt" widget="custom_label" />
+
+                                    <field name="date_to" string="Ordre de reprise" widget="date"/>
+                                
+                                    <field name="order_reprise_file" string="Fichier d'ordre de reprise" widget="custom_label" />
+
+                                    <field name="totale_des_arret"/>
+
+                            </tree>
+
+                        </field>
+                        
+                    </xpath>
+
+
+
+            </field>
+
+        </record>
+
+    </data>
+
+</odoo>

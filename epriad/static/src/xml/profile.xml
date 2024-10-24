@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template2" xml:space="preserve">
+<t t-name="profile_view">
+<div class="MyContainer contaProfile">
+    <div class="MyContainerPart1" id="profileVue">
+      <div class="selection_cherche modifierProfile">
+          <div class='classHeader'>Secteurs</div>
+          <div class="classes">
+              <div class="selection">
+               </div>
+               <div class="selecteddd">
+               </div>
+          </div>
+          <div class='classHeader'>Villes</div>
+          <div class="classes">
+               <div class="selectionVilles">
+               </div>
+               <div class="selectedVilles">
+               </div>
+          </div>
+      <div class='classHeader'>Recherche avancée</div>
+      <div class='filter'>
+         <div class="formm formprofile">
+            <div class="rowm">
+              <span>Mots clés :</span>
+              <div class="fieldsm">
+                <input type="text" id="Cle1" />
+                <select name="EtOu1" id="EtOu1">
+                  <option value="AND">et</option>
+                </select>
+                <input type="text" id="Cle2" />
+                <select name="EtOu2" id="EtOu2">
+                  <option value="AND">et</option>
+                </select>
+                <input type="text" id="Cle3" />
+              </div>
+            </div>
+
+            <div class="rowm">
+              <span>Date limite :</span>
+              <div class="fieldsm">
+                <label for="Datentre">Entre  :</label>
+                <input type="date" name="Datentre" id="Datentre" />
+                <label for="Datet">Et  :</label>
+                <input type="date" name="Datet" id="Datet" />
+              </div>
+            </div>
+
+            <div class="rowm">
+              <span>Caution :</span>
+              <div class="fieldsm">
+                <label for="Cauentre">Entre  :</label>
+                <input type="number" name="Cauentre" id="Cauentre" min="0" />
+                <label for="Cauet">Et  :</label>
+                <input type="number" name="Cauet" id="Cauet" min="0" />
+              </div>
+            </div>
+
+            <div class="rowm">
+              <span>Budget :</span>
+              <div class="fieldsm">
+                <label for="Budentre">Entre  :</label>
+                <input type="number" name="Budentre" id="Budentre" min="0" />
+                <label for="Budet">Et  :</label>
+                <input type="number" name="Budet" id="Budet" min="0" />
+              </div>
+            </div>
+
+            <div class="rowm">
+              <span>N° d'ordre  :</span>
+              <div class="fieldsm">
+                <input type="text" name="ordre" id="ordre"  />
+              </div>
+            </div>
+
+            <div class="rowm">
+              <span>Référence  :</span>
+              <div class="fieldsm">
+                <input type="text" name="ref" id="ref" />
+              </div>
+            </div>
+        </div> 
+      </div>
+      <div class="cherche" id="operation">
+       Enregistrer
+        </div>  
+    </div>
+  </div> 
+</t>
+</templates>

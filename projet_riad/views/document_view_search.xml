@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="id_document_view_search" model="ir.ui.view">
+            <field name="name">name_document_view_search</field>
+            <field name="model">documents.document</field>
+            <field name="inherit_id" ref="documents.document_view_search"/>
+            <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="project_id"/>
+            </xpath>
+        </field>
+    </record>
+  
+
+
+    </data>
+
+</odoo>
+

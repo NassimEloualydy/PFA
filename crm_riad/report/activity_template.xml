@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Déclaration XML -->
+<odoo>
+    <!-- Élément racine de la configuration Odoo. -->
+
+    <template id="report_your_report_template">
+        <!-- Définition d'un modèle de rapport avec l'identifiant "report_your_report_template". -->
+
+        <t t-call="web.external_layout">
+            <!-- Appel au modèle de mise en page externe. Cela peut inclure des 
+            éléments tels que l'en-tête et le pied de page du rapport. -->
+
+            <t t-call="web.html_container">
+                <!-- Conteneur HTML du rapport. -->
+
+                <t t-set="leads" t-value="env['crm.lead'].search([])"/>
+                <!-- Recherche de tous les enregistrements du modèle 
+                "crm.lead" et stockage du résultat dans la variable "leads". -->
+
+                <t t-foreach="leads" t-as="doc">
+                    <!-- Itération sur chaque enregistrement du modèle 
+                    "crm.lead" et stockage de chaque enregistrement dans la variable "doc". -->
+
+                    <h2>Lead</h2>
+                    <!-- Affichage d'un titre "Lead". -->
+
+                    Customer :<t t-esc="doc.partner_id.name"></t>
+                    <!-- Affichage du nom du client associé à ce lead. -->
+
+                    Date Dead Line :<t t-esc="doc.date_deadline"></t>
+                    <!-- Affichage de la date limite associée à ce lead. -->
+
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

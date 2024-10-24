@@ -1,0 +1,180 @@
+<?xml version="1.0"?>
+
+<odoo>
+
+    <data>
+
+        <record id="id_account_view_kanban" model="ir.ui.view">
+            <!-- Modification de la vue Kanban pour les comptes -->
+
+            <field name="name">name_account_view_kanban</field>
+
+            <field name="model">account.move</field>
+
+            <field name="inherit_id" ref="account.view_account_move_kanban"/>
+
+            <field name="arch" type="xml">
+
+
+                <!-- Modification de la classe d'un élément div dans la vue Kanban -->
+                <xpath expr="//div[contains(@class,'o_kanban_record_headings')]" position="attributes">
+               
+                    <attribute name="class">col-9 o_kanban_record_headings</attribute>
+               
+                </xpath>
+
+
+            <!-- Remplacement d'un élément <span> dans un élément <strong> à l'intérieur de <div> -->
+
+                <xpath expr="//div[contains(@class,'o_kanban_record_headings')]/strong/span" position="replace">
+                
+                    <!-- Définition des propriétés des champs dans la vue de formulaire -->
+
+                    <field name="partner_id" attrs="{'invisible': [('partner_id', '=', False)]}"/>
+
+                    <field name="journal_id" attrs="{'invisible': [('partner_id', '!=', False)]}"/>                 
+
+                    <field name="project_id" string="Projet"/>
+
+                    <field name="nbr_date" invisible="1"/>
+
+                    <div class="d-flex text-muted">
+
+                       <field name="name"/> - 
+
+                       <field name="invoice_date"/> - 
+
+                        <!-- Condition : Si la valeur de nbr_date est supérieure à zéro -->
+                        <t t-if="record.nbr_date.raw_value gt 0">
+                        
+                            <!-- Afficher le texte avec une classe CSS "oe_kanban_text_green" -->
+                            <span t-attf-class="#{'oe_kanban_text_green'}">
+
+                                <!-- Afficher le champ "msg_date" -->
+                                <field name="msg_date"/>
+                            
+                            </span>
+
+                        </t>
+
+                        <!-- Condition : Si la valeur de nbr_date est inférieure à zéro -->
+                        <t t-if="record.nbr_date.raw_value lt 0">
+                        
+                            <!-- Afficher le texte avec une classe CSS "oe_kanban_text_red" -->
+                            <span t-attf-class="#{'oe_kanban_text_red'}">
+                        
+                                <!-- Afficher le champ "msg_date" -->
+                        
+                                <field name="msg_date"/>
+                        
+                            </span>
+                        
+                        </t>
+
+                        <!-- Condition : Si la valeur de nbr_date est égale à zéro -->
+                        <t t-if="record.nbr_date.raw_value == 0">
+                      
+                            <!-- Afficher le texte avec une classe CSS "oe_kanban_text_orange" -->
+                            <span t-attf-class="#{'oe_kanban_text_orange'}">
+                      
+                                <!-- Afficher le champ "msg_date" -->
+                                <field name="msg_date"/>
+                      
+                            </span>
+                      
+                        </t>
+
+
+                    </div>
+
+                    <style type="text/css">
+
+
+                            /* Style pour le texte en vert */
+
+                            .oe_kanban_text_green {
+
+                                color: green; /* Couleur du texte verte */
+
+                                font-weight: bold; /* Texte en gras */
+
+                            }
+
+
+
+                            /* Style pour le texte en orange */
+
+                            .oe_kanban_text_orange {
+
+                                color: orange; /* Couleur du texte orange */
+
+                                font-weight: bold; /* Texte en gras */
+
+                            }
+
+
+
+                            /* Style pour le texte en noir */
+
+                            .oe_kanban_text_black {
+
+                                color: black; /* Couleur du texte noir */
+
+                                font-weight: bold; /* Texte en gras */
+
+                            }
+
+
+
+
+                    </style>
+
+                </xpath> 
+
+
+                <!-- L'expression XPath suivante masque le champ "amount_total" -->
+
+                <xpath expr="//field[@name='amount_total']" position="attributes">
+
+                    <attribute name="invisible">1</attribute>
+
+                </xpath>
+
+
+
+                <!-- L'expression XPath suivante modifie les attributs de la classe de l'élément contenant le montant total -->
+
+                <xpath expr="//div[contains(@class,'text-end')]" position="attributes">
+
+                    <attribute name="class">col-3 text-end</attribute>
+
+                </xpath>
+
+
+
+                <!-- L'expression XPath suivante remplace l'élément "strong" par le montant total -->
+
+                <xpath expr="//div[contains(@class,'text-end')]/strong" position="replace">
+
+                    <field name="amount_total" invisible="1"/> <!-- Masque le champ "amount_total" -->
+
+                    <t t-esc="record.amount_total.value"/> <!-- Affiche la valeur du montant total -->
+
+                </xpath>
+
+
+
+            </field>
+
+        </record>
+  <record id="account.action_move_out_invoice_type" model="ir.actions.act_window">
+            <field name="domain">[('move_type', '=', 'out_invoice'),('state','!=','cancel')]</field>
+        </record>
+  <record id="account.action_move_in_invoice_type" model="ir.actions.act_window">
+            <field name="domain">[('move_type', '=', 'in_invoice'),('state','!=','cancel')]</field>
+        </record>
+
+    </data>
+
+</odoo>
+

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<odoo>
+
+    <data>
+        <!-- Définition d'une nouvelle action pour afficher toutes les tâches de projet -->
+        <record id="project.action_view_all_task" model="ir.actions.act_window">
+            <!-- Définition des modes de vue disponibles -->
+            <field name="view_mode">kanban,tree,form,calendar,gantt</field>
+        </record>
+    </data>
+
+</odoo>

@@ -1,0 +1,200 @@
+<?xml version="1.0"?>
+
+<odoo>
+
+    <data>
+
+        <record id="id_project_task_form2" model="ir.ui.view">
+
+            <field name="name">name_project_task_form2</field>
+
+            <field name="model">project.task</field>
+
+            <field name="inherit_id" ref="project.view_task_form2"/>
+
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='tag_ids']" position="attributes">
+
+                    <attribute name="invisible">1</attribute>
+
+                </xpath>
+
+
+                <!-- Remplacer le champ 'project_id' par des champs personnalisés et des attributs -->
+
+                <xpath expr="//field[@name='project_id'][1]" position="replace">
+
+
+                    <!-- <field name="is_project_readonly" context="{'is_project_readonly': context.get('default_is_project_readonly')}" invisible="1"/>
+                    <field name="is_project_readonly"/> -->
+
+                    <field name="project_id" string="Projet"  domain="[('active', '=', True), ('company_id', '=', company_id)]" attrs="{'invisible': [('parent_id', '!=', False)],'readonly': [('project_id', '!=', False)]}" widget="project_private_task"/>
+
+                </xpath>
+
+                <!-- Remplacer le champ 'user_ids' par des champs personnalisés et des attributs -->
+
+                <xpath expr="//field[@name='user_ids'][1]" position="replace">
+
+                    <!-- Modifier et personnaliser le champ 'user_ids' -->
+
+                    <field name="user_ids" string="Assigné à" class="o_task_user_field" options="{'no_open': True, 'no_quick_create': True}" widget="many2many_avatar_user" domain="[('share', '=', False), ('active', '=', True)]" required="1"/>
+
+                    <field name="pv_id" string="PV"/>
+
+                    <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}" context="{'project_id': project_id}"/>
+
+                </xpath>
+
+
+
+
+                <xpath expr="//div[@class='o_row'][1]" position="attributes">
+
+
+
+                </xpath>
+
+
+
+                <!-- Insérer des champs personnalisés après le champ 'partner_id' -->
+
+                <xpath expr="//field[@name='partner_id'][1]" position="after">
+
+                    <!-- Ajouter des champs personnalisés après 'partner_id' -->
+
+
+
+                    <field name="date_debut" string="Date de début"/>
+
+                    <field name="date_fin_project" string="Date de fin"/>
+
+                    <field name="duree_de_tach" string="Durée de tâche"/>
+
+                    <field name="echance_fin" string="Echéance / Fin"/>
+
+                    <field name="qte_planifier" string="Quantité planifiées" invisible="1"/>
+
+                    <!-- <field name="tag_ids" string="Étiquettes" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}" context="{'project_id': project_id}" modifiers="{&quot;invisible&quot;: true}" can_create="true" can_write="true"/> -->
+
+                    <field name="temp_de_travail_enrgistrer" string="Temps de Travail Enregistré"/>
+
+                </xpath>
+
+
+
+                <!-- Modifier les attributs du champ 'partner_id' -->
+
+
+                <xpath expr="//field[@name='partner_id'][1]" position="attributes">
+
+                    <!-- Définir l'attribut 'invisible' pour masquer le champ 'date_deadline' -->
+
+                    <attribute name="invisible">1</attribute>
+
+                </xpath>
+
+
+
+                <!-- Modifier les attributs du champ 'date_deadline' -->
+
+                <xpath expr="//field[@name='date_deadline']" position="attributes">
+
+                    <!-- Définir l'attribut 'invisible' pour masquer le champ 'date_deadline' -->
+
+                    <attribute name="invisible">1</attribute>
+
+                </xpath>
+
+                <!-- Remplacer le champ 'name' par des attributs personnalisés -->
+
+                <xpath expr="//field[@name='name'][1]" position="replace">
+
+                    <!-- Personnaliser et modifier le champ 'name' -->
+
+                    <field name="name" class="o_task_name text-truncate w-100 w-md-75 pe-2" placeholder="Titre de tâche..."/>
+
+                </xpath>
+
+                <!-- Modifier les attributs du champ 'stage_id' -->
+
+
+
+                <field name="stage_id" widget="statusbar" class="o_field_statusbar" options="{'clickable': '1', 'fold_field': 'fold'}" domain="['|', ('team_id', '=', team_id), ('team_id', '=', False)]" attrs="{'invisible': ['|', ('active', '=', False)]}"/>
+
+                <!-- Ajouter un champ personnalisé 'partner_id' après le premier groupe -->
+
+
+
+                <xpath expr="//page[@name='extra_info']/group[1]/group[1]/field[1]" position="after">
+
+                    <field name="partner_id" string="Maître d'ouvrage"/>
+
+                </xpath>
+
+                <!-- add the button "cree une tache" in the header -->
+
+
+
+                <xpath expr="//button[@name='action_assign_to_me']" position="before">
+
+                    <button name="cree_une_achat" string="Créer un achat" type="object" class="oe_highlight"/>
+
+                </xpath>
+
+                <!-- Ajouter un bouton personnalisé "Crée une tache" avant le bouton avec le nom "action_assign_to_me" -->
+
+
+
+                <xpath expr="//label[@for='planned_date_begin']" position="attributes">
+
+                    <!-- Modifier les attributs du label 'planned_date_begin' -->
+
+                    <attribute name="string"/>
+
+                </xpath>
+
+
+
+                <!-- Insérer un bouton personnalisé avant le premier bouton avec la classe 'oe_stat_button' -->
+
+                <xpath expr="//button[@class='oe_stat_button'][1]" position="before">
+
+                    <button name="archive_action_function" type="object" class="oe_stat_button oe_percent" icon="fa-smile-o">
+
+                        <field name='is_active'/>
+
+                    </button>
+
+                </xpath>
+
+                <!-- Modifier les attributs du champ 'name' -->
+
+
+
+                <xpath expr="//field[@name='name'][1]" position="attributes">
+
+                    <attribute name="widget">text</attribute>
+
+                    <!-- Modifier l'attribut 'widget' du champ 'name' -->
+
+                </xpath>
+                <xpath expr="//group[1]/group[2]" position="after">
+                    <group invisible="1">
+                          <field name="tag_ids" string="Étiquettes" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}" context="{'project_id': project_id}" can_create="true" can_write="true"/>
+                    </group>
+                </xpath>
+                                  <xpath expr="//field[@name='milestone_id']" position="attributes">
+                                        <attribute name="invisible">1</attribute>
+                  </xpath>                
+
+            </field>
+
+        </record>
+
+
+
+    </data>
+
+</odoo>

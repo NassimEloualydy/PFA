@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+
+<odoo>
+
+    <data>
+    <record model="ir.actions.server" id="add_active_menu_in_project_pv">
+        
+      
+        
+            <field name="name">Archiver</field>
+        
+            <!-- Nom de l'action -->
+        
+            <field name="model_id" ref="model_project_pv"/>
+            
+            <!-- Référence au modèle associé à cette action -->
+        
+            <field name="binding_model_id" ref="model_project_pv"/>
+        
+            <!-- Référence au modèle de liaison (éventuellement) -->
+            
+            <field name="state">code</field>
+        
+            <!-- L'action est de type "code" -->
+        
+            <field name="code">action = records.add_active_in_menu()</field>
+        
+            <!-- Le code à exécuter lors de l'action -->
+        
+
+        </record>
+
+        </data>
+
+</odoo>

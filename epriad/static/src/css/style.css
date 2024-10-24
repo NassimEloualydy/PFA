@@ -1,0 +1,500 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Roboto');
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+}
+
+.MyContainer {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-image: url("/epriad/static/src/xml/images/Back.png");
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+    overflow: auto;
+
+}
+
+.MyContainerPart2 {
+    position: relative;
+    width: 100%;
+}
+
+.MyContainer table {
+
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    box-shadow: 0 2px 15px rgba(64, 64, 64, .7);
+    border-radius: 12px 12px 0 0;
+    overflow: hidden;
+
+}
+
+.MyContainer td,
+.MyContainer th {
+    padding: 5px 10px;
+    text-align: center;
+}
+
+.MyContainer th {
+    background-color: #ba68c8;
+    color: #fafafa;
+    font-family: 'Open Sans', Sans-serif;
+    font-weight: 200;
+    font-size: 15px;
+    text-transform: uppercase;
+}
+
+.MyContainer td {
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.MyContainer tr {
+    width: 100%;
+    background-color: #fafafa;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+}
+
+.MyContainer tr:nth-child(even) {
+    background-color: #eeeeee;
+}
+
+
+.MyContainerPart1 {
+    width: 100%;
+    position: relative;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.statistique {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;
+    font-family: 'Oswald', sans-serif;
+    margin-bottom: 20px;
+}
+
+.slide {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 10px;
+    width: 260px;
+    height: 120px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.356);
+    font-size: 25px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    transition: 0.6s;
+    background-color: rgba(128, 0, 128, 0.158);
+    color: purple;
+    border: 1px solid purple;
+    cursor: pointer;
+}
+
+.current {
+    background-color: rgba(128, 0, 128, 0.432);
+}
+
+.slide span {
+    height: 100%;
+    width: 100%;
+    padding: 20px;
+}
+
+.selection_cherche {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.classes {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 10px;
+    margin-bottom: 20px;
+
+}
+
+
+.cherche {
+    padding: 8px 60px;
+    border: 1px solid rgb(97, 22, 218);
+    background-color: rgba(97, 22, 218, 0.781);
+    border-radius: 10px;
+    font-size: 20px;
+    color: white;
+    font-size: 800;
+    margin-bottom: 10px;
+    font-family: 'Montserrat', sans-serif;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.438);
+    cursor: pointer;
+}
+
+.cherche:hover {
+    background-color: rgba(97, 22, 218, 0.904);
+}
+
+.selection,
+.selecteddd,
+.selectionVilles,
+.selectedVilles {
+    position: relative;
+    height: 200px;
+    width: 48%;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.322);
+    backdrop-filter: blur(30px);
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.534);
+    overflow: auto;
+    padding: 10px;
+
+}
+
+.item,
+.itemVille {
+    padding: 4px;
+    border-radius: 10px;
+    width: 98%;
+    margin-bottom: 2px;
+    cursor: pointer;
+    color: rgb(58, 57, 57);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+}
+
+.item:hover,
+.itemVille:hover {
+    background-color: rgb(77, 5, 77, 0.151);
+    border: 1px solid rgb(77, 5, 77);
+    color: rgb(77, 5, 77);
+}
+
+.desactive {
+    visibility: hidden;
+    display: none;
+}
+
+.leadGene {
+    border: none;
+    outline: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    background-color: #ba68c8;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.leadGeneDejaLu {
+    border: none;
+    outline: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    background-color: #9a031e;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.filter {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#organismeInput,#budgetInput,
+#classificationinput,#referenceInput,#cautionInput,#villeInput{
+    width: 15%;
+    outline: none;
+    background: rgba(255, 255, 255, 0.452);
+    border: none;
+    backdrop-filter: blur(50px);
+    color: black;
+    border-radius: 20px;
+    padding: 10px 20px;
+    margin: 10px 0px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    box-shadow: 2px 2px 10px rgb(145, 145, 145);
+    display: none;
+}
+
+
+.FiltersOptions {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+}
+
+.success-notification {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+}
+
+.danger-notification {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px;
+    background-color: #af4c4c;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+}
+
+.dao {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100px;
+    justify-content: center;
+}
+
+.dao a {
+    width: 40px;
+    height: 30px;
+    margin-bottom: 10px;
+    text-decoration: none;
+    background-color: #a12b91;
+    line-height: 30px;
+    color: white;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 300;
+}
+
+.formm {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    background-color: white;
+    padding: 10px;
+    position: relative;
+    margin-bottom: 10px;
+    font-family: 'Open Sans', Sans-serif;
+    font-weight: bolder;
+    font: 20px;
+}
+
+.rowm {
+    position: relative;
+    width: 100%;
+    display: flex;
+    margin-bottom: 15px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fieldsm {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fieldsm select {
+    width: 40px;
+    border: none;
+    outline: none;
+    color: purple;
+    font-family: 'Open Sans', Sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    margin: 2px;
+    text-align: center;
+}
+
+.fieldsm input {
+    width: 30%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    background-color: rgb(231, 229, 229);
+
+
+}
+
+/* my style */
+.selectI {
+    width: 60% !important;
+    padding: 10px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    background-color: rgb(231, 229, 229);
+}
+
+.selectIDomain {
+    width: 60% !important;
+    padding: 10px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    background-color: rgb(231, 229, 229);
+
+}
+
+.spanSearch {
+    margin-right: 20px !important;
+    margin-left: 10px !important;
+}
+
+.spanSearch:nth-child(1) {
+    margin-right: 20px !important;
+    margin-left: 0px !important;
+}
+
+.btn_plus {
+    width: 10% !important;
+
+    padding: 5px !important;
+    border: 1px solid #198754 !important;
+    border-radius: 3px !important;
+    margin-left: 5px !important;
+
+    color: white;
+    background-color: #198754 !important;
+}
+
+.btn_moin {
+    width: 10% !important;
+    margin-left: 5px !important;
+    padding: 5px !important;
+    border: 1px solid #DC3545 !important;
+    border-radius: 3px !important;
+    color: white !important;
+    background-color: #DC3545 !important;
+}
+
+.btn_moin_1 {
+    width: 10% !important;
+    margin-left: 5px !important;
+    padding: 5px !important;
+    border: 1px solid #DC3545 !important;
+    border-radius: 3px !important;
+    color: white !important;
+    background-color: #DC3545 !important;
+    visibility: hidden;
+}
+
+/* end */
+
+.selectionProfile,
+.formprofile {
+    width: 100%;
+}
+
+.classHeader {
+
+    font-family: 'Open Sans', Sans-serif;
+    letter-spacing: 10px;
+    font-size: 30px;
+    font-weight: 900;
+    margin-bottom: 10px;
+    color: rgb(34, 34, 34);
+}
+
+
+.profiles {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+    flex-wrap: wrap;
+}
+
+.profile {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.466);
+    border-radius: 50%;
+    background-color: rgb(165, 6, 165);
+    color: white;
+    font-weight: 700;
+    margin-right: 15px;
+    transition: transform 0.3s ease;
+}
+
+.profile:hover {
+    transform: scale(1.2);
+}
+
+.addProfile {
+    cursor: pointer;
+}
+
+.profileTitle {
+    margin-right: 20px;
+    font-family: 'Open Sans', Sans-serif;
+    font-size: 30px;
+    font-weight: 900;
+    margin-bottom: 10px;
+    color: rgb(34, 34, 34);
+}
+
+.total {
+
+    width: 100%;
+    font-family: 'Open Sans', Sans-serif;
+    font-size: 20px;
+    font-weight: lighter;
+    margin-bottom: 10px;
+    text-align: center;
+    color: rgb(0, 0, 0);
+}

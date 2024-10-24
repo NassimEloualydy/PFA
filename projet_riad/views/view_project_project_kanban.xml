@@ -1,0 +1,380 @@
+<?xml version="1.0"?>
+
+<odoo>
+
+    <data>
+
+        <record id="id_project_project_view_form_kanban_id" model="ir.ui.view">
+
+            <field name="name">project.view_project_kanban_name</field>
+
+            <field name="model">project.project</field>
+
+            <field name="inherit_id" ref="project.view_project_kanban"/>
+
+            <field name="arch" type="xml">
+             
+             <!-- Remplacer le contenu du div avec la classe "o_kanban_primary_left" -->
+             
+             <xpath expr="//div[@class='o_kanban_primary_left']" position='replace'>
+                 
+                 <!-- Nouveau contenu du div -->
+                 
+                 <div class='o_kanban_primary_left ml_cont'>
+                 
+                     <!-- Nom de la tâche -->
+                 
+                     <span class="container_task fw-bolder" t-att-title="record.display_name.value">
+                 
+                         <t t-esc="record.display_name.value" widget="text"/>
+                 
+                     </span>
+                 
+                     <!-- Afficher le nom du partenaire s'il existe -->
+                 
+                     <span class="text-muted" t-if="record.partner_id.value">
+                 
+                         <br/>
+                 
+                         <span class="fa fa-user me-2" aria-label="Partner" title="Partner"/>
+                 
+                         <t t-esc="record.partner_id.value"/>
+                 
+                     </span>
+                 
+                     <!-- Champs invisibles -->
+                 
+                     <field name="numero_marche" invisible="1" />
+                 
+                     <field name="date_reception_provisoire" invisible="1" />
+                 
+                     <field name="delai_restant" invisible="1" />
+             
+
+                 
+                     <!-- Afficher le numéro de marché s'il existe -->
+                 
+                     <t t-if="record.numero_marche.raw_value" class="text-muted o_row">
+                 
+                         <br/>
+                 
+                         <span>N° marché : </span>
+                 
+                         <field class="fw-bolder" name="numero_marche" string="N° marché"/>
+                 
+                     </t>
+                 
+                     <!-- Afficher la date d'achèvement s'il existe -->
+                 
+                     <t t-if="record.date_reception_provisoire.raw_value" class="text-muted o_row">
+                 
+                         <br/>
+                 
+                         <span>Date achèvement : </span>
+                 
+                         <field class="fw-bolder" name="date_reception_provisoire" widget="date" string="Date achèvement"/>
+                 
+                         <br/>
+                 
+                     </t>
+                 
+                     <!-- Afficher le délai restant s'il existe -->
+                 
+                     <t t-if="record.delai_restant.raw_value" class="text-muted o_row">
+                 
+                         <span>Délai restant : </span>
+                 
+                         <field name="delai_restant_nbr" invisible="1"/>
+                 
+                         <!-- Gérer la couleur en fonction de la valeur du délai restant -->
+                 
+                         <t t-if="record.delai_restant_nbr.raw_value gt 50">
+                 
+                             <span t-attf-class="#{'oe_kanban_text_green'}">
+                 
+                                 <field name="delai_restant" string="Délai restant"/>
+                 
+                             </span>
+                 
+                         </t>
+                 
+                         <t t-if="record.delai_restant_nbr.raw_value lt 50">
+                 
+                             <span t-attf-class="#{'oe_kanban_text_red'}">
+                 
+                                 <field name="delai_restant" string="Délai restant"/>
+                 
+                             </span>
+                 
+                         </t>
+                 
+                         <t t-if="record.delai_restant_nbr.raw_value == 50">
+                 
+                             <span t-attf-class="#{'oe_kanban_text_orange'}">
+                 
+                                 <field name="delai_restant" string="Délai restant"/>
+                 
+                             </span>
+                 
+                         </t>
+                 
+                      <br/>
+                 
+                    </t>
+                 
+                 </div>
+             
+
+                 
+                 <!-- Styles CSS pour le contenu -->
+                 
+                 <style type="text/css">
+                 
+                        
+                        /* Classe .container_task pour la gestion de la tâche */
+                        
+                        .container_task {
+                        
+                            width: 100% !important; /* Largeur de 100% */
+                        
+                            max-height: 3em !important; /* Hauteur maximale de 3 em (unité relative) */
+                        
+                            overflow: hidden !important; /* Cacher le contenu dépassant la hauteur maximale */
+                        
+                            text-overflow: ellipsis !important; /* Ajouter des points de suspension (...) pour le texte dépassant */
+                        
+                            white-space: normal !important; /* Espacement normal des mots */
+                        
+                            display: -webkit-box !important; /* Affichage en tant que boîte flex (préfixe pour certains navigateurs) */
+                        
+                            -webkit-line-clamp: 2 !important; /* Limite le nombre de lignes à 2 (préfixe pour certains navigateurs) */
+                        
+                            -webkit-box-orient: vertical !important; /* Orientation verticale de la boîte flex (préfixe pour certains navigateurs) */
+                        
+                        }
+
+
+                        
+                        /* Classe .user_id_op avec une marge à gauche automatique (auto) */
+                        
+                        .user_id_op {
+                        
+                            margin-left: auto; /* Marge automatique à gauche pour centrer à droite */
+                        
+                        }
+
+
+                        
+                        /* Classe .oe_kanban_text_green avec du texte en vert et en gras */
+                        
+                        .oe_kanban_text_green {
+                        
+                            color: green; /* Couleur verte */
+                        
+                            font-weight: bold; /* Texte en gras */
+                        
+                        }
+
+
+                        
+                        /* Classe .oe_kanban_text_orange avec du texte en orange et en gras */
+                        
+                        .oe_kanban_text_orange {
+                        
+                            color: orange; /* Couleur orange */
+                        
+                            font-weight: bold; /* Texte en gras */
+                        
+                        }
+
+
+                        
+                        /* Classe .oe_kanban_text_black avec du texte en noir et en gras */
+                        
+                        .oe_kanban_text_black {
+                        
+                            color: black; /* Couleur noire */
+                        
+                            font-weight: bold; /* Texte en gras */
+                        
+                        }
+
+
+                        
+                        /* Classe .oe_kanban_text_red avec du texte en rouge et en gras (plus gras) */
+                        
+                        .oe_kanban_text_red {
+                        
+                            color: red; /* Couleur rouge */
+                        
+                            font-weight: bold; /* Texte en gras */
+                        
+                            font-weight: bolder; /* Texte encore plus gras */
+                        
+                        }
+
+
+                        
+                        /* Classe .ml_cont avec une marge à gauche de 15 pixels */
+                        
+                        .ml_cont {
+                        
+                            margin-left: 15px; /* Marge à gauche de 15 pixels */
+                        
+                        }
+
+
+
+
+                 </style>
+             
+                </xpath>
+
+                <xpath expr="//div[contains(@class, 'o_kanban_card_content')]" position="after">
+
+                    
+                    <div class="text-info">
+                    
+                        <!-- Premier conteneur flex -->
+                    
+                        <div class="flex_container">
+                    
+                            <!-- Première section - Tâches -->
+                    
+                            <span class="fw-bolder">
+                    
+                                <a name="get_nbr_task_for_project" class="text-info" type="object">
+                    
+                                    <field name="nbr_tasks_for_project"/>
+                    
+                                </a>
+                    
+                            </span>
+
+
+                    
+                            <!-- Deuxième section - Document -->
+                    
+                            <span class="fw-normal">
+                    
+                                <span class="fw-bolder">
+                    
+                                    <a name="get_attachment_for_user" class="text-info" type="object">
+                    
+                                        <field name="nbr_field_attached"/> Document
+                    
+                                    </a>
+                    
+                                </span>
+                    
+                            </span>
+
+
+                    
+                            <!-- Troisième section - PV (Procès-Verbal) -->
+                    
+                            <span class="fw-normal">
+                    
+                                <span class="fw-bolder">
+                    
+                                    <a name="get_pv_for_project" class="text-info" type="object">
+                    
+                                        <field name="pv_project_task"/> PV
+                    
+                                    </a>
+                    
+                                </span>
+                    
+                            </span>
+                    
+                        </div>
+
+
+                    
+                        <!-- Deuxième conteneur - DP (Décompte Partiel) -->
+                    
+                        <!-- <div>
+                    
+                            <span class="fw-normal">
+                    
+                                <span class="fw-bolder">
+                    
+                                    <a name="get_account_move_project" class="text-info" type="object">
+                    
+                                        <field name="dp_account_move"/> DP
+                    
+                                    </a>
+                    
+                                </span>
+                    
+                            </span>
+                    
+                        </div> -->
+                    
+                    </div>
+
+                    <style type="text/css">
+
+                            
+                            /* Classe .d_flex_one avec une marge de droite de 30 pixels */
+                            
+                            .d_flex_one {
+                            
+                                margin-right: 30px;
+                            
+                            }
+
+
+                            
+                            /* Classe .flex_container pour un affichage flexible avec les éléments centrés et espacés uniformément */
+                            
+                            .flex_container {
+                            
+                                display: flex; /* Affichage flexible */
+                            
+                                align-items: center; /* Centrage vertical des éléments */
+                            
+                                justify-content: space-between; /* Espacement uniforme des éléments */
+                            
+                            }
+
+
+                            
+                            /* Classe .mn-5 avec une marge de gauche de 40 pixels */
+                            
+                            .mn-5 {
+                            
+                                margin-left: 40px;
+                            
+                            }
+
+                    </style>
+
+                </xpath>
+
+                <!-- rendre la class div avec la class o_kanban_record_bottom invisible -->
+
+                <xpath expr="//div[contains(@class, 'o_kanban_record_bottom')]" position="attributes">
+
+                                    <attribute name="invisible">1</attribute>
+
+                </xpath>
+                
+
+                <!-- ajoute l'order par sequence -->
+
+                <xpath expr="//kanban" position="attributes">
+
+                    <attribute name="default_order">sequence asc</attribute>
+
+                </xpath>
+
+
+
+            </field>
+
+        </record>
+
+    </data>
+
+</odoo>

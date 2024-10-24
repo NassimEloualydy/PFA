@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+
+<odoo>
+
+    <record id="id_wizard_purchase_order" model="ir.ui.view">
+
+            <field name="name">Assistance création achat</field>
+
+            <field name="model">purchase.order.wizard</field>
+
+            <field name="arch" type="xml">
+                
+                <form string="Créer un bon de commande fournisseur">
+                
+                    <p>Cet assistant créera un achat concernant les fournisseurs choisis</p>
+                
+                    <!-- <field name="supplier_ids" widget="many2many"/> -->
+                
+                    <field name="supplier_ids" widget="many2many_tags"/>
+
+
+                
+                    <!-- Vous définissez un classeur (notebook) pour organiser les champs de votre formulaire -->
+                
+                    <notebook>
+                
+                        <!-- Vous avez une page à l'intérieur du classeur -->
+                
+                        <page string="Choisir les produits">
+                
+                            <!-- À l'intérieur de la page, vous avez un champ appelé product_line_ids, qui semble être un champ one2many -->
+                
+                            <field name="product_line_ids" nolabel="1">
+                
+                                <!-- À l'intérieur du champ one2many, vous avez une vue en arborescence (tree) pour afficher plusieurs lignes de produits -->
+                
+                                <tree editable="bottom">
+                
+                                    <!-- Champs pour la ligne de produit -->
+                
+                                    <field name="product_id"/>
+                
+                                    <field name="quantity"/>
+                
+                                    <field name="qty_available" readonly="1"/>
+                
+                                    <field name="product_uom"/>
+                
+                                </tree>
+                
+                            </field>
+                
+                        </page>
+                
+                    </notebook>
+                
+                </form>
+
+            </field>
+
+    </record>
+
+</odoo>

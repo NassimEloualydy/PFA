@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+
+<odoo>
+
+    <!-- Enregistrement de la vue -->
+
+    <record id="id_project_ms" model="ir.ui.view">
+
+        <field name="name">IMPORTER UN FICHIER DE MS PROJET</field>
+
+        <field name="model">project.ms</field>
+
+        <field name="arch" type="xml">
+
+            <!-- Définition du formulaire -->
+
+            <form string="Créer un bon de commande fournisseur">
+
+                <!-- Groupe de champs -->
+
+                <group>
+
+                    <field name="projet_id" string="PROJET"/>
+
+                    <field name="ms_project_file" string="FICHIER MS PROJECT"/>
+
+                </group>
+
+                <!-- Pied de page du formulaire -->
+
+                <footer>
+
+                    <!-- Bouton d'action pour importer des données -->
+
+                    <button name="import_data" string="IMPORTER" type="object" class="btn-primary"/>
+
+                </footer>
+
+            </form>
+
+        </field>
+
+    </record>
+
+</odoo>
+

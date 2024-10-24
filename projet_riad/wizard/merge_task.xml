@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+
+<odoo>
+
+    <!-- Enregistrement de la vue -->
+
+    <record id="merge_task" model="ir.ui.view">
+
+        <field name="name">Fusionner Les Tâches</field>
+
+        <field name="model">merge.task</field>
+
+        <field name="arch" type="xml">
+
+            <!-- Définition du formulaire -->
+
+            <form string="Fusionner Les Tâches">
+
+                <!-- Groupe de champs -->
+
+                <group>
+
+                    <field name="tasks"  widget="many2many_tags" options="{'no_create': True,'no_create_edit': True}"/>
+                    <!-- <field name="tasks_choosen" /> -->
+                </group>
+
+                <!-- Pied de page du formulaire -->
+
+                <footer>
+
+                    <!-- Bouton d'action pour importer des données -->
+
+                    <button name="merge" string="Fusionner" type="object" class="btn-primary"/>
+
+                </footer>
+
+            </form>
+
+        </field>
+
+    </record>
+
+</odoo>
+

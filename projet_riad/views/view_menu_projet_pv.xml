@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+        <record id="project_pv_view" model="ir.ui.view">
+            <field name="name">PV(s)</field>
+            <field name="model">project.pv</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <!-- Ajoute un bouton "Créer les tâches" dans l'en-tête -->
+                    <header>
+
+                        <button name="cree_tach" string="Créer les tâches" type="object" class="btn-primary"/>
+
+                    </header>
+
+                    <sheet>
+                        <field name="active" invisible="1"/>
+
+                        <div class="oe_button_box" name="button_box">
+
+                            <button name="archive_action_function" type="object" class="oe_stat_button oe_percent" icon="fa-smile-o">
+
+                                <field name='is_active'/>
+
+                            </button>
+                        </div>
+                        <widget name="web_ribbon" title="Archivé" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"  />
+                        <!-- Groupe de champs pour les détails du partenaire -->
+                        <group>
+
+                            <group name="partner_details">
+
+                                <field name="nom" string="Nom" />
+
+                                <field name="user_id" string="Responsable"/>
+
+                                <field name="date_pv" string="Date PV"/>
+
+                            </group>
+
+                            <group>
+
+                                <field name="type_pv" string="Type"/>
+
+                                <field name="is_project_readonly" invisible="1"/>
+
+                                <field name="projet_id" string="Projet" context="{'default_project_id': context.get('default_project_id')}" attrs="{'readonly': [('is_project_readonly', '=', True)]}"/>
+
+                            </group>
+
+
+
+                        </group>
+
+
+                        <!-- Notebook (Carnet) pour les pages -->
+
+                        <notebook>
+
+                            <!-- Page pour les tâches -->
+
+                            <page string="Taches">
+
+                                <tree>
+
+                                    <!-- Champ pour les identifiants de tâches du projet -->
+
+                                    <field name="project_tasks_ids" options="{'no_create': True}" class="no_create" editable="false" readonly="1"/>
+
+                                </tree>
+
+                            </page>
+
+                        </notebook>
+                    </sheet>
+
+
+
+
+                    <!-- Section du carnet (notebook) pour les discussions et activités -->
+
+                    <div class="oe_chatter">
+
+                        <!-- Champ pour les identifiants des suiveurs des messages -->
+
+                        <field name="message_follower_ids" options="{'post_refresh':True}" help="Suivez ce projet pour suivre automatiquement les événements associés aux tâches et problèmes de ce projet." groups="base.group_user"/>
+
+                        <!-- Champ pour les activités -->
+
+                        <field name="activity_ids"/>
+
+                        <!-- Champ pour les messages -->
+
+                        <field name="message_ids"/>
+
+                    </div>
+
+                </form>
+
+            </field>
+
+        </record>
+
+
+
+        <record id="project_pv_view_tree" model="ir.ui.view">
+
+            <field name="name">PV(S)</field>
+
+            <field name="model">project.pv</field>
+
+            <field name="type">tree</field>
+
+            <field name="arch" type="xml">
+
+
+                <!-- Arborescence (tree) pour afficher une liste de données de projets -->
+
+                <tree js_class="button_in_tree">
+
+                    <!-- Champ pour afficher le nom -->
+
+                    <field name="nom" string="Nom"/>
+
+                    <!-- Champ pour afficher la date PV -->
+
+                    <field name="date_pv" string="Date PV"/>
+
+                    <!-- Champ pour afficher le projet avec un contexte par défaut -->
+
+                    <field name="projet_id" string="Projet" context="{'default_project_id': context.get('default_project_id')}"/>
+
+                    <!-- Champ pour afficher le responsable -->
+
+                    <field name="user_id" string="Responsable"/>
+
+                    <!-- Champ pour afficher les pièces jointes (PJ) -->
+
+                    <field name="pj" string="PJ"/>
+
+                    <!-- Champ pour afficher le type de PV -->
+
+                    <field name="type_pv" string="Type"/>
+
+                </tree>
+
+
+            </field>
+
+        </record>
+
+
+
+
+
+        <record id="project_pv_action" model="ir.actions.act_window">
+
+            <field name="name">PV(S)</field>
+
+            <field name="res_model">project.pv</field>
+
+            <field name="view_mode">tree,form</field>
+
+            <field name="view_id" ref="project_pv_view_tree"/>
+
+
+
+            <field name="help" type="html">
+
+                <p class="o_view_nocontent_smiling_face">
+
+                    creer votre premier record
+
+                </p>
+
+            </field>
+
+        </record>
+
+
+
+        <record id="project_project_action" model="ir.actions.act_window">
+
+            <field name="name">Projet</field>
+
+            <field name="res_model">project.project</field>
+
+            <field name="view_mode">tree,form,kanban</field>
+
+            <field name="view_id" ref="project.view_project_kanban"/>
+
+
+
+            <field name="help" type="html">
+
+                <p class="o_view_nocontent_smiling_face">
+
+                    creer votre premier record
+
+                </p>
+
+            </field>
+
+        </record>
+
+        <record id="project_task_view_all" model="ir.actions.act_window">
+
+            <field name="name">Tâches</field>
+
+            <field name="res_model">project.task</field>
+
+            <field name="view_mode">kanban,tree,form,calendar,gantt</field>
+
+            <field name="view_id" ref="project.view_task_kanban"/>
+        </record>
+
+
+        <record id="project_pv_view_search" model="ir.ui.view">
+
+            <field name="name">pv_search</field>
+
+            <field name="model">project.pv</field>
+
+            <field name="arch" type="xml">
+
+                <search>
+
+                    <field name="nom" string="Nom" filter_domain="[('nom', 'ilike', self)]"/>
+
+                    <field name="date_pv" string="Date PV" filter_domain="[('date_pv', 'ilike', self)]"/>
+
+                    <field name="projet_id" string="Projet" filter_domain="[('projet_id', 'ilike', self)]" context="{'default_project_id': context.get('default_project_id')}"/>
+
+
+
+                    <field name="user_id" string="Responsable" filter_domain="[('user_id', 'ilike', self)]"/>
+
+                    <field name="pj" string="PJ" filter_domain="[('pj', 'ilike', self)]" />
+
+                    <field name="type_pv" string="Type De PV" filter_domain="[('type_pv_libelle', 'ilike', self)]"/>
+                    <filter string="Archivé" name="archived" domain="[('active', '=', False)]"/>
+                </search>
+
+            </field>
+
+        </record>
+<record id="project.open_view_project_all" model="ir.actions.act_window">
+            <!-- <field name="domain">[('is_internal_project', '=', False),('is_visible_for_user_connected','=',True)]</field> -->
+            <!-- <field name="domain">[('is_internal_project', '=', False),('message_partner_ids','in',[user.partner_id.id])]</field> -->
+            <field name="domain">[('is_internal_project', '=', False)]</field>
+            <field name="context">{'search_default_my_projects': 1}</field>
+
+        </record>
+
+
+        <menuitem id="menu_projects" name="Projects" parent="project.menu_main_pm" sequence="1"/>
+
+        <menuitem id="menu_project_project" name="Projects" sequence="2" parent="project.menu_projects" action="project.open_view_project_all" />
+
+        <menuitem id="menu_project_task_all" name="Tâches" sequence="3" parent="project.menu_projects" action="project_task_view_all" />
+
+        <menuitem id="menu_project_pv" name="PV(S)" sequence="4" parent="project.menu_projects" action="project_pv_action" />
+
+    </data>
+
+</odoo>

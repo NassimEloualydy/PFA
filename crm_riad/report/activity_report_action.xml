@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+        <record id="action_report_your_report" model="ir.actions.report">
+            <field name="name">Your Report</field>
+            <field name="model">crm.lead</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">crm_riad.report_your_report_template</field>
+            <field name="binding_model_id" ref="crm.model_crm_lead"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,25 @@
+<odoo>
+    <data>
+      <record id="Offres_action" model="ir.actions.client">
+            <field name="name">Appel D'offre</field>
+            <field name="tag">crm.Actions</field>
+      </record>
+
+      <record id="MonProfile_action" model="ir.actions.client">
+            <field name="name">Creation Profile</field>
+            <field name="tag">monProfile.Actions</field>
+      </record>
+
+        <record model="ir.actions.act_window" id="riad_compte_action">
+            <field name="name">My Model</field>
+            <field name="res_model">riad.compte</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+       <menuitem id="crm_offres" name="Offres" parent="crm.crm_menu_root" sequence="5"/>
+       <menuitem id="riad_compte_menu" name="Mon Compte" parent='crm_offres' sequence="0" action="riad_compte_action"/>
+       <menuitem id="riad_profile_menu" name="Profile" parent='crm_offres' sequence="1" action="MonProfile_action"/>
+       <menuitem id="first_menu_item"  name="Offres" parent='crm_offres' sequence="2" action='Offres_action' /> 
+       
+    </data>  
+</odoo>

@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+
+<odoo>
+
+    <data>
+
+        <record id="id_view_account_payment_register_form" model="ir.ui.view">
+            <!-- Définition d'une vue de formulaire personnalisée pour les enregistrements de paiement -->
+
+            <field name="name">name_view_account_payment_register_form</field>
+
+            <field name="model">account.payment.register</field>
+
+            <field name="inherit_id" ref="account.view_account_payment_register_form"/>
+
+            <field name="arch" type="xml">
+
+
+
+                <!-- Personnalisation de la vue de formulaire pour les enregistrements de paiement -->
+
+                <xpath expr="//field[@name='journal_id']" position="before">
+
+                    <!-- Ajout du champ "payment_subtype" avant le champ "journal_id" -->
+                     <field name="partner_type" invisible="1"/>
+                    <field name="payment_subtype" string="Type"  attrs="{'invisible':[('partner_type', '=', 'supplier')]}"/>
+
+                </xpath>
+
+
+
+                <xpath expr="//field[@name='amount']" position="attributes">
+
+                    <!-- Modification de l'étiquette (libellé) du champ "amount" -->
+
+                    <attribute name="string">Montant du règlement</attribute>
+
+                </xpath>
+
+
+
+                <xpath expr="//field[@name='journal_id']" position="attributes">
+
+                    <!-- Modification de l'étiquette (libellé) du champ "journal_id" -->
+
+                    <attribute name="string">Journal des règlements</attribute>
+
+                </xpath>
+
+
+
+                <xpath expr="//field[@name='payment_date']" position="attributes">
+
+                    <!-- Modification de l'étiquette (libellé) du champ "payment_date" -->
+
+                    <attribute name="string">Date de règlement</attribute>
+
+                </xpath>
+
+
+
+                <xpath expr="//field[@name='payment_date']" position="after">
+
+                    <!-- Ajout du champ "date_echeance" après le champ "payment_date" -->
+
+                    <field name="date_echeance" string="Date d'échéance"/>
+
+                </xpath>
+
+
+
+                <xpath expr="//field[@name='partner_bank_id']" position="attributes">
+
+                    <!-- Rend le champ "partner_bank_id" invisible -->
+
+                    <attribute name="invisible">1</attribute>
+
+                </xpath>
+                <xpath expr="//field[@name='communication']" position="attributes">
+
+                    <!-- Rend le champ "partner_bank_id" invisible -->
+
+                    <attribute name="invisible">1</attribute>
+
+                </xpath>
+                <xpath expr="//field[@name='payment_method_line_id']" position="after">
+                    <field name="communication" string="Numéro de chèque"/>
+                </xpath>
+                
+            </field>
+
+        </record>
+
+        </data>
+
+</odoo>
